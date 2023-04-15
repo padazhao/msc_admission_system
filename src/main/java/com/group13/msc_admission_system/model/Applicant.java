@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 public class Applicant {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="applicant_id",nullable = false)
     private long applicant_id;
     @Column(name="email", nullable = false)
     private String email;
