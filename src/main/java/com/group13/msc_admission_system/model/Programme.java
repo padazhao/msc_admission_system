@@ -12,9 +12,11 @@ public class Programme {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="programme_id",nullable = false)
     private long programme_id;
-
+    @Column(name = "name", nullable = false)
     private String name;
+    @Column(name = "description", nullable = false)
     private String description;
+    @Column(name = "duration", nullable = false)
     private long programme_Duration;
 
     //CONSTRUCTOR==============================================================

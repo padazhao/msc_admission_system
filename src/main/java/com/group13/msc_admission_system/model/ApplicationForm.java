@@ -10,20 +10,21 @@ import java.util.Set;
 @Table(name= "application_Form")
 public class ApplicationForm {
 
+    //ATTRIBUTES =========================================================
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="applicationForm_id",nullable = false)
     private long applicationForm_id;
 
     @OneToOne
-    @Column(name="applicant_id",nullable = false)
+    @PrimaryKeyJoinColumn
     private Applicant applicant;
 
     @OneToMany
-    @Column(name = "programme_ids")
     private Set<Programme> programme;
-
+    @Column(name = "status")
     private Status status;
+    @Column(name = "applied_On")
     private LocalDate applied_On;
 
 
@@ -34,7 +35,6 @@ public class ApplicationForm {
         this.applied_On = LocalDate.now();
         this.status = Status.APPROVED;
     }
-
     public ApplicationForm() {
 
     }

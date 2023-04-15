@@ -26,10 +26,6 @@ public class SchoolAdmin {
         return admin_id;
     }
 
-    public void setAdmin_id(long admin_id) {
-        this.admin_id = admin_id;
-    }
-
     public String getSchool_admin_username() {
         return school_admin_username;
     }
