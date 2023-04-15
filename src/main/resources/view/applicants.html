@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xml:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>MSc admission system</title>
+</head>
+<body>
+
+<div class="container">
+  <div class="row">
+    <h1>List Applicants</h1>
+  </div>
+  <a href="applicant_form">Add new applicant</a>
+  <table class="table table-striped table-bordered">
+    <tr>
+      <th>Applicant ID</th>
+      <th>Applicant Username</th>
+      <th>Applicant Password</th>
+      <th>Application Gender</th>
+    </tr>
+
+    <tbody>
+    <tr th:each = "applicant:${listApplicants}">
+      <td th:text="${applicant.id}">
+      </td>
+      <td th:text="${applicant.username}">
+      </td>
+      <td th:text="${applicant.password}">
+      </td>
+      <td th:text="${applicant.gender}">
+      </td>
+      <td>
+        <a href="@{'/applicants/edit/' + ${applicants.id}}">Edit</a>
+        <a href="@{'/applicants/delete/'+${applicant.id}">Delete</a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+</body>
+</html>
