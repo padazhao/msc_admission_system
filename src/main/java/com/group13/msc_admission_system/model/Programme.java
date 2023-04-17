@@ -2,8 +2,6 @@ package com.group13.msc_admission_system.model;
 
 import jakarta.persistence.*;
 
-import java.time.LocalDate;
-
 @Entity
 @Table(name="programme")
 public class Programme {
@@ -17,16 +15,16 @@ public class Programme {
     @Column(name = "description", nullable = false)
     private String description;
     @Column(name = "duration", nullable = false)
-    private long programme_Duration;
+    private long programmeDuration;
 
     //CONSTRUCTOR==============================================================
     public Programme(){
 
     }
-    public Programme(String name, String description, long programme_Duration){
+    public Programme(String name, String description, long programmeDuration){
         this.name = name;
         this.description= description;
-        this.programme_Duration = programme_Duration;
+        this.programmeDuration = programmeDuration;
     }
 
     //GETTERS AND SETTERS
@@ -50,11 +48,11 @@ public class Programme {
         this.description = description;
     }
 
-    public long getProgramme_Duration() {
-        return programme_Duration;
+    public long getProgrammeDuration() {
+        return programmeDuration;
     }
 
-    public void setProgramme_Duration(long programme_Duration) {
-        this.programme_Duration = programme_Duration;
+    public void setProgrammeDuration(long programmeDuration) {
+        this.programmeDuration = programmeDuration;
     }
 }

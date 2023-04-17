@@ -9,13 +9,13 @@ public class SchoolAdmin {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long adminId;
     @Column(name = "school_admin_username", nullable = false)
-    private String school_admin_username;
+    private String schoolAdminUsername;
     @Column(name = "school_admin_password", nullable = false)
-    private String school_admin_password;
+    private String schoolAdminPassword;
 
-    public SchoolAdmin(String school_admin_username, String school_admin_password){
-        this.school_admin_username=school_admin_username;
-        this.school_admin_password=school_admin_password;
+    public SchoolAdmin(String school_admin_username, String schoolAdminPassword){
+        this.schoolAdminUsername=school_admin_username;
+        this.schoolAdminPassword = schoolAdminPassword;
     }
     public SchoolAdmin(){
 
@@ -26,18 +26,18 @@ public class SchoolAdmin {
     }
 
     public String getSchool_admin_username() {
-        return school_admin_username;
+        return schoolAdminUsername;
     }
 
     public void setSchool_admin_username(String school_admin_username) {
-        this.school_admin_username = school_admin_username;
+        this.schoolAdminUsername = school_admin_username;
     }
 
-    public String getSchool_admin_password() {
-        return school_admin_password;
+    public String getSchoolAdminPassword() {
+        return schoolAdminPassword;
     }
 
-    public void setSchool_admin_password(String school_admin_password) {
-        this.school_admin_password = school_admin_password;
+    public void setSchoolAdminPassword(String schoolAdminPassword) {
+        this.schoolAdminPassword = schoolAdminPassword;
     }
 }
