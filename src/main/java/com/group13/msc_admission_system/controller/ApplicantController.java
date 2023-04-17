@@ -23,6 +23,13 @@ public class ApplicantController {
         this.applicantService = applicantService;
     }
 
+    //register function
+    @GetMapping("/register")
+    public String showRegisterationForm(Model model){
+        model.addAttribute("applicant", new Applicant());
+        return "register";
+    }
+
     @PostMapping("/register")
     public String register(@Validated Applicant applicant){
         try{

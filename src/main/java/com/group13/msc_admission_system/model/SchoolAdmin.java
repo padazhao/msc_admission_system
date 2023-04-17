@@ -7,14 +7,13 @@ import jakarta.persistence.*;
 public class SchoolAdmin {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long admin_id;
+    private long adminId;
     @Column(name = "school_admin_username", nullable = false)
     private String school_admin_username;
     @Column(name = "school_admin_password", nullable = false)
     private String school_admin_password;
 
-    public SchoolAdmin(long admin_id, String school_admin_username, String school_admin_password){
-        this.admin_id=admin_id;
+    public SchoolAdmin(String school_admin_username, String school_admin_password){
         this.school_admin_username=school_admin_username;
         this.school_admin_password=school_admin_password;
     }
@@ -22,8 +21,8 @@ public class SchoolAdmin {
 
     }
 
-    public long getAdmin_id() {
-        return admin_id;
+    public long getAdminId() {
+        return adminId;
     }
 
     public String getSchool_admin_username() {

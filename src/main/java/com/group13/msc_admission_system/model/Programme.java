@@ -11,7 +11,7 @@ public class Programme {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="programme_id",nullable = false)
-    private long programme_id;
+    private long programmeId;
     @Column(name = "name", nullable = false)
     private String name;
     @Column(name = "description", nullable = false)
@@ -30,8 +30,8 @@ public class Programme {
     }
 
     //GETTERS AND SETTERS
-    public long getProgramme_id() {
-        return programme_id;
+    public long getProgrammeId() {
+        return programmeId;
     }
 
     public String getName() {

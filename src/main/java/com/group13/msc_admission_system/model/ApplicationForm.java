@@ -14,7 +14,7 @@ public class ApplicationForm {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="applicationForm_id",nullable = false)
-    private long applicationForm_id;
+    private long applicationFormId;
 
     @OneToOne
     @PrimaryKeyJoinColumn
@@ -41,12 +41,12 @@ public class ApplicationForm {
 
     //GETTERS AND SETTERS===========================================
 
-    public long getApplicationForm_id() {
-        return applicationForm_id;
+    public long getApplicationFormId() {
+        return applicationFormId;
     }
 
     public Long getApplicant() {
-        return applicant.getApplicant_id();
+        return applicant.getApplicantId();
     }
 
 

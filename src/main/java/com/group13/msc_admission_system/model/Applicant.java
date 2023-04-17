@@ -15,7 +15,7 @@ public class Applicant {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="applicant_id",nullable = false)
-    private long applicant_id;
+    private long applicantId;
     @Column(name="username",nullable = false)
     private String username;
     @Column(name="email", nullable = false)
@@ -54,8 +54,8 @@ public class Applicant {
 
     //GETTERS AND SETTERS==============================================================================================================
 
-    public Long getApplicant_id() {
-        return applicant_id;
+    public Long getApplicantId() {
+        return applicantId;
     }
 
     public String getUsername() {
