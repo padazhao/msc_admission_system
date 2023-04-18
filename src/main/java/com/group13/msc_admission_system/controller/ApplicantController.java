@@ -14,12 +14,13 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 
-@Controller
+
+@RestController
+@RequestMapping("/applicant")
 public class ApplicantController {
     @Autowired private ApplicantService applicantService;
 
-
-
+    //CONSTRUCTOR=================================================================================================
     public ApplicantController(ApplicantService applicantService) {
         super();
         this.applicantService = applicantService;
@@ -59,8 +60,8 @@ public class ApplicantController {
         }
     }
 
-    //UPDATE==================================================================================================================================================
-    @PutMapping("/applicant/{id}")
+    //UPDATE===============================================================================================================
+    @PutMapping("/{id}")
     public String updateUser(@Validated @PathVariable("id") Long id, @RequestBody ApplicantRequestDTO applicantRequestDTO) {
         applicantService.updateApplicant(id, applicantRequestDTO);
         return "redirect:/dashboard";

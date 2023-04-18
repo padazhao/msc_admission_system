@@ -18,16 +18,16 @@ import java.util.Set;
 @Service
 public class ApplicationFormServiceImplement implements ApplicationFormService {
 
-    @Autowired
-    ApplicationFormRepository applicationFormRepository;
-    @Autowired
-    ProgramRepository programRepository;
-    @Autowired
-    SchoolAdminRepository schoolAdminRepository;
+    @Autowired ApplicationFormRepository applicationFormRepository;
+    @Autowired ProgramRepository programRepository;
+    @Autowired SchoolAdminRepository schoolAdminRepository;
 
-    public ApplicationFormServiceImplement(ApplicationFormRepository applicationFormRepository) {
-        super();
+    public ApplicationFormServiceImplement(ApplicationFormRepository applicationFormRepository,
+                                           ProgramRepository programRepository,
+                                           SchoolAdminRepository schoolAdminRepository) {
         this.applicationFormRepository = applicationFormRepository;
+        this.programRepository = programRepository;
+        this.schoolAdminRepository = schoolAdminRepository;
     }
 
     //UPDATE============================================================================================================
@@ -72,5 +72,9 @@ public class ApplicationFormServiceImplement implements ApplicationFormService {
             Status status = new StatusConverter().convert(applicationFormRequestDTO.getStatus());
             update.setStatus(status);
         }
+
+        applicationFormRepository.save(update);
+
+        System.out.println( Message.updated);
     }
 }

@@ -2,7 +2,6 @@ package com.group13.msc_admission_system.dto;
 
 import com.group13.msc_admission_system.common.Message;
 import com.group13.msc_admission_system.exception.MyOutOfBoundException;
-import jakarta.validation.constraints.NotNull;
 
 /**
  * This is a Data Transfer Object Class.
@@ -14,14 +13,10 @@ import jakarta.validation.constraints.NotNull;
 public class ApplicationFormRequestDTO {
 
     private static int maxNumberOfSelectedProgramme = 2;
-    @NotNull
-    private long applicantId;
     private Long[] programId;
     private String status;
-
     private Long adminId;
 
-    public long getApplicantId() {  return applicantId;}
     public Long[] getProgramId() {
         if(programId.length>maxNumberOfSelectedProgramme){
             throw new MyOutOfBoundException(Message.invalidInput + ": Only" + maxNumberOfSelectedProgramme + " can be chosen");
