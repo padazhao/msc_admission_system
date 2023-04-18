@@ -1,7 +1,7 @@
 package com.group13.msc_admission_system.model;
 
 import com.group13.msc_admission_system.common.Gender;
-import com.group13.msc_admission_system.common.StringToEnumConverter;
+import com.group13.msc_admission_system.common.GenderConverter;
 import com.group13.msc_admission_system.dto.ApplicantRequestDTO;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Past;
@@ -36,7 +36,7 @@ public class Applicant {
     public Applicant(ApplicantRequestDTO applicantRequestDTO) {
 
         Gender gender; //CONVERTS GENDER INPUT TO ENUM TYPE GENDER
-        gender = new StringToEnumConverter().convert(ApplicantRequestDTO.getGender());
+        gender = new GenderConverter().convert(ApplicantRequestDTO.getGender());
 
         this.username = applicantRequestDTO.getUsername();
         this.email = applicantRequestDTO.getEmail();

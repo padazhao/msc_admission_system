@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
  * It is a Controller class but for exceptions.
  * It receives all exceptions which should have been directed the controller and handles it.
  * It does this by sending each type of error to the method designed to handle that error.
- * @RestControllerAdvice tells springboot to use this class for global exception handling
- * @ExceptionHandler is used to map the types of error
+ * RestControllerAdvice tells springboot to use this class for global exception handling
+ * ExceptionHandler is used to map the types of error
  */
 @RestControllerAdvice
 public class MyGlobalExceptionHandler {
@@ -22,6 +22,11 @@ public class MyGlobalExceptionHandler {
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ResponseEntity<ExceptionErrorMessage> notFoundException(MyResourceNotFoundException exception, HttpServletRequest request){
         return new ResponseEntity(new ExceptionErrorMessage(exception.getMessage(), request.getServletPath()),HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(MyOutOfBoundException.class)
+    public ResponseEntity<ExceptionErrorMessage> notFoundException(MyOutOfBoundException exception, HttpServletRequest request){
+        return new ResponseEntity(new ExceptionErrorMessage(exception.getMessage(), request.getServletPath()),HttpStatus.BAD_REQUEST);
     }
 
 }

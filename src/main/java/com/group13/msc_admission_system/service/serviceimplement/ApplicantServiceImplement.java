@@ -2,7 +2,6 @@ package com.group13.msc_admission_system.service.serviceimplement;
 
 import com.group13.msc_admission_system.common.*;
 import com.group13.msc_admission_system.dto.ApplicantRequestDTO;
-import com.group13.msc_admission_system.dto.ApplicantResponseDTO;
 import com.group13.msc_admission_system.exception.MyResourceNotFoundException;
 import com.group13.msc_admission_system.model.Applicant;
 import com.group13.msc_admission_system.repository.ApplicantRepository;
@@ -13,9 +12,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class ApplicantServiceImplement implements ApplicantService {
-    @Autowired
-    private ApplicantRepository applicantRepository;
 
+    private final ApplicantRepository applicantRepository;
+    @Autowired
     public ApplicantServiceImplement(ApplicantRepository applicantRepository) {
         super();
         this.applicantRepository = applicantRepository;
@@ -38,6 +37,8 @@ public class ApplicantServiceImplement implements ApplicantService {
     public Applicant findByEmailAndPassword(String email, String password) {
         return applicantRepository.findByEmailAndPassword(email,password);
     }
+
+    //UPDATE==================================================================================================================
     @Transactional
     @Override
     public void updateApplicant(Long id, ApplicantRequestDTO applicantRequestDTO) {
@@ -51,10 +52,12 @@ public class ApplicantServiceImplement implements ApplicantService {
         if (MyUtils.isNotEmptyAndNotNull(applicantRequestDTO.getEmail())) {
             update.setEmail(applicantRequestDTO.getEmail());
         }
+
         if (MyUtils.isNotEmptyAndNotNull(applicantRequestDTO.getGender())) {
-            Gender gender = new StringToEnumConverter().convert(applicantRequestDTO.getGender()); //CONVERTS GENDER INPUT TO ENUM TYPE GENDER
+            Gender gender = new GenderConverter().convert(applicantRequestDTO.getGender()); //CONVERTS GENDER INPUT TO ENUM TYPE GENDER
             update.setGender(gender);
         }
+
         if (applicantRequestDTO.getPhoneNumber() > 0) {
             update.setPhoneNumber(applicantRequestDTO.getPhoneNumber());
         }

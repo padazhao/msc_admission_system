@@ -1,7 +1,12 @@
 package com.group13.msc_admission_system.model;
 
+import com.group13.msc_admission_system.common.Message;
+import com.group13.msc_admission_system.common.ResourceType;
 import com.group13.msc_admission_system.common.Status;
+import com.group13.msc_admission_system.exception.MyResourceNotFoundException;
+import com.group13.msc_admission_system.repository.ProgramRepository;
 import jakarta.persistence.*;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDate;
 import java.util.Set;
@@ -15,13 +20,11 @@ public class ApplicationForm {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="applicationForm_id",nullable = false)
     private long applicationFormId;
-
     @OneToOne
     @PrimaryKeyJoinColumn
     private Applicant applicant;
-
     @OneToMany
-    private Set<Programme> programme;
+    private Set<Program> program;
     @Column(name = "status")
     private Status status;
     @Column(name = "applied_On")
@@ -29,9 +32,9 @@ public class ApplicationForm {
 
 
     //CONSTRUCTOR==================================================
-    public ApplicationForm(Applicant applicant, Set<Programme> programme){
+    public ApplicationForm(Applicant applicant, Set<Program> program){
         this.applicant = applicant;
-        this.programme = programme;
+        this.program = program;
         this.appliedOn = LocalDate.now();
         this.status = Status.APPROVED;
     }
@@ -50,14 +53,13 @@ public class ApplicationForm {
     }
 
 
-    public Set<Programme> getProgramme() {
-        return programme;
+    public Set<Program> getProgram() {
+        return program;
     }
 
-    public void setProgramme(Set<Programme> programme) {
-        this.programme = programme;
+    public void setProgram(Set<Program> program) {
+        this.program = program;
     }
-
     public Status getStatus() {
         return status;
     }

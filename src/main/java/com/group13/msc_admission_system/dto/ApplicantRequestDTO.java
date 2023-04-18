@@ -4,7 +4,13 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
-
+/**
+ * This is a Data Transfer Object Class.
+ * It is designed to 'register' all the inputs from the client and store it in a single object "Transfer Object"
+ * This object is later mapped to the 'real' Applicant Object accordingly
+ * Helps seperate concerns, from client object and server object.
+ * Modifications on server object does not affect client's object
+ */
 public class ApplicantRequestDTO {
 
     //USED TO ACCEPT DATA FOR CREATION
