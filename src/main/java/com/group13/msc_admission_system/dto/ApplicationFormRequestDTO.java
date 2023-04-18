@@ -19,6 +19,8 @@ public class ApplicationFormRequestDTO {
     private Long[] programId;
     private String status;
 
+    private Long adminId;
+
     public long getApplicantId() {  return applicantId;}
     public Long[] getProgramId() {
         if(programId.length>maxNumberOfSelectedProgramme){
@@ -28,4 +30,11 @@ public class ApplicationFormRequestDTO {
     }
     public String getStatus() { return status;}
 
+    public static int getMaxNumberOfSelectedProgramme() {
+        return maxNumberOfSelectedProgramme;
+    }
+
+    public Long getAdminId() {
+        return adminId;
+    }
 }

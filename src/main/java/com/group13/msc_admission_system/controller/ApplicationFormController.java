@@ -19,9 +19,15 @@ public class ApplicationFormController {
     }
 
     //UPDATE USER
-    @PutMapping("/{id}")
-    public String updateApplicationForm(@PathVariable("id") Long id, @RequestBody ApplicationFormRequestDTO applicationFormRequestDTO){
-        applicationFormService.updateApplicationForm(id,applicationFormRequestDTO);
+    @PutMapping("/program/{id}")
+    public String programUpdate(@PathVariable("id") Long id, @RequestBody ApplicationFormRequestDTO applicationFormRequestDTO){
+        applicationFormService.programUpdate(id,applicationFormRequestDTO);
+        return "redirect: /dashboard";
+    }
+
+    @PutMapping("/status/{id}")
+    public String statusUpdate(@PathVariable("id") Long id, @RequestBody ApplicationFormRequestDTO applicationFormRequestDTO){
+        applicationFormService.programUpdate(id,applicationFormRequestDTO);
         return "redirect: /dashboard";
     }
 }
