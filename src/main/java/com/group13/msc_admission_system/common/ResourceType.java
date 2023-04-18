@@ -8,6 +8,6 @@ package com.group13.msc_admission_system.common;
 public enum ResourceType {
     APPLICANT, APPLICANTS,
     APPLICATIONFORM,
-    PROGRAMME,
+    PROGRAM,
     SCHOOLADMIN
 }
