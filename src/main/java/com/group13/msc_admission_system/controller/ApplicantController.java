@@ -55,7 +55,7 @@ public class ApplicantController {
             model.addAttribute("error", "Invalid email or password");
             return "login_form";
         } else {
-            return
+            return "redirect:/dashboard";
         }
     }
 
