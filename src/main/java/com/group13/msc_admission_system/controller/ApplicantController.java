@@ -1,6 +1,7 @@
 package com.group13.msc_admission_system.controller;
 
 
+import com.group13.msc_admission_system.dto.ApplicantRequestDTO;
 import com.group13.msc_admission_system.model.Applicant;
 import com.group13.msc_admission_system.service.serviceinterface.ApplicantService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 
 @Controller
@@ -31,9 +33,9 @@ public class ApplicantController {
     }
 
     @PostMapping("/register")
-    public String register(@Validated Applicant applicant){
+    public String register(@Validated @RequestBody ApplicantRequestDTO applicantRequestDTO){
         try{
-            applicantService.register(applicant);
+            applicantService.register(applicantRequestDTO);
             return "redirect:/login";
         }catch (Exception e){
             return "register";

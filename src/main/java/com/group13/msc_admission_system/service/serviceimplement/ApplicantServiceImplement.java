@@ -1,5 +1,6 @@
 package com.group13.msc_admission_system.service.serviceimplement;
 
+import com.group13.msc_admission_system.dto.ApplicantRequestDTO;
 import com.group13.msc_admission_system.model.Applicant;
 import com.group13.msc_admission_system.repository.ApplicantRepository;
 import com.group13.msc_admission_system.service.serviceinterface.ApplicantService;
@@ -17,10 +18,11 @@ public class ApplicantServiceImplement implements ApplicantService {
     }
 
     @Override
-    public void register(Applicant applicant) throws Exception{
-        if(applicantRepository.findByEmail(applicant.getEmail()).isPresent()){
+    public void register(ApplicantRequestDTO applicantRequestDTO) throws Exception{
+        if(applicantRepository.findByEmail(applicantRequestDTO.getEmail()).isPresent()){
             throw new Exception("Email is already exists");
         }
+        Applicant applicant = new Applicant(applicantRequestDTO);
         applicantRepository.save(applicant);
 
     }

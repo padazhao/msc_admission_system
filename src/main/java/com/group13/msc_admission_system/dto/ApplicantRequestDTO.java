@@ -19,7 +19,7 @@ public class ApplicantRequestDTO {
     @NotNull(message = "User must have a phone number")
     private int phoneNumber;
     @NotEmpty(message = "password cannot be empty")
-    @Size(min = 8, message = "Password must contain at least 8 characters")
+    @Size(min = 3, message = "Password must contain at least 8 characters")
     private String password;
     @NotEmpty(message = "Date of birth cannot be empty")
     private static String dateOfBirth;

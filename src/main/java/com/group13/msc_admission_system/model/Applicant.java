@@ -39,7 +39,7 @@ public class Applicant {
         gender = new StringToEnumConverter().convert(ApplicantRequestDTO.getGender());
 
         this.username = applicantRequestDTO.getUsername();
-        this.email=applicantRequestDTO.getEmail();
+        this.email = applicantRequestDTO.getEmail();
         this.password = applicantRequestDTO.getPassword();
         this.gender = gender;
         this.dateOfBirth = LocalDate.parse(ApplicantRequestDTO.getDateOfBirth());
