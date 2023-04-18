@@ -23,12 +23,16 @@ public class ApplicantServiceImplement implements ApplicantService {
 
     @Override
     public void register(ApplicantRequestDTO applicantRequestDTO) throws Exception{
-        if(applicantRepository.findByEmail(applicantRequestDTO.getEmail()).isPresent()){
+
+        if(applicantRepository.findByEmail(applicantRequestDTO.getEmail())!=null){
             throw new Exception("Email is already exists");
         }
+
         Applicant applicant = new Applicant(applicantRequestDTO);
+
         applicantRepository.save(applicant);
     }
+
 
     @Override
     public Applicant findByEmailAndPassword(String email, String password) {

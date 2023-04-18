@@ -1,14 +1,199 @@
 <!DOCTYPE html>
 <html lang="en" xml:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
-    <title>MSc admission system</title>
-</head>
-<body>
+    <title>Admission System</title>
+    <style>
+        /* Global styles */
 
-    <h1>This is an MSc admission System</h1>
-    <p>Provide some MSc programs information</p>
-    <a href="/login">Login</a>
-    <a href="/register">Register</a>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #336699;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            margin: 0;
+        }
+
+        nav {
+            background-color: #223344;
+            color: #fff;
+            padding: 10px;
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav li {
+            display: inline-block;
+            margin-right: 20px;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        section {
+            padding: 30px;
+            background-color: gainsboro;
+            margin-bottom: 50px;
+        }
+        h2 {
+            margin-top: 0;
+        }
+
+        ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        li ul {
+            margin-left: 20px;
+        }
+
+        form label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        form input[type="text"],
+        form input[type="email"],
+        form textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            margin-bottom: 10px;
+        }
+
+        form input[type="submit"] {
+            background-color: #333;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 3px;
+            text-decoration: none;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #555;
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        /* Media queries */
+
+        @media screen and (max-width: 600px) {
+            nav li {
+                display: block;
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+<header>
+    <h1>Welcome to the Admission System</h1>
+</header>
+<nav>
+    <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#courses">Courses</a></li>
+        <li><a href="/register">Register</a></li>
+        <li><a href="#contact">Contact Us</a></li>
+        <li><a href="/login">Login</a></li>
+    </ul>
+</nav>
+<section id="home">
+    <h2>Home</h2>
+    <p>Welcome to our Admission System! We offer a wide range of courses and programs to suit your educational
+        needs. Our admission process is simple and easy. Apply online and start your journey with us!</p>
+</section>
+<section id="courses">
+    <h2>Courses</h2>
+    <ul>
+        <li>
+            <h3>Bachelor's Degree Programs</h3>
+            <ul>
+                <li>Computer Science</li>
+                <li>Business Administration</li>
+                <li>Engineering</li>
+            </ul>
+        </li>
+        <li>
+            <h3>Master's Degree Programs</h3>
+            <ul>
+                <li>Data Science</li>
+                <li>MBA</li>
+                <li>Information Technology</li>
+            </ul>
+        </li>
+        <li>
+            <h3>Diploma Programs</h3>
+            <ul>
+                <li>Web Development</li>
+                <li>Graphic Design</li>
+                <li>Accounting</li>
+            </ul>
+        </li>
+    </ul>
+</section>
+<section id="apply">
+    <h2>Apply</h2>
+    <p>Ready to apply? Fill out our online application form and provide the required documents. Our admission team
+        will review your application and get back to you with further instructions.</p>
+    <a href="application_form.html" class="btn">Apply Now</a>
+</section>
+<section id="contact">
+    <h2>Contact Us</h2>
+    <p>If you have any questions or need more information, feel free to contact us using the form below or through
+        the contact details provided.</p>
+    <form action="contact_form.php" method="post">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" required>
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required>
+        <label for="message">Message</label>
+        <textarea id="message" name="message" required></textarea>
+        <input type="submit" value="Submit" class="btn">
+    </form>
+</section>
+<footer>
+    <p>&copy; 2023 Admission System. All rights reserved.</p>
+</footer>
 </body>
+
 </html>
+

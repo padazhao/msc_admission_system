@@ -14,15 +14,18 @@ public class ApplicantRequestDTO {
     @NotEmpty(message = "Email cannot be empty")
     @Email(message = "Email must conform to email format")
     private String email;
-    @NotEmpty(message = "Gender cannot be empty")
-    private static String gender;
-    @NotNull(message = "User must have a phone number")
-    private int phoneNumber;
     @NotEmpty(message = "password cannot be empty")
     @Size(min = 3, message = "Password must contain at least 8 characters")
     private String password;
+    @NotEmpty(message = "Gender cannot be empty")
+    private static String gender;
+    @NotNull(message = "Age cannot be empty")
+    private int age;
+    @NotNull(message = "User must have a phone number")
+    private int phoneNumber;
     @NotEmpty(message = "Date of birth cannot be empty")
     private static String dateOfBirth;
+
 
 
     //GETTERS AND SETTERS=====================================================================
@@ -72,5 +75,13 @@ public class ApplicantRequestDTO {
 
     public void setDateOfBirth(String dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
     }
 }

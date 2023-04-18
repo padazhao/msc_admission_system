@@ -8,7 +8,7 @@ public class ApplicantResponseDTO implements Serializable {
         //USED TO EXPOSE "WANTED" DATA TO REST API
 
         private Long id;
-        private String userName;
+        private String username;
         private String email;
         private String gender;
         private int phoneNumber;

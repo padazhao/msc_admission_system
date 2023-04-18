@@ -5,6 +5,7 @@ import com.group13.msc_admission_system.dto.ApplicantRequestDTO;
 import com.group13.msc_admission_system.dto.ApplicantResponseDTO;
 import com.group13.msc_admission_system.model.Applicant;
 import com.group13.msc_admission_system.service.serviceinterface.ApplicantService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
@@ -18,10 +19,7 @@ import org.springframework.web.bind.annotation.*;
 public class ApplicantController {
     @Autowired private ApplicantService applicantService;
 
-
-
     public ApplicantController(ApplicantService applicantService) {
-        super();
         this.applicantService = applicantService;
     }
 
@@ -33,11 +31,13 @@ public class ApplicantController {
     }
 
     @PostMapping("/register")
-    public String register(@Validated @RequestBody ApplicantRequestDTO applicantRequestDTO){
+    public String register(@Validated ApplicantRequestDTO applicantRequestDTO, Model model){
         try{
             applicantService.register(applicantRequestDTO);
-            return "redirect:/login";
+            return "redirect:/";
         }catch (Exception e){
+            String s = e.getMessage();
+            model.addAttribute("err", s);
             return "register";
         }
     }
@@ -49,15 +49,22 @@ public class ApplicantController {
     }
 
     @PostMapping("/login")
-    public String processLoginForm(@ModelAttribute("applicant") Applicant applicant, Model model){
-        Applicant foundApplicant = applicantService.findByEmailAndPassword(applicant.getEmail(), applicant.getPassword());
+    public String processLoginForm(@ModelAttribute("applicant") ApplicantRequestDTO applicantRequestDTO, Model model, HttpSession session){
+
+        Applicant foundApplicant = applicantService.findByEmailAndPassword(applicantRequestDTO.getEmail(), applicantRequestDTO.getPassword());
+
         if (foundApplicant == null) {
             model.addAttribute("error", "Invalid email or password");
             return "login_form";
         } else {
-            return "redirect:/dashboard";
+            session.setAttribute("email", foundApplicant.getEmail());
+            return "redirect:/applicant";
         }
     }
+
+
+
+
 
     //UPDATE==================================================================================================================================================
     @PutMapping("/applicant/{id}")
@@ -65,9 +72,4 @@ public class ApplicantController {
         applicantService.updateApplicant(id, applicantRequestDTO);
         return "redirect:/dashboard";
     }
-
-
-
-
-
 }
