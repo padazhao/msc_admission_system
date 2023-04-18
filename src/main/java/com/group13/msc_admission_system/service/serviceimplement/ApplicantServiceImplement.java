@@ -1,7 +1,6 @@
 package com.group13.msc_admission_system.service.serviceimplement;
 
-import com.group13.msc_admission_system.common.Message;
-import com.group13.msc_admission_system.common.ResourceType;
+import com.group13.msc_admission_system.common.*;
 import com.group13.msc_admission_system.dto.ApplicantRequestDTO;
 import com.group13.msc_admission_system.dto.ApplicantResponseDTO;
 import com.group13.msc_admission_system.exception.MyResourceNotFoundException;
@@ -37,39 +36,28 @@ public class ApplicantServiceImplement implements ApplicantService {
     }
     @Transactional
     @Override
-    public ApplicantResponseDTO updateApplicant(Long id, ApplicantRequestDTO applicantRequestDTO) {
+    public void updateApplicant(Long id, ApplicantRequestDTO applicantRequestDTO) {
         Applicant update = applicantRepository.findById(id).orElseThrow(
                 () -> new MyResourceNotFoundException(Message.resourceNotFound(ResourceType.APPLICANT, id)));
 
-//        if (MyUtils.isNotEmptyAndNotNull(userRequestDTO.getFirstName())) {
-//            update.setFirstName(userRequestDTO.getFirstName());
-//        }
-//        if (MyUtils.isNotEmptyAndNotNull(userRequestDTO.getLastName())) {
-//            update.setLastName(userRequestDTO.getLastName());
-//        }
-//        if (userRequestDTO.getAddressId() != null) {
-//            Address newAddress = addressService.getAddress(userRequestDTO.getAddressId());
-//            update.getAddress().add(newAddress);
-//        }
-//        if (MyUtils.isNotEmptyAndNotNull(userRequestDTO.getEmail())) {
-//            update.setEmail(userRequestDTO.getEmail());
-//        }
-//        if (MyUtils.isNotEmptyAndNotNull(userRequestDTO.getGender())) {
-//            Gender gender = new StringToEnumConverter().convert(userRequestDTO.getGender()); //CONVERTS GENDER INPUT TO ENUM TYPE GENDER
-//            update.setGender(gender);
-//        }
-//        if (userRequestDTO.getPhoneNumber() > 0) {
-//            update.setPhoneNumber(userRequestDTO.getPhoneNumber());
-//        }
-//        if (MyUtils.isNotEmptyAndNotNull(userRequestDTO.getUserName())) {
-//            update.setUserName(userRequestDTO.getUserName());
-//        }
-//        userRepository.save(update);
-//
-//        System.out.println( Message.updated); // TODO: 4/30/2022 Use logs
-//
-//        return userMapper.userToUserResponseDTO(update);
+        if (MyUtils.isNotEmptyAndNotNull(applicantRequestDTO.getUsername())) {
+            update.setUsername(applicantRequestDTO.getUsername());
+        }
 
-        return null;
+        if (MyUtils.isNotEmptyAndNotNull(applicantRequestDTO.getEmail())) {
+            update.setEmail(applicantRequestDTO.getEmail());
+        }
+        if (MyUtils.isNotEmptyAndNotNull(applicantRequestDTO.getGender())) {
+            Gender gender = new StringToEnumConverter().convert(applicantRequestDTO.getGender()); //CONVERTS GENDER INPUT TO ENUM TYPE GENDER
+            update.setGender(gender);
+        }
+        if (applicantRequestDTO.getPhoneNumber() > 0) {
+            update.setPhoneNumber(applicantRequestDTO.getPhoneNumber());
+        }
+
+        applicantRepository.save(update);
+
+        System.out.println( Message.updated); // TODO: 4/30/2022 Use logs
+
     }
 }

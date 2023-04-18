@@ -55,13 +55,15 @@ public class ApplicantController {
             model.addAttribute("error", "Invalid email or password");
             return "login_form";
         } else {
-            return "redirect:/dashboard";
+            return
         }
     }
 
+    //UPDATE==================================================================================================================================================
     @PutMapping("/applicant/{id}")
-    public ResponseEntity<ApplicantResponseDTO> updateUser(@Validated @PathVariable("id") Long id, @RequestBody ApplicantRequestDTO applicantRequestDTO) {
-        return ResponseEntity.ok(applicantService.updateApplicant(id, applicantRequestDTO));
+    public String updateUser(@Validated @PathVariable("id") Long id, @RequestBody ApplicantRequestDTO applicantRequestDTO) {
+        applicantService.updateApplicant(id, applicantRequestDTO);
+        return "redirect:/dashboard";
     }
 
 

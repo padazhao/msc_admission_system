@@ -86,6 +86,8 @@ public class Applicant {
         return gender;
     }
 
+    public void setGender(Gender gender) {this.gender = gender;}
+
     public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
@@ -105,4 +107,5 @@ public class Applicant {
     public void setPhoneNumber(int phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
+
 }

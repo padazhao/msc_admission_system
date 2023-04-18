@@ -10,5 +10,5 @@ public interface ApplicantService {
 
     Applicant findByEmailAndPassword(String email, String password);
 
-    ApplicantResponseDTO updateApplicant(Long id, ApplicantRequestDTO applicantRequestDTO);
+    void updateApplicant(Long id, ApplicantRequestDTO applicantRequestDTO);
 }
