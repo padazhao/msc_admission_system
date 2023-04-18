@@ -9,9 +9,10 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/applicationform")
 public class ApplicationFormController {
 
-    @Autowired ApplicationFormService applicationFormService;
+    private final ApplicationFormService applicationFormService;
 
     //CONSTRUCTOR=======================================================================================================
+    @Autowired
     public ApplicationFormController(ApplicationFormService applicationFormService) {
         super();
         this.applicationFormService = applicationFormService;

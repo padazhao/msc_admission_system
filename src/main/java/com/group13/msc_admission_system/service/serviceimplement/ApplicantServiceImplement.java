@@ -12,9 +12,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class ApplicantServiceImplement implements ApplicantService {
-    @Autowired
-    private ApplicantRepository applicantRepository;
 
+    private final ApplicantRepository applicantRepository;
+    @Autowired
     public ApplicantServiceImplement(ApplicantRepository applicantRepository) {
         super();
         this.applicantRepository = applicantRepository;

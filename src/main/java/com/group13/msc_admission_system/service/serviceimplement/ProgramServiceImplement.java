@@ -15,9 +15,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class ProgramServiceImplement implements ProgramService {
 
-    @Autowired ProgramRepository programRepository;
-    @Autowired SchoolAdminRepository schoolAdminRepository;
+    private final ProgramRepository programRepository;
+    private final SchoolAdminRepository schoolAdminRepository;
 
+    @Autowired
     public ProgramServiceImplement(ProgramRepository programRepository, SchoolAdminRepository schoolAdminRepository) {
         this.programRepository = programRepository;
         this.schoolAdminRepository = schoolAdminRepository;

@@ -18,9 +18,10 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/applicant")
 public class ApplicantController {
-    @Autowired private ApplicantService applicantService;
+    private final ApplicantService applicantService;
 
     //CONSTRUCTOR=================================================================================================
+    @Autowired
     public ApplicantController(ApplicantService applicantService) {
         super();
         this.applicantService = applicantService;

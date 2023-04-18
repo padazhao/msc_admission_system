@@ -18,10 +18,11 @@ import java.util.Set;
 @Service
 public class ApplicationFormServiceImplement implements ApplicationFormService {
 
-    @Autowired ApplicationFormRepository applicationFormRepository;
-    @Autowired ProgramRepository programRepository;
-    @Autowired SchoolAdminRepository schoolAdminRepository;
+    private final ApplicationFormRepository applicationFormRepository;
+    private final ProgramRepository programRepository;
+    private final SchoolAdminRepository schoolAdminRepository;
 
+    @Autowired
     public ApplicationFormServiceImplement(ApplicationFormRepository applicationFormRepository,
                                            ProgramRepository programRepository,
                                            SchoolAdminRepository schoolAdminRepository) {

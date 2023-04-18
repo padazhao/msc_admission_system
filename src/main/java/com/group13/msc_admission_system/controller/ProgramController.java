@@ -9,9 +9,10 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/program")
 public class ProgramController {
 
-    @Autowired ProgramService programService;
+     private final ProgramService programService;
 
-    //CONSTRUCTOR
+    //CONSTRUCTOR====================================================================================================
+    @Autowired
     public ProgramController(ProgramService programService) {   super(); this.programService = programService;}
 
     //UPDATE=========================================================================================================
