@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Programme search result</title>
+</head>
+<body>
+<h3>This is a serach function that for the admin find the programme id by input the programme id</h3>
+
+<form action="/admin/programme/search" method="get">
+    <input type="number" name="programmeId" placeholder="Enter the Programme ID">
+    <input type="submit" value="Search">
+</form>
+<h4>List the search results</h4>
+
+<table>
+    <thead>
+    <tr>
+        <th>Programme ID</th>
+        <th>Programme Name</th>
+        <th>Programme Description</th>
+        <th>Programme Duration</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <tr th:each = "programme:${programmeResult}">
+        <td th:text="${programmeResult.programmeId}">
+        </td>
+        <td th:text="${programmeResult.name}">
+        </td>
+        <td th:text="${programmeResult.description}">
+        </td>
+        <td th:text="${programmeResult.programmeDuration}">
+        </td>
+        <td>
+        </td>
+    </tr>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

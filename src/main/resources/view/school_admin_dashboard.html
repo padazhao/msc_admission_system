@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" xml:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin</title>
+</head>
+<body>
+<h1> This is School Admin Dashboard Page.</h1>
+
+<h3>This is a serach function that for the admin find the programme id by input the programme id</h3>
+
+<form action="/admin/programme/search" method="get">
+    <input type="number" name="programmeId" placeholder="Enter the Programme ID">
+    <input type="submit" value="Search">
+</form>
+
+
+<h3>This is for the Programmes list</h3>
+<div class="container">
+    <div class="row">
+        <h1>List Programmes</h1>
+    </div>
+    <table class="table table-striped table-bordered">
+        <tr>
+            <th>Programme ID</th>
+            <th>Programme Name</th>
+            <th>Programme Description</th>
+            <th>Programme Duration</th>
+        </tr>
+        <tbody>
+        <tr th:each = "programme:${programmes}">
+            <td th:text="${programme.programmeId}">
+            </td>
+            <td th:text="${programme.name}">
+            </td>
+            <td th:text="${programme.description}">
+            </td>
+            <td th:text="${programme.programmeDuration}">
+            </td>
+            <td>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+
+
+
+<h3>This for the Programme Create </h3>
+<form action="/admin/programme/create" method="post">
+    <label for="name">Programme Name: </label>
+    <input type="text" name="name" id="name" required><br>
+    <label for="description">Program Description: </label>
+    <input type="text" name="description" id="description" required><br>
+    <label for="programmeDuration">Programme Duration: </label>
+    <input type="number" name="duration" id="programmeDuration" required>
+    <input type="submit" value="Create">
+</form>
+
+<br>
+<br>
+<br>
+
+<form action="/admin/application/search" method="get">
+    <input type="number" name="applicationFormId" placeholder="Enter the Application Form  ID">
+    <input type="submit" value="Search">
+</form>
+
+<h3>This is for the Applications list</h3>
+<div class="container">
+    <div class="row">
+        <h1>List Applications</h1>
+    </div>
+    <table class="table table-striped table-bordered">
+        <tr>
+            <th>ApplicationForm ID</th>
+            <th>Application Applicant</th>
+            <th>Application Programme</th>
+            <th>Application State</th>
+            <th>Application Date</th>
+        </tr>
+        <tbody>
+        <tr th:each = "applicationForm:${applicationForms}">
+            <td th:text="${applicationForm.applicationFormId}">
+            </td>
+            <td th:text="${applicationForm.applicant}">
+            </td>
+            <td th:text="${applicationForm.programme}">
+            </td>
+            <td th:text="${applicationForm.status}">
+            </td>
+            <td th:text="${applicationForm.appliedOn}">
+            </td>
+            <td>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

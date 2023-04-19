@@ -13,7 +13,7 @@ public class ApplicationForm {
     //ATTRIBUTES =========================================================
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="applicationForm_id",nullable = false)
+    @Column(name="application_form_id",nullable = false)
     private long applicationFormId;
 
     @OneToOne
@@ -25,14 +25,14 @@ public class ApplicationForm {
     @Column(name = "status")
     private Status status;
     @Column(name = "applied_On")
-    private LocalDate applied_On;
+    private LocalDate appliedOn;
 
 
     //CONSTRUCTOR==================================================
     public ApplicationForm(Applicant applicant, Set<Programme> programme){
         this.applicant = applicant;
         this.programme = programme;
-        this.applied_On = LocalDate.now();
+        this.appliedOn = LocalDate.now();
         this.status = Status.APPROVED;
     }
     public ApplicationForm() {
@@ -66,7 +66,7 @@ public class ApplicationForm {
         this.status = status;
     }
 
-    public LocalDate getApplied_On() {
-        return applied_On;
+    public LocalDate getAppliedOn() {
+        return appliedOn;
     }
 }
