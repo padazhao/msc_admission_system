@@ -4,7 +4,13 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
-
+/**
+ * This is a Data Transfer Object Class.
+ * It is designed to 'register' all the inputs from the client and store it in a single object "Transfer Object"
+ * This object is later mapped to the 'real' Applicant Object accordingly
+ * Helps seperate concerns, from client object and server object.
+ * Modifications on server object does not affect client's object
+ */
 public class ApplicantRequestDTO {
 
     //USED TO ACCEPT DATA FOR CREATION
@@ -14,15 +20,18 @@ public class ApplicantRequestDTO {
     @NotEmpty(message = "Email cannot be empty")
     @Email(message = "Email must conform to email format")
     private String email;
+    @NotEmpty(message = "password cannot be empty")
+    @Size(min = 3, message = "Password must contain at least 8 characters")
+    private String password;
     @NotEmpty(message = "Gender cannot be empty")
     private static String gender;
+    @NotNull(message = "Age cannot be empty")
+    private int age;
     @NotNull(message = "User must have a phone number")
     private int phoneNumber;
-    @NotEmpty(message = "password cannot be empty")
-    @Size(min = 8, message = "Password must contain at least 8 characters")
-    private String password;
     @NotEmpty(message = "Date of birth cannot be empty")
     private static String dateOfBirth;
+
 
 
     //GETTERS AND SETTERS=====================================================================
@@ -72,5 +81,13 @@ public class ApplicantRequestDTO {
 
     public void setDateOfBirth(String dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
     }
 }

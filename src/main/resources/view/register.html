@@ -1,21 +1,91 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xml:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Registration for System</title>
+    <title>User Registration</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        form {
+            width: 300px;
+            margin: 0 auto;
+        }
+
+        label{
+            font-size: 12pt;
+            font-weight: bold;
+            float: left;
+        }
+
+        label,
+        input,
+        select {
+            display: block;
+            margin-bottom: 5px;
+            width: 100%;
+            padding: 3px;
+        }
+
+        input[type="submit"] {
+            width: auto;
+            margin-top: 20px;
+            float: right;
+        }
+        .container {
+            display: flex;
+            height: 1200px;
+            position: relative;
+            max-width: 600px;
+            margin: 50px auto;
+            align-items: flex-start;
+            gap: 20px;
+        }
+        .container .main-container {
+            flex: 1 1 650px;
+            padding: 20px;
+            background-image: linear-gradient(#B5CCFF, #80A8FF, #5C8FFF);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            border-radius: 50px;
+            opacity: 0.7;
+        }
+    </style>
 </head>
 <body>
-<h1> Please register for application</h1>
+<div class="container">
+    <div class="main-container">
+        <h2>User Registration</h2>
+        <div>
+            <form action="/register" method="post">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
 
-<form action="/register" method="post">
-  <label for="username">Username:</label>
-  <input type="text" name="username" id="username" required><br><br>
-  <label for="email">Email:</label>
-  <input type="email" name="email" id="email" required><br><br>
-  <label for="password">Password:</label>
-  <input type="password" name="password" id="password" required><br><br>
-  <input type="submit" value="Register">
-</form>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required><span th:if="${err!=null}" th:text="${err}"></span>
 
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+                <label for="gender">Gender:</label>
+                <select id="gender" name="gender" required>
+                    <option value="" disabled selected hidden>Select your gender</option>
+                    <option value="MALE">MALE</option>
+                    <option value="FEMALE">FEMALE</option>
+                    <option value="OTHER">OTHER</option>
+                </select>
+                <label for="dob">Date of Birth:</label>
+                <input type="date" id="dob" name="dateOfBirth" required>
+                <label for="age">Age:</label>
+                <input type="number" id="age" name="age" required>
+                <label for="phone">Phone Number:</label>
+                <input type="tel" id="phone" name="phoneNumber" required />
+                <input type="submit" value="Register" />
+            </form>
+        </div>
+    </div>
+</div>
 </body>
 </html>
