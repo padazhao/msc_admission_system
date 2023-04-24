@@ -12,6 +12,8 @@ import com.group13.msc_admission_system.service.serviceinterface.ProgramService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ProgramServiceImplement implements ProgramService {
 
@@ -22,6 +24,11 @@ public class ProgramServiceImplement implements ProgramService {
     public ProgramServiceImplement(ProgramRepository programRepository, AdminRepository AdminRepository) {
         this.programRepository = programRepository;
         this.AdminRepository = AdminRepository;
+    }
+
+    @Override
+    public List<Program> getAllPrograms() {
+        return programRepository.findAll();
     }
 
     //UPDATE============================================================================================================

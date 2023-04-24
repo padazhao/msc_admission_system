@@ -1,5 +1,6 @@
 package com.group13.msc_admission_system.controller;
 
+import com.group13.msc_admission_system.dto.LoginCredentials;
 import com.group13.msc_admission_system.dto.UserRequestDTO;
 import com.group13.msc_admission_system.model.ApplicationForm;
 import com.group13.msc_admission_system.model.Program;
@@ -7,6 +8,7 @@ import com.group13.msc_admission_system.model.Admin;
 import com.group13.msc_admission_system.repository.ApplicationFormRepository;
 import com.group13.msc_admission_system.repository.ProgramRepository;
 import com.group13.msc_admission_system.service.serviceinterface.AdminService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/admin")
@@ -36,7 +39,7 @@ public class AdminController {
         this.adminService = adminService;
     }
 
-    //REGISTER================================
+    //REGISTER=======================================================================================================================================
     @GetMapping("/register") // USED SHOW A REGISTRATION FORM
     public ModelAndView showAdminRegistrationForm(){
         ModelAndView modelAndView = new ModelAndView("register");
@@ -50,7 +53,7 @@ public class AdminController {
         return modelAndView;
     }
 
-    //LOGIN================================
+    //LOGIN===========================================================================================================================================
     @GetMapping("/login")
     public ModelAndView showAdminLoginForm(){
         ModelAndView modelAndView = new ModelAndView("school_admin_login");
@@ -60,20 +63,26 @@ public class AdminController {
 
     //TODO SHOULD USE EMAIL AND PASSWORD INSTEAD, SINCE EMAIL IS UNIQUE AND NOT USERNAME
     @PostMapping("/login")
-    public ModelAndView adminLogin(@RequestBody UserRequestDTO userRequestDTO){
-        adminService.login(userRequestDTO);
+    public ModelAndView adminLogin(@Validated @RequestBody LoginCredentials loginCredentials){
+        adminService.login(loginCredentials);
         ModelAndView modelAndView = new ModelAndView("school_admin_dashboard");
         return modelAndView;
     }
 
 
+
+
     //load all the programmes  information and all the applications information
     @GetMapping("/dashboard")
-    public String adminProgram(Model model){
+    public String adminProgram(){
+
         List<Program> programs = programRepository.findAll();
-        model.addAttribute("programmes", programs);
+       // model.addAttribute("programmes", programs);
         List<ApplicationForm> applicationForms = applicationFormRepository.findAll();
-        model.addAttribute("applicationForms",applicationForms);
+       // model.addAttribute("applicationForms",applicationForms);
+        ModelAndView modelAndView = new ModelAndView("school_admin_dashboard");
+        modelAndView.addObject("progams",programs);
+        modelAndView.addObject("applicationForms",applicationForms);
         return "school_admin_dashboard";
 
     }

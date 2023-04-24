@@ -1,20 +1,18 @@
 package com.group13.msc_admission_system.controller;
 
 
+import com.group13.msc_admission_system.dto.LoginCredentials;
 import com.group13.msc_admission_system.dto.UserRequestDTO;
 import com.group13.msc_admission_system.model.Applicant;
 import com.group13.msc_admission_system.service.serviceinterface.ApplicantService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.net.URI;
+import java.util.Map;
 
 
 @RestController
@@ -26,50 +24,49 @@ public class ApplicantController {
     @Autowired
     public ApplicantController(ApplicantService applicantService) {this.applicantService = applicantService;}
 
-    //register function
+    //REGISTER============================================================================================================================
     @GetMapping("/register")
     public ModelAndView showApplicantRegistrationForm(){
         ModelAndView modelAndView = new ModelAndView("register");
-        //modelAndView.addObject("applicant",new Applicant());
+        modelAndView.addObject("applicant",new Applicant());
         return modelAndView;
     }
 
     @PostMapping("/register")
-    public ResponseEntity<Void> register(@Validated @RequestBody UserRequestDTO userRequestDTO, Model model){
+    public ModelAndView register(@Validated @RequestBody UserRequestDTO userRequestDTO){
         applicantService.register(userRequestDTO);
-        HttpHeaders headers = new HttpHeaders();
-        headers.setLocation(URI.create("redirect:/login_form"));
-        return ResponseEntity.status(HttpStatus.OK).headers(headers).build();
+        ModelAndView modelAndView = new ModelAndView("login_form");
+        return modelAndView;
     }
 
+    //LOGIN============================================================================================================================
     @GetMapping("/login")
-    public String showLoginForm(Model model){
-        model.addAttribute("applicant", new Applicant());
-        return "login_form";
+    public ModelAndView showLoginForm(){
+        ModelAndView modelAndView = new ModelAndView("login_form");
+        modelAndView.addObject("applicant", new Applicant());
+        return modelAndView;
     }
 
     @PostMapping("/login")
-    public String processLoginForm(@ModelAttribute("applicant") UserRequestDTO userRequestDTO, Model model, HttpSession session){
+    public ModelAndView login(@Validated @RequestBody LoginCredentials loginCredentials, Model model, HttpSession session){
 
-        Applicant foundApplicant = applicantService.findByEmailAndPassword(userRequestDTO.getEmail(), userRequestDTO.getPassword());
+        applicantService.login(loginCredentials);
+        ModelAndView modelAndView = new ModelAndView("applicants");
+        return modelAndView;
 
-        if (foundApplicant == null) {
-            model.addAttribute("error", "Invalid email or password");
-            return "login_form";
-        } else {
-            session.setAttribute("email", foundApplicant.getEmail());
-            return "redirect:/applicant";
-        }
+//        if (foundApplicant == null) {
+//            model.addAttribute("error", "Invalid email or password");
+//            return "login_form";
+//        } else {
+//            session.setAttribute("email", foundApplicant.getEmail());
+//            return "redirect:/applicant";
+//        }
     }
 
-
-
-
-
-    //UPDATE==================================================================================================================================================
+    //UPDATE====================================================================================================================================
     @PutMapping("/applicant/{id}")
-    public String updateUser(@Validated @PathVariable("id") Long id, @RequestBody UserRequestDTO userRequestDTO) {
+    public ModelAndView updateUser(@Validated @PathVariable("id") Long id, @RequestBody UserRequestDTO userRequestDTO) {
         applicantService.updateApplicant(id, userRequestDTO);
-        return "redirect:/dashboard";
+        return new ModelAndView("applicants");
     }
 }
