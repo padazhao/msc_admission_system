@@ -18,12 +18,20 @@ import java.util.List;
 public class ProgramServiceImplement implements ProgramService {
 
     private final ProgramRepository programRepository;
-    private final AdminRepository AdminRepository;
+    private final AdminRepository adminRepository;
 
+    //CONSTRUCTOR=======================================================================================================
     @Autowired
-    public ProgramServiceImplement(ProgramRepository programRepository, AdminRepository AdminRepository) {
+    public ProgramServiceImplement(ProgramRepository programRepository, AdminRepository adminRepository) {
         this.programRepository = programRepository;
-        this.AdminRepository = AdminRepository;
+        this.adminRepository = adminRepository;
+    }
+
+    //CREATE ===========================================================================================================
+    @Override
+    public void createProgram(ProgramRequestDTO programRequestDTO) {
+        Program program = new Program(programRequestDTO);
+        programRepository.save(program);
     }
 
     @Override
@@ -35,15 +43,15 @@ public class ProgramServiceImplement implements ProgramService {
     @Override
     public void programUpdate(Long id, ProgramRequestDTO programRequestDTO) {
 
-        if(!AdminRepository.existsById(programRequestDTO.getAdminId())){
+        if(!adminRepository.existsById(programRequestDTO.getAdminId())){
             throw new MyResourceNotFoundException(Message.resourceNotFound(ResourceType.ADMIN,programRequestDTO.getAdminId()));
         }
 
         Program update = programRepository.findById(id).orElseThrow(
                 ()-> new MyResourceNotFoundException(Message.resourceNotFound(ResourceType.PROGRAM,id)));
 
-        if(MyUtils.isNotEmptyAndNotNull(programRequestDTO.getName())){
-            update.setName(programRequestDTO.getName());
+        if(MyUtils.isNotEmptyAndNotNull(programRequestDTO.getProgramName())){
+            update.setProgramName(programRequestDTO.getProgramName());
         }
 
         if(MyUtils.isNotEmptyAndNotNull(programRequestDTO.getDescription())){
@@ -62,7 +70,8 @@ public class ProgramServiceImplement implements ProgramService {
 
     //DELETE============================================================================================================
     public void deleteProgram(Long programId) {
-        programRepository.findById(programId).orElseThrow(() -> new MyResourceNotFoundException(Message.resourceNotFound(ResourceType.PROGRAM, programId)));
+        programRepository.findById(programId).orElseThrow(
+                () -> new MyResourceNotFoundException(Message.resourceNotFound(ResourceType.PROGRAM, programId)));
         programRepository.deleteById(programId);
         System.out.println( Message.updated);
     }

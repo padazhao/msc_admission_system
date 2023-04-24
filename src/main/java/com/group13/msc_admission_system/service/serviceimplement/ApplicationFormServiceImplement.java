@@ -27,6 +27,7 @@ public class ApplicationFormServiceImplement implements ApplicationFormService {
     private final AdminRepository adminRepository;
     private final ApplicantRepository applicantRepository;
 
+    //CONSTRUCTOR========================================================================================================
     @Autowired
     public ApplicationFormServiceImplement(ApplicationFormRepository applicationFormRepository,
                                            ProgramRepository programRepository,
@@ -59,8 +60,7 @@ public class ApplicationFormServiceImplement implements ApplicationFormService {
     public void programUpdate(Long id, ApplicationFormRequestDTO applicationFormRequestDTO) {
 
         ApplicationForm update = applicationFormRepository.findById(id).orElseThrow(
-                () -> new MyResourceNotFoundException(Message.resourceNotFound(ResourceType.APPLICATION_FORM, id)));
-        
+                () -> new MyResourceNotFoundException(Message.resourceNotFound(ResourceType.APPLICATION_FORM, id)));    //THROW EXCEPTION IF APPLICANT FORM ID IS NOT FOUND
         
         //Update program ID 
         if (applicationFormRequestDTO.getProgramIds().length != 0) {
@@ -68,7 +68,6 @@ public class ApplicationFormServiceImplement implements ApplicationFormService {
             Set<Program> program = validateProgramInput(applicationFormRequestDTO);
             update.setProgram(program);
         }
-
         applicationFormRepository.save(update);
         System.out.println( Message.updated); // TODO: Use logs
     }
@@ -78,7 +77,7 @@ public class ApplicationFormServiceImplement implements ApplicationFormService {
     public void statusUpdate(Long id, ApplicationFormRequestDTO applicationFormRequestDTO){
 
         if(!adminRepository.existsById(applicationFormRequestDTO.getAdminId())){
-            throw new MyResourceNotFoundException(Message.resourceNotFound(ResourceType.ADMIN, applicationFormRequestDTO.getAdminId()));
+            throw new MyResourceNotFoundException(Message.resourceNotFound(ResourceType.ADMIN, applicationFormRequestDTO.getAdminId())); //THROW EXCEPTION IF APPLICANT FORM ID IS NOT FOUND
         }
 
         ApplicationForm update = applicationFormRepository.findById(id).orElseThrow(

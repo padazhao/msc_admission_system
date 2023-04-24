@@ -121,15 +121,6 @@ public class AdminController {
 //        return "school_admin_dashboard";
 //    }
 
-    //creat new programme by amdin
-    @PostMapping("/programme/create")
-    public String createProgramme(@RequestParam("name") String name,
-                                  @RequestParam("description") String description,
-                                  @RequestParam("duration") long duration){
-        Program program = new Program(name, description, duration);
-        programRepository.save(program);
-        return "redirect:/admin/dashboard";
-    }
     // find the application by using applicationFormId in the html search button
 
     @GetMapping("/application/search")

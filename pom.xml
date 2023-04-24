@@ -12,7 +12,7 @@
     <groupId>com.group13</groupId>
     <artifactId>msc_admission_system</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>msc_admission_system</name>
+    <programName>msc_admission_system</programName>
     <description>msc_admission_system</description>
 
     <properties>

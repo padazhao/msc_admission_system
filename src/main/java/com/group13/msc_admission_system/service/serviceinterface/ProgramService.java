@@ -10,6 +10,7 @@ import java.util.List;
 @Service
 public interface ProgramService {
 
+    void createProgram(ProgramRequestDTO programRequestDTO);
     List<Program> getAllPrograms();
 
     void programUpdate(Long id, ProgramRequestDTO programRequestDTO);
