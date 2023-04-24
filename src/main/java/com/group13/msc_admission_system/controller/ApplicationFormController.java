@@ -14,10 +14,7 @@ public class ApplicationFormController {
 
     //CONSTRUCTOR=======================================================================================================
     @Autowired
-    public ApplicationFormController(ApplicationFormService applicationFormService) {
-        super();
-        this.applicationFormService = applicationFormService;
-    }
+    public ApplicationFormController(ApplicationFormService applicationFormService) { super();  this.applicationFormService = applicationFormService;}
 
     //CREATE AN APPLICATION FORM
     @PostMapping("/submit")
@@ -26,16 +23,18 @@ public class ApplicationFormController {
         return new ModelAndView("applicants");
     }
 
-    //UPDATE =======================================================================================================
+    //UPDATE ===========================================================================================================
     @PutMapping("/program/{id}")
-    public ModelAndView programFormUpdate(@PathVariable("id") Long id, @RequestBody ApplicationFormRequestDTO applicationFormRequestDTO){
+    public ModelAndView programFormUpdate(@PathVariable("id") Long id,
+                                          @RequestBody ApplicationFormRequestDTO applicationFormRequestDTO){
         applicationFormService.programUpdate(id,applicationFormRequestDTO);
         return new ModelAndView("applicant_form");
     }
 
     @PutMapping("/status/{id}")
-    public String statusUpdate(@PathVariable("id") Long id, @RequestBody ApplicationFormRequestDTO applicationFormRequestDTO){
+    public ModelAndView statusUpdate(@PathVariable("id") Long id,
+                               @RequestBody ApplicationFormRequestDTO applicationFormRequestDTO){
         applicationFormService.statusUpdate(id,applicationFormRequestDTO);
-        return "redirect: /dashboard";
+        return new ModelAndView();
     }
 }

@@ -12,26 +12,23 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.Map;
-
 
 @RestController
 @RequestMapping("/applicant")
 public class ApplicantController {
     private final ApplicantService applicantService;
 
-    //CONSTRUCTOR
+    //CONSTRUCTOR ======================================================================================================
     @Autowired
     public ApplicantController(ApplicantService applicantService) {this.applicantService = applicantService;}
 
-    //REGISTER============================================================================================================================
+    //REGISTER==========================================================================================================
     @GetMapping("/register")
     public ModelAndView showApplicantRegistrationForm(){
         ModelAndView modelAndView = new ModelAndView("register");
         modelAndView.addObject("applicant",new Applicant());
         return modelAndView;
     }
-
     @PostMapping("/register")
     public ModelAndView register(@Validated @RequestBody UserRequestDTO userRequestDTO){
         applicantService.register(userRequestDTO);
@@ -39,21 +36,18 @@ public class ApplicantController {
         return modelAndView;
     }
 
-    //LOGIN============================================================================================================================
+    //LOGIN=============================================================================================================
     @GetMapping("/login")
     public ModelAndView showLoginForm(){
         ModelAndView modelAndView = new ModelAndView("login_form");
         modelAndView.addObject("applicant", new Applicant());
         return modelAndView;
     }
-
     @PostMapping("/login")
     public ModelAndView login(@Validated @RequestBody LoginCredentials loginCredentials, Model model, HttpSession session){
-
         applicantService.login(loginCredentials);
         ModelAndView modelAndView = new ModelAndView("applicants");
         return modelAndView;
-
 //        if (foundApplicant == null) {
 //            model.addAttribute("error", "Invalid email or password");
 //            return "login_form";
@@ -63,8 +57,8 @@ public class ApplicantController {
 //        }
     }
 
-    //UPDATE====================================================================================================================================
-    @PutMapping("/applicant/{id}")
+    //UPDATE============================================================================================================
+    @PutMapping("/{id}")
     public ModelAndView updateUser(@Validated @PathVariable("id") Long id, @RequestBody UserRequestDTO userRequestDTO) {
         applicantService.updateApplicant(id, userRequestDTO);
         return new ModelAndView("applicants");
