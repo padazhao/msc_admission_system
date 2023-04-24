@@ -7,8 +7,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public interface ApplicationFormService {
-    void programUpdate(Long id, ApplicationFormRequestDTO applicationFormRequestDTO);
 
+    void createApplication(ApplicationFormRequestDTO applicationFormRequestDTO);
+    void programUpdate(Long id, ApplicationFormRequestDTO applicationFormRequestDTO);
     @Transactional
     void statusUpdate(Long id, ApplicationFormRequestDTO applicationFormRequestDTO);
 }

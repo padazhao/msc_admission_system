@@ -4,6 +4,7 @@ import com.group13.msc_admission_system.dto.ApplicationFormRequestDTO;
 import com.group13.msc_admission_system.service.serviceinterface.ApplicationFormService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 @RestController
 @RequestMapping("/applicationform")
@@ -18,11 +19,18 @@ public class ApplicationFormController {
         this.applicationFormService = applicationFormService;
     }
 
+    //CREATE AN APPLICATION FORM
+    @PostMapping("/submit")
+    public ModelAndView submitApplicationForm(@RequestBody ApplicationFormRequestDTO applicationFormRequestDTO){
+        applicationFormService.createApplication(applicationFormRequestDTO);
+        return new ModelAndView("applicants");
+    }
+
     //UPDATE =======================================================================================================
     @PutMapping("/program/{id}")
-    public String programFormUpdate(@PathVariable("id") Long id, @RequestBody ApplicationFormRequestDTO applicationFormRequestDTO){
+    public ModelAndView programFormUpdate(@PathVariable("id") Long id, @RequestBody ApplicationFormRequestDTO applicationFormRequestDTO){
         applicationFormService.programUpdate(id,applicationFormRequestDTO);
-        return "redirect: /dashboard";
+        return new ModelAndView("applicant_form");
     }
 
     @PutMapping("/status/{id}")
@@ -30,18 +38,4 @@ public class ApplicationFormController {
         applicationFormService.statusUpdate(id,applicationFormRequestDTO);
         return "redirect: /dashboard";
     }
-
-    //TO BE USED AS EXAMPLE ON HOW TO RETURN A RESPONSE ENTITY BUT WITH A HEADER TO REDIRECT
-//    @GetMapping("/example")
-//    public ResponseEntity<String> example() {
-//        String responseBody = "This is the response body";
-//        HttpHeaders headers = new HttpHeaders();
-//        headers.setLocation(URI.create("/redirected-page"));
-//        return new ResponseEntity<>(responseBody, headers, HttpStatus.FOUND);
-//    }
-//
-//    @GetMapping("/redirected-page")
-//    public String redirectedPage() {
-//        return "redirected-page";
-//    }
 }

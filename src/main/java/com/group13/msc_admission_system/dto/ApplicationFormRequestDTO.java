@@ -13,15 +13,17 @@ import com.group13.msc_admission_system.exception.MyOutOfBoundException;
 public class ApplicationFormRequestDTO {
 
     private static int maxNumberOfSelectedProgramme = 2;
-    private Long[] programId;
+    private Long[] programIds;
     private String status;
     private Long adminId;
+    private Long applicantId;
 
-    public Long[] getProgramId() {
-        if(programId.length>maxNumberOfSelectedProgramme){
-            throw new MyOutOfBoundException(Message.invalidInput + ": Only" + maxNumberOfSelectedProgramme + " can be chosen");
-        }
-        return programId;
+    public Long getApplicantId() {
+        return applicantId;
+    }
+
+    public Long[] getProgramIds() {
+        return programIds;
     }
     public String getStatus() { return status;}
 
