@@ -5,16 +5,16 @@
     <title>School_Admin</title>
 </head>
 <body>
-<h1>This is the Schoole Admin Login Page.</h1>
+<h1>This is the School Admin Login Page.</h1>
 
-<form action="#" th:action="@{/admin/login}" th:object="${schoolAdmin}" method="post">
+<form action="#" th:action="@{/admin/login}" th:object="${Admin}" method="post">
     <div>
         <label for="username">Username:</label>
-        <input type="text" id="username" th:field="*{schoolAdminUsername}" required>
+        <input type="text" id="username" th:field="*{username}" required>
     </div>
     <div>
         <label for="password">Password:</label>
-        <input type="password" id="password" th:field="*{schoolAdminPassword}" required>
+        <input type="password" id="password" th:field="*{password}" required>
     </div>
 
     <button type="submit">Login</button>

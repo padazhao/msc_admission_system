@@ -5,9 +5,9 @@
     <title>Programme search result</title>
 </head>
 <body>
-<h3>This is a serach function that for the admin find the programme id by input the programme id</h3>
+<h3>This is a serach function that for the admin find the program id by input the program id</h3>
 
-<form action="/admin/programme/search" method="get">
+<form action="/admin/program/search" method="get">
     <input type="number" name="programmeId" placeholder="Enter the Programme ID">
     <input type="submit" value="Search">
 </form>
@@ -24,14 +24,14 @@
     </thead>
     <tbody>
     <tr>
-    <tr th:each = "programme:${programmeResult}">
-        <td th:text="${programmeResult.programmeId}">
+    <tr th:each = "program:${programResult}">
+        <td th:text="${programResult.programmeId}">
         </td>
-        <td th:text="${programmeResult.name}">
+        <td th:text="${programResult.name}">
         </td>
-        <td th:text="${programmeResult.description}">
+        <td th:text="${programResult.description}">
         </td>
-        <td th:text="${programmeResult.programmeDuration}">
+        <td th:text="${programResult.programmeDuration}">
         </td>
         <td>
         </td>

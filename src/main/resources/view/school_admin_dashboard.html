@@ -7,9 +7,9 @@
 <body>
 <h1> This is School Admin Dashboard Page.</h1>
 
-<h3>This is a serach function that for the admin find the programme id by input the programme id</h3>
+<h3>This is a serach function that for the admin find the program id by input the program id</h3>
 
-<form action="/admin/programme/search" method="get">
+<form action="/admin/program/search" method="get">
     <input type="number" name="programmeId" placeholder="Enter the Programme ID">
     <input type="submit" value="Search">
 </form>
@@ -28,14 +28,14 @@
             <th>Programme Duration</th>
         </tr>
         <tbody>
-        <tr th:each = "programme:${programmes}">
-            <td th:text="${programme.programmeId}">
+        <tr th:each = "program:${programs}">
+            <td th:text="${program.programmeId}">
             </td>
-            <td th:text="${programme.name}">
+            <td th:text="${program.name}">
             </td>
-            <td th:text="${programme.description}">
+            <td th:text="${program.description}">
             </td>
-            <td th:text="${programme.programmeDuration}">
+            <td th:text="${program.programmeDuration}">
             </td>
             <td>
             </td>
@@ -48,7 +48,7 @@
 
 
 <h3>This for the Programme Create </h3>
-<form action="/admin/programme/create" method="post">
+<form action="/admin/program/create" method="post">
     <label for="name">Programme Name: </label>
     <input type="text" name="name" id="name" required><br>
     <label for="description">Program Description: </label>
@@ -86,7 +86,7 @@
             </td>
             <td th:text="${applicationForm.applicant}">
             </td>
-            <td th:text="${applicationForm.programme}">
+            <td th:text="${applicationForm.program}">
             </td>
             <td th:text="${applicationForm.status}">
             </td>

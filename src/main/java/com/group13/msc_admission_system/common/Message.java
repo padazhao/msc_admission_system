@@ -14,6 +14,13 @@ public class Message {
     public static String resourceNotFound(ResourceType resourceType, Long id){
         return resourceType +": " + id+ " NOT FOUND";
     }
+    public static String resourceNotFound(ResourceType resourceType){
+        return resourceType +": NOT FOUND";
+    }
+
+    public static String resourceAlreadyExist(ResourceType resourceType){
+        return resourceType + ": ALREADY EXIST";
+    }
 
     public static String isEmpty(String field){ return field.toUpperCase() + " IS EMPTY"; }
 

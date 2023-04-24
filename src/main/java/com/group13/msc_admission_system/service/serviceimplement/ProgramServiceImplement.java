@@ -7,7 +7,7 @@ import com.group13.msc_admission_system.dto.ProgramRequestDTO;
 import com.group13.msc_admission_system.exception.MyResourceNotFoundException;
 import com.group13.msc_admission_system.model.Program;
 import com.group13.msc_admission_system.repository.ProgramRepository;
-import com.group13.msc_admission_system.repository.SchoolAdminRepository;
+import com.group13.msc_admission_system.repository.AdminRepository;
 import com.group13.msc_admission_system.service.serviceinterface.ProgramService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,20 +16,20 @@ import org.springframework.stereotype.Service;
 public class ProgramServiceImplement implements ProgramService {
 
     private final ProgramRepository programRepository;
-    private final SchoolAdminRepository schoolAdminRepository;
+    private final AdminRepository AdminRepository;
 
     @Autowired
-    public ProgramServiceImplement(ProgramRepository programRepository, SchoolAdminRepository schoolAdminRepository) {
+    public ProgramServiceImplement(ProgramRepository programRepository, AdminRepository AdminRepository) {
         this.programRepository = programRepository;
-        this.schoolAdminRepository = schoolAdminRepository;
+        this.AdminRepository = AdminRepository;
     }
 
     //UPDATE============================================================================================================
     @Override
     public void programUpdate(Long id, ProgramRequestDTO programRequestDTO) {
 
-        if(!schoolAdminRepository.existsById(programRequestDTO.getAdminId())){
-            throw new MyResourceNotFoundException(Message.resourceNotFound(ResourceType.SCHOOLADMIN,programRequestDTO.getAdminId()));
+        if(!AdminRepository.existsById(programRequestDTO.getAdminId())){
+            throw new MyResourceNotFoundException(Message.resourceNotFound(ResourceType.ADMIN,programRequestDTO.getAdminId()));
         }
 
         Program update = programRepository.findById(id).orElseThrow(
@@ -43,8 +43,8 @@ public class ProgramServiceImplement implements ProgramService {
             update.setDescription(programRequestDTO.getDescription());
         }
 
-        if(programRequestDTO.getProgrammeDuration()!=0){
-            update.setProgrammeDuration(programRequestDTO.getProgrammeDuration());
+        if(programRequestDTO.getProgramDuration()!=0){
+            update.setProgramDuration(programRequestDTO.getProgramDuration());
         }
 
         programRepository.save(update);

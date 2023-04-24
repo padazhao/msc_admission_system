@@ -6,8 +6,10 @@ package com.group13.msc_admission_system.common;
  * This class is used to standardize the ways resources are called across the entire project
  */
 public enum ResourceType {
+    ADMIN,
     APPLICANT, APPLICANTS,
-    APPLICATIONFORM,
+    APPLICATION_FORM,
+    EMAIL,
     PROGRAM,
-    SCHOOLADMIN
+    USER
 }

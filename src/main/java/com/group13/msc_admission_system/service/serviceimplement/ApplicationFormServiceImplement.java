@@ -7,7 +7,7 @@ import com.group13.msc_admission_system.model.ApplicationForm;
 import com.group13.msc_admission_system.model.Program;
 import com.group13.msc_admission_system.repository.ApplicationFormRepository;
 import com.group13.msc_admission_system.repository.ProgramRepository;
-import com.group13.msc_admission_system.repository.SchoolAdminRepository;
+import com.group13.msc_admission_system.repository.AdminRepository;
 import com.group13.msc_admission_system.service.serviceinterface.ApplicationFormService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,15 +20,15 @@ public class ApplicationFormServiceImplement implements ApplicationFormService {
 
     private final ApplicationFormRepository applicationFormRepository;
     private final ProgramRepository programRepository;
-    private final SchoolAdminRepository schoolAdminRepository;
+    private final AdminRepository AdminRepository;
 
     @Autowired
     public ApplicationFormServiceImplement(ApplicationFormRepository applicationFormRepository,
                                            ProgramRepository programRepository,
-                                           SchoolAdminRepository schoolAdminRepository) {
+                                           AdminRepository AdminRepository) {
         this.applicationFormRepository = applicationFormRepository;
         this.programRepository = programRepository;
-        this.schoolAdminRepository = schoolAdminRepository;
+        this.AdminRepository = AdminRepository;
     }
 
     //UPDATE============================================================================================================
@@ -37,7 +37,7 @@ public class ApplicationFormServiceImplement implements ApplicationFormService {
     public void programUpdate(Long id, ApplicationFormRequestDTO applicationFormRequestDTO) {
 
         ApplicationForm update = applicationFormRepository.findById(id).orElseThrow(
-                () -> new MyResourceNotFoundException(Message.resourceNotFound(ResourceType.APPLICATIONFORM, id)));
+                () -> new MyResourceNotFoundException(Message.resourceNotFound(ResourceType.APPLICATION_FORM, id)));
         
         //Update program ID 
         if (applicationFormRequestDTO.getProgramId().length != 0) {
@@ -61,12 +61,12 @@ public class ApplicationFormServiceImplement implements ApplicationFormService {
     @Override
     public void statusUpdate(Long id, ApplicationFormRequestDTO applicationFormRequestDTO){
 
-        if(!schoolAdminRepository.existsById(applicationFormRequestDTO.getAdminId())){
-            throw new MyResourceNotFoundException(Message.resourceNotFound(ResourceType.SCHOOLADMIN, applicationFormRequestDTO.getAdminId()));
+        if(!AdminRepository.existsById(applicationFormRequestDTO.getAdminId())){
+            throw new MyResourceNotFoundException(Message.resourceNotFound(ResourceType.ADMIN, applicationFormRequestDTO.getAdminId()));
         }
 
         ApplicationForm update = applicationFormRepository.findById(id).orElseThrow(
-                () -> new MyResourceNotFoundException(Message.resourceNotFound(ResourceType.APPLICATIONFORM, id)));
+                () -> new MyResourceNotFoundException( Message.resourceNotFound(ResourceType.APPLICATION_FORM, id))   );
 
         //Update status
         if (MyUtils.isNotEmptyAndNotNull(applicationFormRequestDTO.getStatus())) {

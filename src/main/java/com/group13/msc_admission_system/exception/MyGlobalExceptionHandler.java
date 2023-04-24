@@ -20,13 +20,18 @@ public class MyGlobalExceptionHandler {
 
     @ExceptionHandler(MyResourceNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ResponseEntity<ExceptionErrorMessage> notFoundException(MyResourceNotFoundException exception, HttpServletRequest request){
-        return new ResponseEntity(new ExceptionErrorMessage(exception.getMessage(), request.getServletPath()),HttpStatus.NOT_FOUND);
+    public ResponseEntity<MyExceptionErrorMessage> notFoundException(MyResourceNotFoundException exception, HttpServletRequest request){
+        return new ResponseEntity(new MyExceptionErrorMessage(exception.getMessage(), request.getServletPath()),HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(MyOutOfBoundException.class)
-    public ResponseEntity<ExceptionErrorMessage> notFoundException(MyOutOfBoundException exception, HttpServletRequest request){
-        return new ResponseEntity(new ExceptionErrorMessage(exception.getMessage(), request.getServletPath()),HttpStatus.BAD_REQUEST);
+    public ResponseEntity<MyExceptionErrorMessage> notFoundException(MyOutOfBoundException exception, HttpServletRequest request){
+        return new ResponseEntity(new MyExceptionErrorMessage(exception.getMessage(), request.getServletPath()),HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(MyResourceAlreadyExistException.class)
+    public ResponseEntity<MyExceptionErrorMessage> notFoundException(MyResourceAlreadyExistException exception, HttpServletRequest request){
+        return new ResponseEntity(new MyExceptionErrorMessage(exception.getMessage(), request.getServletPath()),HttpStatus.CONFLICT);
     }
 
 }

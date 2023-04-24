@@ -1,7 +1,8 @@
 package com.group13.msc_admission_system.service.serviceimplement;
 
 import com.group13.msc_admission_system.common.*;
-import com.group13.msc_admission_system.dto.ApplicantRequestDTO;
+import com.group13.msc_admission_system.dto.UserRequestDTO;
+import com.group13.msc_admission_system.exception.MyResourceAlreadyExistException;
 import com.group13.msc_admission_system.exception.MyResourceNotFoundException;
 import com.group13.msc_admission_system.model.Applicant;
 import com.group13.msc_admission_system.repository.ApplicantRepository;
@@ -21,13 +22,12 @@ public class ApplicantServiceImplement implements ApplicantService {
     }
 
     @Override
-    public void register(ApplicantRequestDTO applicantRequestDTO) throws Exception{
+    public void register(UserRequestDTO userRequestDTO) {
 
-        if(applicantRepository.findByEmail(applicantRequestDTO.getEmail())!=null){
-            throw new Exception("Email is already exists");
-        }
+        if(applicantRepository.findByEmail(userRequestDTO.getEmail())==null)
+            throw new MyResourceAlreadyExistException(Message.resourceAlreadyExist(ResourceType.EMAIL));
 
-        Applicant applicant = new Applicant(applicantRequestDTO);
+        Applicant applicant = new Applicant(userRequestDTO);
 
         applicantRepository.save(applicant);
     }
@@ -41,25 +41,25 @@ public class ApplicantServiceImplement implements ApplicantService {
     //UPDATE==================================================================================================================
     @Transactional
     @Override
-    public void updateApplicant(Long id, ApplicantRequestDTO applicantRequestDTO) {
+    public void updateApplicant(Long id, UserRequestDTO userRequestDTO) {
         Applicant update = applicantRepository.findById(id).orElseThrow(
                 () -> new MyResourceNotFoundException(Message.resourceNotFound(ResourceType.APPLICANT, id)));
 
-        if (MyUtils.isNotEmptyAndNotNull(applicantRequestDTO.getUsername())) {
-            update.setUsername(applicantRequestDTO.getUsername());
+        if (MyUtils.isNotEmptyAndNotNull(userRequestDTO.getUsername())) {
+            update.setUsername(userRequestDTO.getUsername());
         }
 
-        if (MyUtils.isNotEmptyAndNotNull(applicantRequestDTO.getEmail())) {
-            update.setEmail(applicantRequestDTO.getEmail());
+        if (MyUtils.isNotEmptyAndNotNull(userRequestDTO.getEmail())) {
+            update.setEmail(userRequestDTO.getEmail());
         }
 
-        if (MyUtils.isNotEmptyAndNotNull(applicantRequestDTO.getGender())) {
-            Gender gender = new GenderConverter().convert(applicantRequestDTO.getGender()); //CONVERTS GENDER INPUT TO ENUM TYPE GENDER
+        if (MyUtils.isNotEmptyAndNotNull(userRequestDTO.getGender())) {
+            Gender gender = new GenderConverter().convert(userRequestDTO.getGender()); //CONVERTS GENDER INPUT TO ENUM TYPE GENDER
             update.setGender(gender);
         }
 
-        if (applicantRequestDTO.getPhoneNumber() > 0) {
-            update.setPhoneNumber(applicantRequestDTO.getPhoneNumber());
+        if (userRequestDTO.getPhoneNumber() > 0) {
+            update.setPhoneNumber(userRequestDTO.getPhoneNumber());
         }
 
         applicantRepository.save(update);

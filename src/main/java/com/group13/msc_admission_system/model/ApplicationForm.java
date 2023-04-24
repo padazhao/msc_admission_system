@@ -21,23 +21,21 @@ public class ApplicationForm {
     private Applicant applicant;
 
     @OneToMany
-    private Set<Programme> programme;
+    private Set<Program> program;
     @Column(name = "status")
     private Status status;
-    @Column(name = "applied_On")
-    private LocalDate applied_On;
+    @Column(name = "appliedOn")
+    private LocalDate appliedOn;
 
 
     //CONSTRUCTOR==================================================
-    public ApplicationForm(Applicant applicant, Set<Programme> programme){
+    public ApplicationForm(Applicant applicant, Set<Program> program){
         this.applicant = applicant;
-        this.programme = programme;
-        this.applied_On = LocalDate.now();
+        this.program = program;
+        this.appliedOn = LocalDate.now();
         this.status = Status.APPROVED;
     }
-    public ApplicationForm() {
-
-    }
+    public ApplicationForm() {}
 
     //GETTERS AND SETTERS===========================================
 
@@ -46,16 +44,16 @@ public class ApplicationForm {
     }
 
     public Long getApplicant() {
-        return applicant.getApplicantId();
+        return applicant.getUserId();
     }
 
 
-    public Set<Programme> getProgramme() {
-        return programme;
+    public Set<Program> getProgram() {
+        return program;
     }
 
-    public void setProgramme(Set<Programme> programme) {
-        this.programme = programme;
+    public void setProgram(Set<Program> program) {
+        this.program = program;
     }
 
     public Status getStatus() {
@@ -66,7 +64,7 @@ public class ApplicationForm {
         this.status = status;
     }
 
-    public LocalDate getApplied_On() {
-        return applied_On;
+    public LocalDate getAppliedOn() {
+        return appliedOn;
     }
 }

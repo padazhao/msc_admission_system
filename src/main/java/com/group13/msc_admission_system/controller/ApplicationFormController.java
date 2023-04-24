@@ -30,4 +30,18 @@ public class ApplicationFormController {
         applicationFormService.statusUpdate(id,applicationFormRequestDTO);
         return "redirect: /dashboard";
     }
+
+    //TO BE USED AS EXAMPLE ON HOW TO RETURN A RESPONSE ENTITY BUT WITH A HEADER TO REDIRECT
+//    @GetMapping("/example")
+//    public ResponseEntity<String> example() {
+//        String responseBody = "This is the response body";
+//        HttpHeaders headers = new HttpHeaders();
+//        headers.setLocation(URI.create("/redirected-page"));
+//        return new ResponseEntity<>(responseBody, headers, HttpStatus.FOUND);
+//    }
+//
+//    @GetMapping("/redirected-page")
+//    public String redirectedPage() {
+//        return "redirected-page";
+//    }
 }

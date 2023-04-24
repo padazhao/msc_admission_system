@@ -11,7 +11,7 @@ import java.io.Serial;
  */
 @ResponseStatus(value = HttpStatus.NOT_FOUND)
 public class MyResourceNotFoundException extends RuntimeException{
-
+    //CONSTRUCTOR
     public MyResourceNotFoundException(String message) {
         super(message);
     }

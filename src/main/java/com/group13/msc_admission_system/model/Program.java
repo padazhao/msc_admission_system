@@ -2,36 +2,32 @@ package com.group13.msc_admission_system.model;
 
 import jakarta.persistence.*;
 
-import java.time.LocalDate;
-
 @Entity
-@Table(name="programme")
-public class Programme {
+@Table(name="program")
+public class Program {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="programme_id",nullable = false)
-    private long programmeId;
+    @Column(name="program_id",nullable = false)
+    private long programId;
     @Column(name = "name", nullable = false)
     private String name;
     @Column(name = "description", nullable = false)
     private String description;
     @Column(name = "duration", nullable = false)
-    private long programme_Duration;
+    private long programDuration;
 
     //CONSTRUCTOR==============================================================
-    public Programme(){
-
-    }
-    public Programme(String name, String description, long programme_Duration){
+    public Program(String name, String description, long programDuration){
         this.name = name;
         this.description= description;
-        this.programme_Duration = programme_Duration;
+        this.programDuration = programDuration;
     }
+    public Program(){}
 
     //GETTERS AND SETTERS
-    public long getProgrammeId() {
-        return programmeId;
+    public long getProgramId() {
+        return programId;
     }
 
     public String getName() {
@@ -50,11 +46,11 @@ public class Programme {
         this.description = description;
     }
 
-    public long getProgramme_Duration() {
-        return programme_Duration;
+    public long getProgramDuration() {
+        return programDuration;
     }
 
-    public void setProgramme_Duration(long programme_Duration) {
-        this.programme_Duration = programme_Duration;
+    public void setProgramDuration(long programDuration) {
+        this.programDuration = programDuration;
     }
 }

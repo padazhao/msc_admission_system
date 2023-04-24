@@ -11,7 +11,7 @@ import jakarta.validation.constraints.Size;
  * Helps seperate concerns, from client object and server object.
  * Modifications on server object does not affect client's object
  */
-public class ApplicantRequestDTO {
+public class UserRequestDTO {
 
     //USED TO ACCEPT DATA FOR CREATION
     @NotEmpty(message ="Username cannot be empty")
@@ -21,7 +21,7 @@ public class ApplicantRequestDTO {
     @Email(message = "Email must conform to email format")
     private String email;
     @NotEmpty(message = "password cannot be empty")
-    @Size(min = 3, message = "Password must contain at least 8 characters")
+    @Size(min = 3, message = "Password must contain at least 3 characters")
     private String password;
     @NotEmpty(message = "Gender cannot be empty")
     private static String gender;

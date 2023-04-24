@@ -7,7 +7,7 @@ public class ProgramRequestDTO {
 
     private String description;
 
-    private long programmeDuration;
+    private long programDuration;
 
     private long adminId;
 
@@ -19,8 +19,8 @@ public class ProgramRequestDTO {
         return description;
     }
 
-    public long getProgrammeDuration() {
-        return programmeDuration;
+    public long getProgramDuration() {
+        return programDuration;
     }
 
     public long getAdminId() {
