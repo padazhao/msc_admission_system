@@ -53,9 +53,7 @@ public class ApplicantServiceImplement implements ApplicantService {
     }
 
     @Override
-    public List<Applicant> getAllApplicantInfo() {
-        return applicantRepository.findAll();
-    }
+    public List<Applicant> getAllApplicantInfo() { return applicantRepository.findAll();}
 
     //UPDATE============================================================================================================
     @Transactional

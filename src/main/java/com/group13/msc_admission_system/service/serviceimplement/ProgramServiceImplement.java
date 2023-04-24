@@ -35,7 +35,13 @@ public class ProgramServiceImplement implements ProgramService {
     }
 
     @Override
-    public List<Program> getAllPrograms() {
+    public Program getProgram(Long programId) {
+        return programRepository.findById(programId).orElseThrow(
+                () -> new MyResourceNotFoundException(Message.resourceNotFound(ResourceType.PROGRAM, programId)));
+    }
+
+    @Override
+    public List<Program> getAllProgram() {
         return programRepository.findAll();
     }
 

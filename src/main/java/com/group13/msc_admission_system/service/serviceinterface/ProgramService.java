@@ -11,10 +11,13 @@ import java.util.List;
 public interface ProgramService {
 
     void createProgram(ProgramRequestDTO programRequestDTO);
-    List<Program> getAllPrograms();
+
+    Program getProgram(Long programId);
+    List<Program> getAllProgram();
 
     void programUpdate(Long id, ProgramRequestDTO programRequestDTO);
 
     void deleteProgram(Long programId);
+
 
 }
