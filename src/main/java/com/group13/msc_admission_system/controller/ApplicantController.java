@@ -12,6 +12,8 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
+
 
 @RestController
 @RequestMapping("/applicant")
@@ -55,6 +57,23 @@ public class ApplicantController {
 //            session.setAttribute("email", foundApplicant.getEmail());
 //            return "redirect:/applicant";
 //        }
+    }
+
+    //GET ==============================================================================================================
+    @GetMapping("/info/{id}")
+    public ModelAndView getApplicantInfo(@PathVariable("id") Long applicantId){
+        Applicant applicant = applicantService.getApplicantInfo(applicantId);
+        ModelAndView modelAndView = new ModelAndView("applicants");
+        modelAndView.addObject("Applicant",applicant);
+        return  modelAndView;
+    }
+
+    @GetMapping("/info/")
+    public ModelAndView getAllApplicantInfo(){
+        List<Applicant> applicant = applicantService.getAllApplicantInfo();
+        ModelAndView modelAndView = new ModelAndView("applicants");
+        modelAndView.addObject("Applicant",applicant);
+        return  modelAndView;
     }
 
     //UPDATE============================================================================================================

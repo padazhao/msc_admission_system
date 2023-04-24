@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -20,13 +21,13 @@ public class ApplicantServiceImplement implements ApplicantService {
 
     private final ApplicantRepository applicantRepository;
 
-    //CONSTRUCTOR=================================================================================================================
+    //CONSTRUCTOR=======================================================================================================
     @Autowired
     public ApplicantServiceImplement(ApplicantRepository applicantRepository) { super();
         this.applicantRepository = applicantRepository;
     }
 
-    //REGISTER=================================================================================================================
+    //REGISTER==========================================================================================================
     @Override
     public void register(UserRequestDTO userRequestDTO) {
         if(applicantRepository.findByEmail(userRequestDTO.getEmail())!=null)
@@ -36,16 +37,27 @@ public class ApplicantServiceImplement implements ApplicantService {
         applicantRepository.save(applicant);
     }
 
-    //LOGIN====================================================================================================================
+    //LOGIN=============================================================================================================
     @Override
     public void login(LoginCredentials loginCredentials) {
         Applicant applicant = applicantRepository.findByEmailAndPassword(loginCredentials.getEmail(), loginCredentials.getPassword());
-
         if(applicant==null)                                     //THROW EXCEPTION IF ADMIN NOT FOUND
             throw new MyResourceNotFoundException(Message.resourceNotFound(ResourceType.APPLICANT));
     }
 
-    //UPDATE==================================================================================================================
+    //LOGIN=============================================================================================================
+    @Override
+    public Applicant getApplicantInfo(Long applicantId) {
+        return applicantRepository.findById(applicantId).orElseThrow(
+                () -> new MyResourceNotFoundException(Message.resourceNotFound(ResourceType.APPLICANT, applicantId)));
+    }
+
+    @Override
+    public List<Applicant> getAllApplicantInfo() {
+        return applicantRepository.findAll();
+    }
+
+    //UPDATE============================================================================================================
     @Transactional
     @Override
     public void updateApplicant(Long id, UserRequestDTO userRequestDTO) {
@@ -74,4 +86,6 @@ public class ApplicantServiceImplement implements ApplicantService {
         System.out.println( Message.updated);
 
     }
+
+
 }
