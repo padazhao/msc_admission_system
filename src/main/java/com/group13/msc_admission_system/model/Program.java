@@ -1,5 +1,6 @@
 package com.group13.msc_admission_system.model;
 
+import com.group13.msc_admission_system.dto.ProgramRequestDTO;
 import jakarta.persistence.*;
 
 @Entity
@@ -10,18 +11,18 @@ public class Program {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="program_id",nullable = false)
     private long programId;
-    @Column(name = "name", nullable = false)
-    private String name;
+    @Column(name = "program_name", nullable = false)
+    private String programName;
     @Column(name = "description", nullable = false)
     private String description;
     @Column(name = "duration", nullable = false)
     private long programDuration;
 
     //CONSTRUCTOR==============================================================
-    public Program(String name, String description, long programDuration){
-        this.name = name;
-        this.description= description;
-        this.programDuration = programDuration;
+    public Program(ProgramRequestDTO programRequestDTO){
+        this.programName = programRequestDTO.getProgramName();
+        this.description= programRequestDTO.getDescription();
+        this.programDuration = programRequestDTO.getProgramDuration();
     }
     public Program(){}
 
@@ -30,12 +31,12 @@ public class Program {
         return programId;
     }
 
-    public String getName() {
-        return name;
+    public String getProgramName() {
+        return programName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setProgramName(String programName) {
+        this.programName = programName;
     }
 
     public String getDescription() {

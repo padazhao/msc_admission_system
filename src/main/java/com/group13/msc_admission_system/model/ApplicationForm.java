@@ -19,7 +19,6 @@ public class ApplicationForm {
     @OneToOne
     @PrimaryKeyJoinColumn
     private Applicant applicant;
-
     @OneToMany
     private Set<Program> program;
     @Column(name = "status")
@@ -46,7 +45,6 @@ public class ApplicationForm {
     public Long getApplicant() {
         return applicant.getUserId();
     }
-
 
     public Set<Program> getProgram() {
         return program;

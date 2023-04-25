@@ -11,7 +11,7 @@ import java.time.Period;
 
 
 @MappedSuperclass
-public abstract class User {
+public abstract class User {           // https://medium.com/analytics-vidhya/jpa-hibernate-entity-inheritance-1f6aa7ea2eea
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long userId;

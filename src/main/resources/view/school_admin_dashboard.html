@@ -10,7 +10,7 @@
 <h3>This is a serach function that for the admin find the program id by input the program id</h3>
 
 <form action="/admin/program/search" method="get">
-    <input type="number" name="programmeId" placeholder="Enter the Programme ID">
+    <input type="number" programName="programmeId" placeholder="Enter the Programme ID">
     <input type="submit" value="Search">
 </form>
 
@@ -31,7 +31,7 @@
         <tr th:each = "program:${programs}">
             <td th:text="${program.programmeId}">
             </td>
-            <td th:text="${program.name}">
+            <td th:text="${program.programName}">
             </td>
             <td th:text="${program.description}">
             </td>
@@ -49,12 +49,12 @@
 
 <h3>This for the Programme Create </h3>
 <form action="/admin/program/create" method="post">
-    <label for="name">Programme Name: </label>
-    <input type="text" name="name" id="name" required><br>
+    <label for="programName">Programme Name: </label>
+    <input type="text" programName="programName" id="programName" required><br>
     <label for="description">Program Description: </label>
-    <input type="text" name="description" id="description" required><br>
+    <input type="text" programName="description" id="description" required><br>
     <label for="programmeDuration">Programme Duration: </label>
-    <input type="number" name="duration" id="programmeDuration" required>
+    <input type="number" programName="duration" id="programmeDuration" required>
     <input type="submit" value="Create">
 </form>
 
@@ -63,7 +63,7 @@
 <br>
 
 <form action="/admin/application/search" method="get">
-    <input type="number" name="applicationFormId" placeholder="Enter the Application Form  ID">
+    <input type="number" programName="applicationFormId" placeholder="Enter the Application Form  ID">
     <input type="submit" value="Search">
 </form>
 

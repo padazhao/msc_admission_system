@@ -8,7 +8,7 @@
 <h3>This is a serach function that for the admin find the program id by input the program id</h3>
 
 <form action="/admin/program/search" method="get">
-    <input type="number" name="programmeId" placeholder="Enter the Programme ID">
+    <input type="number" programName="programmeId" placeholder="Enter the Programme ID">
     <input type="submit" value="Search">
 </form>
 <h4>List the search results</h4>
@@ -27,7 +27,7 @@
     <tr th:each = "program:${programResult}">
         <td th:text="${programResult.programmeId}">
         </td>
-        <td th:text="${programResult.name}">
+        <td th:text="${programResult.programName}">
         </td>
         <td th:text="${programResult.description}">
         </td>
