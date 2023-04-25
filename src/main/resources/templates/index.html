@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" xml:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
     <title>Admission System</title>
-    <link rel="stylesheet" href="CSS/index.css"/>
+    <link th:href="@{/CSS/index.css}" rel="stylesheet"/>
 </head>
 
 <body>
@@ -14,17 +14,17 @@
     <div class="wrapper">
         <!-- Main page logo -->
         <div class="logo">
-            <a href="index.html"><img src="../static/image/log1.png" height="30px" width="40px" alt="logo"></a>
-            <P>XXX University</P>
+            <a th:href="@{/}"><img src="/image/log1.png" height="30px" width="40px" alt="logo"></a>
+            <P>XYZ University</P>
         </div>
         <!-- Main page navigation list -->
         <div class="nav-list">
             <ul>
-                <li><a href="Login_form.html">Login</a></li>
-                <li><a href="Register.html">Register</a></li>
-                <li><a href="#contact">Contact</a></li>
-                <li><a href="#programme">Programme</a></li>
-                <li><a href="index.html">Home</a></li>
+                <li><a th:href="@{/applicant/login}">Login</a></li>
+                <li><a th:href="@{/applicant/register}">Register</a></li>
+                <li><a th:href="@{#contact}">Contact</a></li>
+                <li><a th:href="@{#programme}">Programme</a></li>
+                <li><a th:href="@{/}">Home</a></li>
             </ul>
         </div>
     </div>
@@ -34,15 +34,15 @@
 <div class="slideshow-container">
     <!-- First image -->
     <div class="mySlides fade">
-        <img src="../static/image/bgi-1.jpg" height="700" width="100%" alt="img1">
+        <img src="/image/bgi-1.jpg" height="700" width="100%" alt="img1">
     </div>
     <!-- Second image -->
     <div class="mySlides fade">
-        <img src="../static/image/bgi.jpg" height="700" width="100%" alt="img2">
+        <img src="/image/bgi.jpg" height="700" width="100%" alt="img2">
     </div>
     <!-- Third image -->
     <div class="mySlides fade">
-        <img src="../static/image/bgi-1.jpg" height="700" width="100%" alt="img3">
+        <img src="/image/bgi-1.jpg" height="700" width="100%" alt="img3">
     </div>
     <!-- Dot indicate current image -->
     <div style="text-align:center">
@@ -71,7 +71,7 @@
     <div class="wrapper">
         <!-- Side Image -->
         <div class="study-img">
-            <img src="../static/image/study.jpg" height="450" width="550" alt="logo">
+            <img src="/image/study.jpg" height="450" width="550" alt="logo">
         </div>
         <!-- Content about the programme -->
         <div class="programme-list">
@@ -93,7 +93,7 @@
 <div class="apply">
     <div class="apply-text">
         <h1>Ready to apply?</h1>
-        <form action="/register">
+        <form th:action="@{/applicant/register}">
             <input type="submit" value="APPLY"/>
         </form>
     </div>
@@ -107,7 +107,8 @@
             <h1>Contact Us</h1><br>
             <p>If you have any questions or need more information, feel free to contact us using the form below or
                 through the contact details provided.</p> <br>
-            <form action="" method="post">
+            <!-- 还需要action Action needed-->
+            <form th:action="@{/applicant/register}" method="post">
                 <label for="name">Name</label>
                 <input type="text" id="name" name="name" required>
                 <label for="email">Email</label>
@@ -118,7 +119,9 @@
             </form>
         </div>
         <!-- Side image -->
-        <div class="background-img"></div>
+        <div class="background-img">
+            <img src="/image/bgi-1.jpg" height="480" width="500" alt="logo">
+        </div>
     </div>
 </div>
 
