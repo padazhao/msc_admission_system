@@ -268,7 +268,7 @@ li {
     margin: 40px 0;
     width: 500px;
     height: 480px;
-    background-image: url("../../static/image/bgi-1.jpg"); /* The image used */
+    background-image: url("../../static/image/bgi-1.jpg");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;

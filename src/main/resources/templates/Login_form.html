@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xml:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login In</title>
+    <link rel="stylesheet" href="CSS/login_Signup.css"/>
+</head>
+<body>
+
+<!--Background Image with blur effect-->
+<div class="bg-image"></div>
+
+<!--Login form-->
+<div class="container">
+    <!--Side image-->
+    <div class="right-img"></div>
+    <!--Login information form-->
+    <div class="main-content">
+        <h2>Welcome Back !</h2>
+        <h6>Please fill in your credentials to login</h6>
+
+        <form th:action="@{/login}" th:object="${applicant}" method="post">
+            <hr>
+            <br>
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required placeholder="Email address"/><br>
+
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required placeholder="Password"/><br><br>
+
+            <label class="remember"><input type="checkbox" checked="checked" name="remember"> Remember me</label><a
+                class="forget-password" href="/">Forgot password?</a>
+            <input type="reset" value=" Reset "/>
+            <input type="submit" value=" Log in "/><br><br>
+            <h5>Don't have an account? <a href="/register">Sign up</a></h5>
+        </form>
+    </div>
+</div>
+</body>
+</html>
