@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en" xml:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Admission System</title>
+    <link rel="stylesheet" href="CSS/index.css"/>
+</head>
+
+<body>
+<!--Navigation bar-->
+<div class="nav">
+    <!--center effect-->
+    <div class="wrapper">
+        <!--Main page logo-->
+        <div class="logo">
+            <a href="index.html"><img src="../static/image/log1.png" height="30px" width="40px" alt="logo"></a>
+            <P>XXX University</P>
+        </div>
+        <!--Main page navigation list-->
+        <div class="nav-list">
+            <ul>
+                <li><a href="Login_form.html">Login</a></li>
+                <li><a href="Register.html">Register</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="#programme">Programme</a></li>
+                <li><a href="index.html">Home</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!--Main page Image slide show-->
+<div class="slideshow-container">
+    <!--First image-->
+    <div class="mySlides fade">
+        <img src="../static/image/bgi-1.jpg" height="700" width="100%" alt="img1">
+    </div>
+    <!--Second image-->
+    <div class="mySlides fade">
+        <img src="../static/image/bgi.jpg" height="700" width="100%" alt="img2">
+    </div>
+    <!--Third image-->
+    <div class="mySlides fade">
+        <img src="../static/image/bgi-1.jpg" height="700" width="100%" alt="img3">
+    </div>
+    <!--Dot indicate current image-->
+    <div style="text-align:center">
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+    </div>
+</div>
+
+<!--Brief introduction about the university-->
+<div class="introduction">
+    <h1>Welcome</h1>
+    <p>At University XYZ, we are committed to providing an exceptional education and fostering a vibrant community of
+        learners. Our university offers a wide range of academic programs, cutting-edge research opportunities, and a
+        supportive environment that encourages personal growth and success. Our dedicated faculty members are experts in
+        their fields and are passionate about teaching and mentoring students. They are committed to providing a
+        high-quality education that prepares students for their future careers and helps them reach their full
+        potential.</p><br>
+    <p>We invite you to join our dynamic community at University XYZ and embark on a fulfilling educational journey that
+        will shape your future and open doors to endless possibilities. Welcome to University XYZ, where excellence
+        meets opportunity!</p>
+</div>
+
+<!--Brief introduction about the university programme-->
+<div id="programme" class="programme">
+    <div class="wrapper">
+        <!--Side Image-->
+        <div class="study-img">
+            <img src="../static/image/study.jpg" height="450" width="550" alt="logo">
+        </div>
+        <!--Content about the programme -->
+        <div class="programme-list">
+            <h1>Programme</h1><br>
+            <p>At University XYZ, we are committed to providing an exceptional education and fostering a vibrant
+                community of
+                learners. Our university offers a wide range of academic programs, cutting-edge research opportunities,
+                and a
+                supportive environment that encourages personal growth and success. Our dedicated faculty members are
+                experts in
+                their fields and are passionate about teaching and mentoring students. They are committed to providing a
+                high-quality education that prepares students for their future careers and helps them reach their full
+                potential.</p>
+        </div>
+    </div>
+</div>
+
+<!--Apply section-->
+<div class="apply">
+    <div class="apply-text">
+        <h1>Ready to apply?</h1>
+        <form action="/register">
+            <input type="submit" value="APPLY"/>
+        </form>
+    </div>
+</div>
+
+<!--Contact section-->
+<div id="contact" class="contact">
+    <div class="wrapper">
+        <!--Contact form-->
+        <div class="contact-form">
+            <h1>Contact Us</h1><br>
+            <p>If you have any questions or need more information, feel free to contact us using the form below or
+                through the contact details provided.</p> <br>
+            <form action="" method="post">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" required>
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+                <label for="message">Message</label>
+                <textarea id="message" name="message" required></textarea>
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+        <!--Side image-->
+        <div class="background-img"></div>
+    </div>
+</div>
+
+<footer>
+    <p>&copy; 2023 Admission System. All rights reserved.</p>
+</footer>
+
+<script>
+    let slideIndex = 0;
+    showSlides();
+
+    function showSlides() {
+        let i;
+        let slides = document.getElementsByClassName("mySlides");
+        let dots = document.getElementsByClassName("dot");
+
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        slideIndex++;
+        if (slideIndex > slides.length) {
+            slideIndex = 1
+        }
+        for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+        }
+        slides[slideIndex - 1].style.display = "block";
+        dots[slideIndex - 1].className += " active";
+        setTimeout(showSlides, 3500); // Change image every 3.5 seconds
+    }
+</script>
+
+</body>
+
+</html>
+
