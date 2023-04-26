@@ -12,7 +12,9 @@ import com.group13.msc_admission_system.repository.ApplicationFormRepository;
 import com.group13.msc_admission_system.repository.ProgramRepository;
 import com.group13.msc_admission_system.repository.AdminRepository;
 import com.group13.msc_admission_system.service.serviceinterface.ApplicationFormService;
+import com.group13.msc_admission_system.service.serviceinterface.MailService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,16 +29,19 @@ public class ApplicationFormServiceImplement implements ApplicationFormService {
     private final AdminRepository adminRepository;
     private final ApplicantRepository applicantRepository;
 
+   private final MailService mailService;
+
     //CONSTRUCTOR========================================================================================================
     @Autowired
     public ApplicationFormServiceImplement(ApplicationFormRepository applicationFormRepository,
                                            ProgramRepository programRepository,
                                            AdminRepository adminRepository,
-                                           ApplicantRepository applicantRepository) {
+                                           ApplicantRepository applicantRepository, MailService mailService) {
         this.applicationFormRepository = applicationFormRepository;
         this.programRepository = programRepository;
         this.adminRepository = adminRepository;
         this.applicantRepository = applicantRepository;
+        this.mailService = mailService;
     }
 
     //CREATE APPLICATION FORM ==========================================================================================
@@ -71,7 +76,7 @@ public class ApplicationFormServiceImplement implements ApplicationFormService {
         applicationFormRepository.save(update);
         System.out.println( Message.updated); // TODO: Use logs
     }
-
+    @JmsListener(destination = "${spring.activemq.queue}")
     @Transactional
     @Override
     public void statusUpdate(Long id, ApplicationFormRequestDTO applicationFormRequestDTO){
@@ -88,9 +93,12 @@ public class ApplicationFormServiceImplement implements ApplicationFormService {
             Status status = new StatusConverter().convert(applicationFormRequestDTO.getStatus());
             update.setStatus(status);
         }
-
+        //when applicant state is changed the email will be sent.
+        mailService.sendSimpleMail("yangnochicken@163.com",
+                applicantRepository.findById(id).get().getEmail(),
+                "State Changed",
+                "You application has changed!");
         applicationFormRepository.save(update);
-
         System.out.println( Message.updated);
     }
 
