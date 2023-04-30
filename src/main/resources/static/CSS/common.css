@@ -65,9 +65,11 @@ li {
     color: white;
 }
 
-.side-nav li.active{
+.active{
     box-shadow: 0 0 10px white;
 }
+
+
 
 .side-nav li:hover{
     width: 100%;
@@ -84,8 +86,6 @@ li {
     width: 88%;
     height: 100%;
 }
-
-
 
 /* Navigation bar */
 .top-nav{
@@ -106,7 +106,7 @@ li {
 /* search icon */
 .btn-search{
     border-style: none;
-    margin: 12px 0;
+    margin: 10px 0;
     width: 40px;
     height: 40px;
     font-size: 18px;
@@ -158,121 +158,23 @@ input[type=text]:focus{
     color: #717171;
 }
 
-
 /* Main body of Home page */
 .main-content{
+    display: block;
     background-color: #e7e6e6;
-/*    border-top: 10px solid grey;
-    border-left: 10px solid grey;*/
-    /*border-right: 10px solid grey;*/
     padding: 35px;
     height: calc(100% - 70px);
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* Calender*/
-.container-calendar {
-    float: right;
-    border: 1px solid #888a8c;
-    border-radius: 30px;
-    margin: 0 10px;
-    padding: 10px 15px;
-    max-width: 475px;
-    background-color: white;
-    box-shadow: 0 0 5px white;
-    overflow: auto;
-}
-/* Switch button on the top of calender*/
-.button-container-calendar button {
-    cursor: pointer;
-    display: inline-block;
-    zoom: 1;
-    background: dodgerblue;
-    color: #fff;
-    border: 1px solid #0aa2b5;
-    border-radius: 5px;
-    padding: 5px 10px;
-}
-
-.table-calendar {
-    border-collapse: collapse;
+.text{
+    display: block;
     width: 100%;
 }
-
-.table-calendar td, .table-calendar th {
-    padding: 5px;
-    font-size: 10px; /* For Mon~Sun*/
-    width: 41px;
-    border: 1px solid #e2e2e2;
-    text-align: center;
-    vertical-align: top;
+.text p{
+    font-style: italic;
+    font-size: 8px;
+    letter-spacing: 0em;
+    margin: 15px 0;
+    color: #888a8c;
 }
 
-
-.date-picker.selected {
-    font-weight: bold;
-    background-color: rgba(192,192,192,0.3);
-    outline: 1px dashed grey;
-}
-
-/* Underline of current day*/
-.date-picker.selected span {
-    border-bottom: 2px solid currentColor;
-}
-
-/* Friday & Sunday*/
-.date-picker:nth-child(1), .date-picker:nth-child(6) {
-    color: dodgerblue;
-}
-
-
-#monthAndYear {
-    text-align: center;
-    margin-top: 0;
-}
-
-.button-container-calendar {
-    position: relative;
-    margin-bottom: 1em;
-    overflow: hidden;
-    clear: both;
-}
-
-#previous {
-    float: left;
-}
-
-#next {
-    float: right;
-}
-
-.footer-container-calendar {
-    margin-top: 1.5em;
-    border-top: 1px solid #dadada;
-    padding: 10px 0;
-}
-
-.footer-container-calendar select {
-    cursor: pointer;
-    display: inline-block;
-    zoom: 1;
-    background: #ffffff;
-    color: #585858;
-    border: 1px solid #bfc5c5;
-    border-radius: 3px;
-    padding: 5px 5px;
-    margin-left: 10px;
-}

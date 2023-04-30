@@ -1,11 +1,17 @@
 <!DOCTYPE html>
-<html lang="en" xml:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Profile</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="CSS/applicants.css"/>
-    <link rel="stylesheet" href="CSS/settings.css"/>
+    <title>Settings</title>
+    <!-- Page icon -->
+    <link rel="shortcut icon" th:href="@{/image/graduated.ico}"/>
+    <!-- Resource for icons -->
+    <link th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css}"
+          rel="stylesheet">
+    <!-- Common Style for the home page-->
+    <link th:href="@{/CSS/common.css}" rel="stylesheet"/>
+    <!-- Style for setting page -->
+    <link th:href="@{/CSS/settings.css}" rel="stylesheet"/>
 </head>
 <body>
 
@@ -15,13 +21,14 @@
         <h3>Home Page</h3>
         <hr>
         <ul>
-            <li><a href="Applicants.html"><i class="fa fa-fw fa-home"></i> Home </a></li>
-            <li><a href="Profile.html"><i class="fa fa-fw fa-user"></i> Profile </a></li>
-            <li><a href=" "><i class="fa fa-fw fa-envelope"></i> Contact</a></li>
-            <li><a href="Application_form.html"><i class="fa fa-file"></i> Submit </a></li>
-            <li><a href="Result.html"><i class="fa fa-trophy"></i> Result </a></li>
-            <li class="active"><a href="Settings.html"><i class="fa fa-cog"></i> Settings </a></li>
-            <li><a href="index.html"><i class="fa fa-sign-out"></i> Log out </a></li>
+            <li><a th:href="@{/applicant/home_page}"><i class="fa fa-fw fa-home"></i> Home </a></li>
+            <li><a th:href="@{/applicant/home_page/profile}"><i class="fa fa-fw fa-user"></i> Profile </a></li>
+            <li><a th:href="@{/applicant/home_page/contact}"><i class="fa fa-fw fa-envelope"></i> Contact</a></li>
+            <li><a th:href="@{/applicant/home_page/application_form}"><i class="fa fa-graduation-cap"></i> Submit </a>
+            </li>
+            <li class="active"><a th:href="@{/applicant/home_page/settings}"><i class="fa fa-cog"></i> Settings </a>
+            </li>
+            <li><a th:href="@{/}"><i class="fa fa-sign-out"></i> Log out </a></li>
         </ul>
     </div>
 
@@ -29,35 +36,62 @@
 
     <!--Main content-->
     <div class="content">
-        <div class="top-nav">
-            <div class="nav-list-left">
-                <form class="search-bar">
-                    <button class="btn-search"><i class="fa fa-search"></i></button>
-                    <input type="text" name="search" placeholder="Type to search...">
-                </form>
-            </div>
-            <div class="nav-list-right">
-                <ul>
-                    <li><a href="Profile.html"><i class="fa fa-user-o"></i></a></li>
-                    <li><a href=" "><i class="fa fa-calendar"></i></a></li>
-                </ul>
-            </div>
-        </div>
+        <div th:replace="~{/common/common::top-nav}"></div>
 
         <div class="main-content">
-            <h1>Settings</h1><br>
+            <div class="text">
+                <h1>Settings</h1>
+                <p> Update your personal information</p>
+                <hr>
+            </div>
             <!-- Update form -->
-            <div class="update-form">
-                <h3>Update request</h3>
-                <hr> <!-- Breakline -->
-                <form>
-                    <label for="username">Username:</label>
-                    <input type="text" id="username" name="username" required>
+            <div class="sub-container">
+                <div class="update-form">
+                    <h3>Update Request</h3>
+                    <hr>
+                    <form th:action="@{/home_page/settings/{id}(id=${user.userId})}" th:object="${user}" th:method="put">
+                        <div class="filed">
+                            <label for="username">Username :</label>
+                            <input type="text" id="username" th:field="*{username}">
+                        </div>
 
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" required><span th:if="${err!=null}" th:text="${err}"></span>
-                </form>
+                        <div class="filed">
+                            <label for="email">Email :</label>
+                            <input type="email" id="email" th:field="*{email}">
+                        </div>
 
+                        <div class="filed">
+                            <label for="email">Email :</label>
+                            <input type="password" id="password" th:field="*{password}">
+                        </div>
+
+                        <div class="filed">
+                            <label for="gender"><strong>Gender :</strong></label>
+                            <select id="gender" th:field="*{gender}">
+                                <option value="" disabled selected hidden></option>
+                                <option value="MALE">MALE</option>
+                                <option value="FEMALE">FEMALE</option>
+                                <option value="OTHER">OTHER</option>
+                            </select>
+                        </div>
+
+                        <div class="filed">
+                            <label for="dob"><strong>Date of Birth :</strong></label>
+                            <input type="date" id="dob" th:field="*{dateOfBirth}">
+                        </div>
+                        <div class="filed">
+                            <label for="phone"><strong>PhoneNumber :</strong></label>
+                            <input type="tel" id="phone" th:field="*{phoneNumber}"/>
+                        </div>
+
+                        <input type="submit" value="Update"/><br><br>
+                    </form>
+                </div>
+
+                <!-- Side image-->
+                <div class="side-img">
+                    <img src="/image/study.jpg" width="100%" height="100%">
+                </div>
             </div>
         </div>
     </div>

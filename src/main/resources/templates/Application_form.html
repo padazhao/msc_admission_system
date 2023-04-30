@@ -1,11 +1,17 @@
 <!DOCTYPE html>
-<html lang="en" xml:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Applicant form submission</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="CSS/applicants.css"/>
-    <link rel="stylesheet" href="CSS/application_form.css"/>
+    <!-- Page icon -->
+    <link rel="shortcut icon" th:href="@{/image/graduated.ico}"/>
+    <!-- Resource for icons -->
+    <link th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css}"
+          rel="stylesheet">
+    <!-- Common Style for the home page-->
+    <link th:href="@{/CSS/common.css}" rel="stylesheet"/>
+    <!-- CSS style for application form -->
+    <link th:href="@{/CSS/application_form.css}" rel="stylesheet"/>
 </head>
 <body>
 
@@ -15,71 +21,81 @@
         <h3>Home Page</h3>
         <hr>
         <ul>
-            <li><a href="Applicants.html"><i class="fa fa-fw fa-home"></i> Home </a></li>
-            <li><a href="Profile.html"><i class="fa fa-fw fa-user"></i> Profile </a></li>
-            <li><a href=" "><i class="fa fa-fw fa-envelope"></i> Contact</a></li>
-            <li class="active"><a href="Application_form.html"><i class="fa fa-file"></i> Submit </a></li>
-            <li><a href="Result.html"><i class="fa fa-trophy"></i> Result </a></li>
-            <li><a href="Settings.html"><i class="fa fa-cog"></i> Settings </a></li>
-            <li><a href="index.html"><i class="fa fa-sign-out"></i> Log out </a></li>
+            <li cals><a th:href="@{/applicant/home_page}"><i class="fa fa-fw fa-home"></i> Home </a></li>
+            <li><a th:href="@{/applicant/home_page/profile}"><i class="fa fa-fw fa-user"></i> Profile </a></li>
+            <li><a th:href="@{/applicant/home_page/contact}"><i class="fa fa-fw fa-envelope"></i> Contact</a></li>
+            <li class="active"><a th:href="@{/applicant/home_page/application_form}"><i
+                    class="fa fa-graduation-cap"></i> Submit </a></li>
+            <li><a th:href="@{/applicant/home_page/settings}"><i class="fa fa-cog"></i> Settings </a></li>
+            <li><a th:href="@{/}"><i class="fa fa-sign-out"></i> Log out </a></li>
         </ul>
     </div>
 
-    <!--Main content of the home page-->
-
     <!--Main content-->
     <div class="content">
-        <div class="top-nav">
-            <div class="nav-list-left">
-                <form class="search-bar">
-                    <button class="btn-search"><i class="fa fa-search"></i></button>
-                    <input type="text" name="search" placeholder="Type to search...">
-                </form>
-            </div>
-            <div class="nav-list-right">
-                <ul>
-                    <li><a href="Profile.html"><i class="fa fa-user-o"></i></a></li>
-                    <li><a href=" "><i class="fa fa-calendar"></i></a></li>
-                </ul>
-            </div>
-        </div>
+        <div th:replace="~{/common/common::top-nav}"></div>
 
         <div class="main-content">
-            <h1>Application form</h1><br>
-            <div class="submission-form">
-                <form th:action="" method="post">
-                    <br>
-                    <label for="programme1">Programme 1:</label>
-                    <select id="programme1" name="programme" required>
-                        <option value="" disabled selected hidden></option>
-                        <option value=""></option>
-                        <option value=""></option>
-                        <option value=""></option>
-                        <option value=""></option>
-                        <option value=""></option>
-                    </select>
-
-                    <label for="programme2">Programme 2:</label>
-                    <select id="programme2" name="programme" required>
-                        <option value="" disabled selected hidden></option>
-                        <option value=""></option>
-                        <option value=""></option>
-                        <option value=""></option>
-                        <option value=""></option>
-                        <option value=""></option>
-                    </select>
-                    <input type="submit" value="submit"/><br><br>
-                </form>
+            <div class="text">
+                <h1>Application form</h1>
+                <p>Ready to join us? Check the programme list and Submit your application form</p>
+                <hr>
             </div>
-            <!--        <h1>Add New Applicant</h1>
-                    <form th:action="@{/applcants/save}" method="post">
-                        <label>Username</label>
-                        <input type="text" th:field="*username"/>
-                        <label>Password</label>
-                        <input type="text" th:field="*password"/>
-                        <label>Gender</label>
-                        <input type="text" th:field="*gender"/>
-                    </form>-->
+
+            <!-- Container for -->
+            <div class="sub-container">
+
+                <div class="class-list">
+                    <h4>Programme List offered at XYZ University</h4>
+                    <hr>
+                    <div class="programme-table">
+                        <table>
+                            <thead>
+                            <tr>
+                                <th> Programme ID</th>
+                                <th> Programme name</th>
+                                <th> Description</th>
+                                <th> Duration</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <th:block th:each="program : ${program}">
+                                <tr>
+                                    <td th:text="${program.programId}"></td>
+                                    <td th:text="${program.programName}"></td>
+                                    <td th:text="${program.description}"></td>
+                                    <td th:text="${program.programDuration}"></td>
+                                </tr>
+                            </th:block>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="sub-sub-container">
+                    <div class="submission-form">
+                        <h2>Application Form</h2>
+                        <form th:action="@{/applicationform/submit}" th:method="post">
+                            <hr>
+                            <br>
+                            <input type="hidden" name="applicantId" th:value="${user.userId}" required>
+
+                            <label for="programme 1">Programme 1 : </label>
+                            <input type="number" id="programme 1" name="programIds" required>
+
+                            <label for="programme 2">Programme 2 : </label>
+                            <input type="numbber" id="programme 2" name="programIds">
+
+                            <input type="submit" value="submit"/><br><br>
+                        </form>
+                    </div>
+                    <div class="progress">
+                        <h3>Your application status:</h3>
+                    </div>
+                </div>
+
+            </div>
+
         </div>
     </div>
 </div>

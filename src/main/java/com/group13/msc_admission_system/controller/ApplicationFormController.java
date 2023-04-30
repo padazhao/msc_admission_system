@@ -18,9 +18,9 @@ public class ApplicationFormController {
 
     //CREATE AN APPLICATION FORM
     @PostMapping("/submit")
-    public ModelAndView submitApplicationForm(@RequestBody ApplicationFormRequestDTO applicationFormRequestDTO){
+    public ModelAndView submitApplicationForm(ApplicationFormRequestDTO applicationFormRequestDTO){
         applicationFormService.createApplication(applicationFormRequestDTO);
-        return new ModelAndView("applicants");
+        return new ModelAndView("Application_form");
     }
 
     //UPDATE ===========================================================================================================

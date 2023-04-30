@@ -1,0 +1,91 @@
+.email{
+    display: flex;
+    margin: 50px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    width: 93%;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    background-color: #f7f7f7;
+    box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+}
+
+.email form{
+    width: 73%;
+}
+
+.email label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.email input[type="text"], .email input[type="email"]{
+    height: 30px;
+}
+
+.email textarea {
+    height: 200px;
+}
+
+.email input[type="text"], .email input[type="email"], .email textarea {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.email .form-group {
+    margin-bottom: 15px;
+}
+
+.email .button{
+    display: flex;
+}
+
+.email input[type="submit"], .email input[type="reset"]{
+    display: block;
+    padding: 10px 12px;
+    margin-right: 10px;
+    border: none;
+    border-radius: 5px;
+    width: fit-content;
+    text-align: center;
+    background-color: royalblue;
+    color: #fff;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.email input[type="submit"]:hover {
+    background-color: cornflowerblue;
+}
+
+input::placeholder{
+    opacity: 0.5;
+}
+
+.contact-list{
+    width: 22%;
+    height: fit-content;
+    margin-left: 45px;
+}
+
+.contact-list{
+    border: 1px dot-dash black;
+    border-radius: 20px;
+    box-shadow: 2px 2px 2px 2px black;
+    color: white;
+    background-color: #585858;
+}
+
+.contact-list h2{
+    margin: 18px 15px;
+}
+
+.contact-list ul li{
+    margin: 15px 15px 20px 18px;
+    font-style: italic;
+    font-size: 13px;
+}

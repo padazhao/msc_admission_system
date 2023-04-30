@@ -1,10 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" xml:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Login In</title>
-    <link rel="stylesheet" href="CSS/login_Signup.css"/>
+    <!-- Page icon -->
+    <link rel="shortcut icon" th:href="@{/image/university.ico}"/>
+    <link th:href="@{/CSS/login_Signup.css}" rel="stylesheet"/>
 </head>
 <body>
 
@@ -20,20 +22,24 @@
         <h2>Welcome Back !</h2>
         <h6>Please fill in your credentials to login</h6>
 
-        <form th:action="@{/login}" th:object="${applicant}" method="post">
+        <!-- Require type of object should be applicant -->
+        <form th:action="@{/applicant/login}" th:object="${applicant}" th:method="post">
             <hr>
             <br>
+            <!-- Two field to match the applicant -->
             <label for="email">Email</label>
-            <input type="email" id="email" name="email" required placeholder="Email address"/><br>
+            <input type="email" id="email" th:field="*{email}" placeholder="Email address" required/><br>
 
             <label for="password">Password</label>
-            <input type="password" id="password" name="password" required placeholder="Password"/><br><br>
+            <input type="password" id="password" th:field="*{password}" placeholder="Password" required /><br><br>
 
-            <label class="remember"><input type="checkbox" checked="checked" name="remember"> Remember me</label><a
-                class="forget-password" href="/">Forgot password?</a>
+            <label class="remember"><input type="checkbox" checked="checked" name="remember"> Remember me</label>
+
+            <!--需要导航 href needed-->
+            <a class="forget-password" th:href="@{/}">Forgot password?</a>
             <input type="reset" value=" Reset "/>
             <input type="submit" value=" Log in "/><br><br>
-            <h5>Don't have an account? <a href="/register">Sign up</a></h5>
+            <h5>Don't have an account? <a th:href="@{/applicant/register}">Sign up</a></h5>
         </form>
     </div>
 </div>

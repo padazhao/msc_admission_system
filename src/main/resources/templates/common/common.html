@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>User Home Page</title>
+    <script type="text/javascript"  th:src="@{/js/calender.js}"></script>
+</head>
+<body>
+
+<!-- Common top bar for home page -->
+<div class="top-nav" th:fragment="top-nav">
+    <!-- left: Search bar -->
+    <div class="nav-list-left">
+        <form class="search-bar">
+            <button class="btn-search"><i class="fa fa-search"></i></button>
+            <input type="text" name="search" placeholder="Type to search...">
+        </form>
+    </div>
+    <!-- Right:Profile & Calender -->
+    <div class="nav-list-right">
+        <ul>
+            <li><a th:href="@{/applicant/home_page}"><i class="fa fa-fw fa-home"></i></a></li>
+            <li><a th:href="@{/applicant/home_page/profile}"><i class="fa fa-user-o"></i></a></li>
+            <li><a th:href="@{/applicant/home_page/contact}"><i class="fa fa-fw fa-envelope"></i></a></li>
+            <li><a th:href="@{/applicant/home_page/application_form}"><i class="fa fa-graduation-cap"></i></a></li>
+            <li><a th:href="@{/applicant/home_page/settings}"><i class="fa fa-cog"></i></a></li>
+            <li><a th:href="@{/applicant/}"><i class="fa fa-sign-out"></i></a></li>
+        </ul>
+    </div>
+</div>
+
+</body>
+</html>

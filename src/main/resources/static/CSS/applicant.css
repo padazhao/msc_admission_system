@@ -1,0 +1,86 @@
+.sub-container {
+    display: flex;
+    height: 90%;
+    margin-left: 12%;
+}
+
+/* This part holds one image and a block of text*/
+.sub-sub-container {
+    display: block;
+    margin: auto 0;
+}
+
+.photo img{
+    width: 200px;
+    height: 200px;
+    margin: 12px;
+    border-radius: 10px;
+}
+
+.content-box {
+    position: relative;
+    margin: 15px 10px;
+    padding: 20px;
+    border: 0 solid black;
+    border-radius: 10px;
+    width: 200px;
+    height: 200px;
+    background-color: black;
+    color: #f3f3f3;
+    overflow: hidden;
+    box-shadow: 2px 2px 2px 2px grey;
+    transition: height 0.5s ease-in-out;
+}
+
+.content-box:hover {
+    height: 270px;
+}
+
+.title {
+    font-size: 20px;
+    letter-spacing: 1px;
+    font-weight: 800;
+    text-align: center;
+    cursor: pointer;
+    text-shadow: 2px 2px grey;
+    transition: all 0.3s ease-in-out;
+}
+
+.hidden-text {
+    margin: 0 10px;
+    text-align: justify;
+    word-spacing: -2px;
+    hyphens: auto;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.5;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.5s ease-in-out;
+    transform: translateY(-10px);
+}
+
+.content-box:nth-child(even) {
+    background-color: white;
+}
+
+.content-box:nth-child(even) .hidden-text {
+    color: #333333;
+}
+
+.content-box:nth-child(even) .title {
+    text-shadow: 2px 2px #b5b5b6;
+    color: #333;
+}
+
+.content-box:hover .title {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-30px);
+}
+
+.content-box:hover .hidden-text {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}

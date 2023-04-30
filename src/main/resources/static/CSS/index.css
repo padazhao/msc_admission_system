@@ -125,7 +125,7 @@ li {
 
 /* Introduction */
 .introduction {
-    margin: 50px auto 90px;
+    margin: 90px auto 90px;
     width: 700px;
     text-align: center;
     opacity: 0;
@@ -229,8 +229,8 @@ li {
 
 .contact .contact-form {
     float: left;
-    margin: 60px 0;
-    width: 700px;
+    margin: 65px 0;
+    width: 55%;
 }
 
 .contact .contact-form input, textarea {
@@ -259,18 +259,18 @@ li {
 }
 
 #message{
-    height: 100px;
+    height: 70px;
 }
 
 .contact .background-img {
     float: right;
-    margin: 40px 0;
-/*    width: 500px;
-    height: 480px;
-    background-image: url("./static/image/bgi-1.jpg");
+    margin: 90px 0;
+    width: 33%;
+    height: 68%;
+    background-image: url("../image/bgi-1.jpg");
     background-position: center;
     background-repeat: no-repeat;
-    background-size: cover;*/
+    background-size: cover;
 }
 
 

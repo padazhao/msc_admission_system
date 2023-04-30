@@ -3,7 +3,10 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Admission System</title>
+    <!-- Page icon -->
+    <link rel="shortcut icon" th:href="@{/image/university.ico}"/>
     <link th:href="@{/CSS/index.css}" rel="stylesheet"/>
 </head>
 
@@ -14,7 +17,8 @@
     <div class="wrapper">
         <!-- Main page logo -->
         <div class="logo">
-            <a th:href="@{/}"><img src="/image/log1.png" height="30px" width="40px" alt="logo"></a>
+            <!-- Click the logo to access the main page -->
+            <a th:href="@{/}"><img src="/image/university.png" height="30px" width="40px" alt="logo"></a>
             <P>XYZ University</P>
         </div>
         <!-- Main page navigation list -->
@@ -34,15 +38,15 @@
 <div class="slideshow-container">
     <!-- First image -->
     <div class="mySlides fade">
-        <img src="/image/bgi-1.jpg" height="700" width="100%" alt="img1">
+        <img src="/image/bgi-1.jpg" height="750" width="100%" alt="img1">
     </div>
     <!-- Second image -->
     <div class="mySlides fade">
-        <img src="/image/bgi.jpg" height="700" width="100%" alt="img2">
+        <img src="/image/bgi-2.jpg" height="750" width="100%" alt="img2">
     </div>
     <!-- Third image -->
     <div class="mySlides fade">
-        <img src="/image/bgi-1.jpg" height="700" width="100%" alt="img3">
+        <img src="/image/bgi-3.jpg" height="750" width="100%" alt="img3">
     </div>
     <!-- Dot indicate current image -->
     <div style="text-align:center">
@@ -119,9 +123,7 @@
             </form>
         </div>
         <!-- Side image -->
-        <div class="background-img">
-            <img src="/image/bgi-1.jpg" height="480" width="500" alt="logo">
-        </div>
+        <div class="background-img"></div>
     </div>
 </div>
 
@@ -132,6 +134,7 @@
 <script>
     let slideIndex = 0;
     showSlides();
+
 
     function showSlides() {
         let i;

@@ -1,0 +1,147 @@
+label {
+    float: left;
+    margin: 5px 0 2px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+input {
+    display: inline-block;
+    border: 1px solid #cccccc;
+    margin: 10px 0;
+    padding: 10px;
+    width: 100%;
+}
+
+input[type=submit]{
+    display: inline-block;
+    border: 1px solid #cccccc;
+    margin: 20px 0;
+    padding: 12px 20px;
+    color: white;
+    background-color: royalblue;
+}
+
+input[type=submit]:hover{
+    background-color: cornflowerblue;
+}
+
+input::placeholder {
+    opacity: 0.7;
+}
+
+.sub-container{
+    display: flex;
+    height: 70%;
+}
+
+
+.class-list{
+    margin: 40px 0;
+    border: 1px solid black;
+    border-radius: 2px;
+    background-color: white;
+    box-shadow: 4px 4px 2px 2px grey;
+    overflow: scroll;
+    width: 70%;
+    height: 100%;
+}
+
+.class-list::-webkit-scrollbar {
+    width: 8px;
+    margin: 2px;
+}
+
+.class-list::-webkit-scrollbar-track {
+    background-color: #fcfcfc;
+    border-radius: 5px;
+}
+
+.class-list::-webkit-scrollbar-thumb {
+    background-color: #959494;
+    border-radius: 5px;
+}
+
+.class-list h4{
+    font-weight: 600;
+    margin: 15px;
+}
+
+table {
+    margin: 20px auto;
+    border-collapse: collapse;
+    width: 95%;
+}
+
+.programme-table th{
+    background-color: #333;
+    color: white;
+}
+
+.programme-table td, .programme-table th {
+    padding: 10px;
+    font-size: 12px; /* For Mon~Sun*/
+    border: 1px solid #545454;
+    text-align: center;
+    vertical-align: center;
+}
+
+/*每一栏的宽度*/
+.programme-table th:nth-child(1){
+    width: 5%;
+}
+.programme-table th:nth-child(2){
+    width: 15%;
+}
+.programme-table th:nth-child(3){
+    width: 20%;
+}
+.programme-table th:nth-child(4){
+    width: 8%;
+}
+
+.programme-table td:nth-child(3){
+    text-align: justify;
+    hyphens: auto;
+}
+
+.sub-sub-container{
+    display: block;
+    margin: 40px 0 40px 30px;
+    width: 35%;
+}
+
+.submission-form{
+    border: 1px solid black;
+    border-radius: 20px;
+    box-shadow: 5px 5px 4px 2px grey;
+    margin: 0 auto;
+    width: 90%;
+    height: fit-content;
+    background-color: white;
+}
+
+.submission-form form{
+    padding: 20px 30px 0;
+}
+.submission-form h2{
+    font-size: 18px;
+    margin-top: 25px;
+    text-align: center;
+}
+
+.progress{
+    border: 1px solid black;
+    border-radius: 5px;
+    box-shadow: 5px 5px 4px 2px grey;
+    margin: 40px auto 0;
+    width: 90%;
+    height: fit-content;
+    background-color: white;
+}
+
+.progress h3{
+    font-size: 18px;
+    margin: 20px;
+    vertical-align: center;
+}

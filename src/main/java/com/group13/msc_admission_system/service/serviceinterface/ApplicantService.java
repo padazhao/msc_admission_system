@@ -11,6 +11,7 @@ public interface ApplicantService {
     void register(UserRequestDTO userRequestDTO);
     void login(LoginCredentials loginCredentials);
     Applicant getApplicantInfo(Long applicantId);
+    Applicant getApplicantInfoByEmail(String email);     /* 新加入通过email获取个人信息 */
     List<Applicant> getAllApplicantInfo();
     void updateApplicant(Long id, UserRequestDTO userRequestDTO);
 

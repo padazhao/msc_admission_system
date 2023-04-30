@@ -3,6 +3,7 @@ package com.group13.msc_admission_system.controller;
 import com.group13.msc_admission_system.dto.ProgramRequestDTO;
 import com.group13.msc_admission_system.model.Program;
 import com.group13.msc_admission_system.service.serviceinterface.ProgramService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -11,7 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
 
 @RestController
-@RequestMapping("/program")
+/*@RequestMapping("/program")*/
 public class ProgramController {
 
     private final ProgramService programService;
@@ -36,13 +37,14 @@ public class ProgramController {
         return  modelAndView;
     }
 
-    @GetMapping("/info/")
-    public ModelAndView getAllProgram(){
+    // 我改了url
+/*    @GetMapping("/applicant/home_page/application_form")
+    public ModelAndView getAllProgram(HttpSession session){
         List<Program> program = programService.getAllProgram();
-        ModelAndView modelAndView = new ModelAndView("applicants");
+        ModelAndView modelAndView = new ModelAndView("Application_form");
         modelAndView.addObject("program",program);
         return  modelAndView;
-    }
+    }*/
 
     //UPDATE============================================================================================================
     @PutMapping("/{id}")
