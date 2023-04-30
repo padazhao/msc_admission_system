@@ -10,6 +10,8 @@ import jakarta.validation.constraints.Size;
  * Helps hold login credentials and helps validate them
  */
 public class LoginCredentials {
+
+
     @NotEmpty(message = "Email cannot be empty")
     @Email(message = "Email must conform to email format")
     private String email;
@@ -23,4 +25,11 @@ public class LoginCredentials {
     public String getPassword() {
         return password;
     }
+
+    public LoginCredentials(String email, String password) {
+        this.email = email;
+        this.password= password;
+    }
+
+
 }
