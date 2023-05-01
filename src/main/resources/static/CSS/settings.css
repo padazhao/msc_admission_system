@@ -38,8 +38,9 @@
     font-weight: bold;
 }
 
-.filed input, .filed select {
+.filed input, .filed select{
     float: left;
+    padding-left: 7px;
     border-radius: 5px;
     border: 1px solid #ccc;
     width: 50%;

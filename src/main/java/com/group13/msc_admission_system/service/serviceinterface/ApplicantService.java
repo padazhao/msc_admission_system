@@ -13,7 +13,7 @@ public interface ApplicantService {
     Applicant getApplicantInfo(Long applicantId);
     Applicant getApplicantInfoByEmail(String email);     /* 新加入通过email获取个人信息 */
     List<Applicant> getAllApplicantInfo();
-    void updateApplicant(Long id, UserRequestDTO userRequestDTO);
+    Applicant updateApplicant(Long id, UserRequestDTO userRequestDTO);
 
 
 

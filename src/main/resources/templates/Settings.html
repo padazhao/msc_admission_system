@@ -26,7 +26,7 @@
             <li><a th:href="@{/applicant/home_page/contact}"><i class="fa fa-fw fa-envelope"></i> Contact</a></li>
             <li><a th:href="@{/applicant/home_page/application_form}"><i class="fa fa-graduation-cap"></i> Submit </a>
             </li>
-            <li class="active"><a th:href="@{/applicant/home_page/settings}"><i class="fa fa-cog"></i> Settings </a>
+            <li class="active"><a th:href="@{/applicant/home_page/settings/{id}(id=${user.userId})}"><i class="fa fa-cog"></i> Settings </a>
             </li>
             <li><a th:href="@{/}"><i class="fa fa-sign-out"></i> Log out </a></li>
         </ul>
@@ -49,7 +49,7 @@
                 <div class="update-form">
                     <h3>Update Request</h3>
                     <hr>
-                    <form th:action="@{/home_page/settings/{id}(id=${user.userId})}" th:object="${user}" th:method="put">
+                    <form th:action="@{/applicant/home_page/settings/{id}(id=${user.userId})}" th:object="${user}" th:method="post">
                         <div class="filed">
                             <label for="username">Username :</label>
                             <input type="text" id="username" th:field="*{username}">
@@ -57,17 +57,17 @@
 
                         <div class="filed">
                             <label for="email">Email :</label>
-                            <input type="email" id="email" th:field="*{email}">
+                            <input type="email" id="email" name="email" th:filed="*{email}">
                         </div>
 
-                        <div class="filed">
+<!--                        <div class="filed">
                             <label for="email">Email :</label>
                             <input type="password" id="password" th:field="*{password}">
-                        </div>
+                        </div>-->
 
                         <div class="filed">
                             <label for="gender"><strong>Gender :</strong></label>
-                            <select id="gender" th:field="*{gender}">
+                            <select id="gender" name="gender" th:field="*{gender}">
                                 <option value="" disabled selected hidden></option>
                                 <option value="MALE">MALE</option>
                                 <option value="FEMALE">FEMALE</option>
@@ -75,10 +75,10 @@
                             </select>
                         </div>
 
-                        <div class="filed">
+<!--                        <div class="filed">
                             <label for="dob"><strong>Date of Birth :</strong></label>
                             <input type="date" id="dob" th:field="*{dateOfBirth}">
-                        </div>
+                        </div>-->
                         <div class="filed">
                             <label for="phone"><strong>PhoneNumber :</strong></label>
                             <input type="tel" id="phone" th:field="*{phoneNumber}"/>

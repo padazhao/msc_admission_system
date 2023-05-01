@@ -27,7 +27,7 @@
             </li>
             <li><a th:href="@{/applicant/home_page/application_form}"><i class="fa fa-graduation-cap"></i> Submit </a>
             </li>
-            <li><a th:href="@{/applicant/home_page/settings}"><i class="fa fa-cog"></i> Settings </a></li>
+            <li><a th:href="@{/applicant/home_page/settings/{id}(id=${user.userId})}"><i class="fa fa-cog"></i> Settings </a></li>
             <li><a th:href="@{/}"><i class="fa fa-sign-out"></i> Log out </a></li>
         </ul>
     </div>

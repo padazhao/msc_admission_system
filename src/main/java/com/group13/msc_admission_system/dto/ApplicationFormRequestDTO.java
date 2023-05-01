@@ -34,4 +34,24 @@ public class ApplicationFormRequestDTO {
     public Long getAdminId() {
         return adminId;
     }
+
+    public void setProgramIds(Long[] programIds) {
+        this.programIds = programIds;
+    }
+
+    public static void setMaxNumberOfSelectedProgramme(int maxNumberOfSelectedProgramme) {
+        ApplicationFormRequestDTO.maxNumberOfSelectedProgramme = maxNumberOfSelectedProgramme;
+    }
+
+    public void setApplicantId(Long applicantId) {
+        this.applicantId = applicantId;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public void setAdminId(Long adminId) {
+        this.adminId = adminId;
+    }
 }

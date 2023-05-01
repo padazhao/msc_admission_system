@@ -86,8 +86,7 @@ public class ApplicantServiceImplement implements ApplicantService {
     //UPDATE============================================================================================================
     @Transactional
     @Override
-    public void updateApplicant(Long id, UserRequestDTO userRequestDTO) {
-        System.out.println(id);
+    public Applicant updateApplicant(Long id, UserRequestDTO userRequestDTO) {
         Applicant update = applicantRepository.findById(id).orElseThrow(
                 () -> new MyResourceNotFoundException(Message.resourceNotFound(ResourceType.APPLICANT, id)));
 
@@ -113,6 +112,7 @@ public class ApplicantServiceImplement implements ApplicantService {
 
         System.out.println(Message.updated);
 
+        return update;
     }
 
 
