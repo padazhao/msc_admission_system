@@ -37,7 +37,7 @@ label {
     font-weight: bold;
 }
 
-input {
+input{
     display: inline-block;
     border: 1px solid #cccccc;
     border-radius: 10px;
@@ -89,22 +89,22 @@ input::placeholder {
 
 
 /*Login page*/
-.container .main-content {
+.container .login-form {
     width: 370px;
     height: 600px;
     text-align: center;
 }
 
-.container .main-content h2 {
+.container .login-form h2 {
     margin: 75px 120px 20px 0;
 }
 
-.container .main-content h6 {
+.container .login-form h6 {
     margin: -10px 90px 10px 0;
     color: darkgray;
 }
 /* Position of the remember me check box */
-.container .main-content .remember {
+.container .login-form .remember {
     float: left;
     margin: -10px 0 10px 0;
     font-size: 14px;
@@ -147,7 +147,7 @@ input[type=reset]:hover{
 }
 
 .container .main-content-sign-up h2 {
-    margin: 45px 175px 10px 0;
+    margin: 45px 161px 10px 0;
 }
 
 .container .main-content-sign-up h6 {
@@ -158,7 +158,7 @@ input[type=reset]:hover{
 .container .main-content-sign-up input, select {
     display: inline-block;
     border: 1px solid #cccccc;
-    border-radius: 10px;
+    border-radius: 5px;
     padding: 3px 9px;
     margin: 3px 0;
     width: 100%;
