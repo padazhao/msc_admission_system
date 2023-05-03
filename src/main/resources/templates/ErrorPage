@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login In</title>
+    <!-- Page icon -->
+    <link rel="shortcut icon" th:href="@{/image/university.ico}"/>
+ 
+</head>
+    <title>Meet Error</title>
+</head>
+<body style="text-align: center">
+<h1 >There is something wrong! Please go back to check!</h1>
+</body>
+</html>
