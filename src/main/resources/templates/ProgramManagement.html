@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>Program Management</title>
+	<!-- Page icon -->
+	<link rel="shortcut icon" th:href="@{/image/graduated.ico}"/>
+	<!-- Resource for icons -->
+	<link th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css}"
+		  rel="stylesheet">
+	<!-- Common Style for the home page-->
+	<link th:href="@{/CSS/common.css}" rel="stylesheet"/>
+	<!-- CSS style for application form -->
+	<link th:href="@{/CSS/application_form.css}" rel="stylesheet"/>
+</head>
+<body>
+
+<div class="container">
+	<!--Side Navigation bar-->
+	<div class="side-nav">
+		<h3>Home Page</h3>
+		<hr>
+		<ul>
+			<li class="active"><a th:href="@{/admin/home_page}"><i class="fa fa-fw fa-home"></i> Home </a></li>
+			<li><a th:href="@{/admin/home_page/AdminProfile}"><i class="fa fa-fw fa-user"></i>Admin Profile </a></li>
+			<li><a th:href="@{/admin/home_page/UserManagement}"><i class="fa fa-fw fa-envelope"></i> User Management</a></li>
+			<li><a th:href="@{/admin/home_page/ProgramManagement}"><i class="fa fa-graduation-cap"></i> Program Management </a></li>
+			<li><a th:href="@{/admin/}"><i class="fa fa-sign-out"></i> Log out </a></li>
+		</ul>
+	</div>
+
+	<!--Main content-->
+	<div class="content">
+<!--		<div th:replace="~{/common/common-admin::top-nav-admin}"></div>-->
+		<div class="top-nav">
+			<!-- left: Search bar -->
+			<div class="nav-list-left">
+				<form class="search-bar" th:action="@{/admin/home_page/ProgramManagement/search}" th:method="post">
+					<button class="btn-search" type="submit"><i class="fa fa-search"></i></button>
+					<input type="text" name="PID" placeholder="Type to search...">
+				</form>
+			</div>
+			<!-- Right:Profile & Calender -->
+			<div class="nav-list-right">
+				<ul>
+					<li><a th:href="@{/admin/home_page}"><i class="fa fa-fw fa-home"></i></a></li>
+					<li><a th:href="@{/admin/home_page/profile}"><i class="fa fa-user-o"></i></a></li>
+					<li><a th:href="@{/admin/}"><i class="fa fa-sign-out"></i></a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="main-content">
+			<div class="text">
+				<h1>Program Management</h1>
+				<p>Manage your program here.</p>
+				<hr>
+			</div>
+			<!-- Container for -->
+			<div class="sub-container">
+
+				<div class="class-list">
+					<h4>Programme List offered at XYZ University</h4>
+					<hr>
+					<div class="programme-table">
+						<table>
+							<thead>
+							<tr>
+								<th> Programme ID</th>
+								<th> Programme name</th>
+								<th> Description</th>
+								<th> Duration</th>
+								<th> Operation</th>
+							</tr>
+							</thead>
+							<tbody>
+							<th:block th:each="program : ${program}">
+								<tr>
+									<td th:text="${program.programId}"></td>
+									<td th:text="${program.programName}"></td>
+									<td th:text="${program.description}"></td>
+									<td th:text="${program.programDuration}"></td>
+									<td><button style="background-color:#f66f6a;
+														color:white;
+														width: 100px;
+														height: 30px;
+														border:0;
+														font-size: 13px;
+														box-sizing: content-box;
+														border-radius: 5px;">delete</button></td>
+								</tr>
+							</th:block>
+							</tbody>
+						</table>
+					</div>
+				</div>
+
+				<div class="sub-sub-container" style="height: 500px">
+					<div class="submission-form" style="height: 500px">
+						<h2>Manage Program</h2>
+						<form th:action="@{/program/create}" th:method="post">
+							<hr>
+							<br>
+							<label for="programme 0">Programme ID : </label>
+							<input type="text" id="programme 0" name="Name">
+
+							<label for="programme 1">Programme Name : </label>
+							<input type="text" id="programme 1" name="Name">
+
+							<label for="programme 2">Programme Description : </label>
+							<input type="text" id="programme 2" name="Description">
+
+							<label for="programme 3">Programme Duration : </label>
+							<input type="numbber" id="programme 3" name="Duration">
+
+							<input type="submit" value="submit" style="width: 40%;float: left;border-radius: 10px"/>
+							<input type="submit" value="modify" style="width: 40%;float: right;border-radius: 10px;background-color: #545454"/>
+						</form>
+					</div>
+				</div>
+
+			</div>
+
+		</div>
+	</div>
+</div>
+</body>
+
+
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile</title>
+    <!-- Page icon -->
+    <link rel="shortcut icon" th:href="@{/image/graduated.ico}"/>
+    <!-- Resource for icons -->
+    <link th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css}" rel="stylesheet">
+    <!-- Common Style for the home page-->
+    <link th:href="@{/CSS/common.css}" rel="stylesheet"/>
+    <!-- CSS style for profile -->
+    <link th:href="@{/CSS/profile.css}" rel="stylesheet"/>
+</head>
+<body>
+
+<div class="container">
+    <!-- Left Side Navigation bar -->
+    <div class="side-nav">
+        <h3>Home Page</h3>
+        <hr>
+        <ul>
+            <li class="active"><a th:href="@{/admin/home_page}"><i class="fa fa-fw fa-home"></i> Home </a></li>
+            <li><a th:href="@{/admin/home_page/AdminProfile}"><i class="fa fa-fw fa-user"></i>Admin Profile </a></li>
+            <li><a th:href="@{/admin/home_page/UserManagement}"><i class="fa fa-fw fa-envelope"></i> User Management</a></li>
+            <li><a th:href="@{/admin/home_page/ProgramManagement}"><i class="fa fa-graduation-cap"></i> Program Management </a></li>
+            <li><a th:href="@{/admin/}"><i class="fa fa-sign-out"></i> Log out </a></li>
+        </ul>
+    </div>
+
+    <!-- Right side of page -->
+    <div class="content">
+        <!-- Top Navigation bar -->
+        <div th:replace="~{/common/common-admin::top-nav-admin}"></div>
+
+        <div class="main-content">
+            <!-- Page title -->
+            <div class="text">
+                <h1>Profile</h1>
+                <p> View your personal information here </p>
+                <hr>
+            </div>
+
+            <!-- User profile -->
+            <div class="profile">
+                <!-- Top image for personal profile-->
+                <div class="top-img"></div><hr>
+
+                <!-- Details information -->
+                <div class="profile-photo">
+                    <img src="/image/study.jpg" width="150" height="150"/>
+                    <!-- A vertical break line -->
+                    <div class="vertical-line"></div>
+                </div>
+
+                <div class="information">
+                    <div class="user-details">
+                        <h5>  ID&nbsp;:&nbsp; <span th:text="${user.userId}"/></h5>
+                        <h5>  Email address&nbsp;:&nbsp;<span th:text="${user.email}"/></h5>
+                        <h5>  Username&nbsp;:&nbsp;<span th:text="${user.username}"/></h5>
+                        <h5>  Age&nbsp;:&nbsp;<span th:text="${user.age}"/></h5>
+                        <h5>  Date of Birth&nbsp;:&nbsp;<span th:text="${user.dateOfBirth}"/></h5>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+</body>
+
+
+</html>

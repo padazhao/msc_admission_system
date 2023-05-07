@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>User Home Page</title>
+    <script type="text/javascript"  th:src="@{/js/calender.js}"></script>
+</head>
+<body>
+
+<!-- Common top bar for home page -->
+<div class="top-nav" th:fragment="top-nav-admin">
+    <!-- Right:Profile & Calender -->
+    <div class="nav-list-right">
+        <ul>
+            <li><a th:href="@{/admin/home_page}"><i class="fa fa-fw fa-home"></i></a></li>
+            <li><a th:href="@{/admin/home_page/AdminProfile}"><i class="fa fa-user-o"></i></a></li>
+            <li><a th:href="@{/admin/}"><i class="fa fa-sign-out"></i></a></li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>

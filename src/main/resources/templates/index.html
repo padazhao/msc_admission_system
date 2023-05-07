@@ -24,6 +24,7 @@
         <!-- Main page navigation list -->
         <div class="nav-list">
             <ul>
+                <li><a th:href="@{/admin/login}">Login for admin</a></li>
                 <li><a th:href="@{/applicant/login}">Login</a></li>
                 <li><a th:href="@{/applicant/register}">Register</a></li>
                 <li><a th:href="@{#contact}">Contact</a></li>
@@ -112,7 +113,7 @@
             <p>If you have any questions or need more information, feel free to contact us using the form below or
                 through the contact details provided.</p> <br>
             <!-- 还需要action Action needed-->
-            <form th:action="@{/applicant/register}" method="post">
+            <form th:action="@{/applicant/register}" th:method="post">
                 <label for="name">Name</label>
                 <input type="text" id="name" name="name" required>
                 <label for="email">Email</label>
@@ -134,7 +135,6 @@
 <script>
     let slideIndex = 0;
     showSlides();
-
 
     function showSlides() {
         let i;

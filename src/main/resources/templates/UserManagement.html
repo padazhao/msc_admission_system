@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>Program Management</title>
+	<!-- Page icon -->
+	<link rel="shortcut icon" th:href="@{/image/graduated.ico}"/>
+	<!-- Resource for icons -->
+	<link th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css}"
+		  rel="stylesheet">
+	<!-- Common Style for the home page-->
+	<link th:href="@{/CSS/common.css}" rel="stylesheet"/>
+	<!-- CSS style for application form -->
+	<link th:href="@{/CSS/application_form.css}" rel="stylesheet"/>
+</head>
+<body>
+
+<div class="container">
+	<!--Side Navigation bar-->
+	<div class="side-nav">
+		<h3>Home Page</h3>
+		<hr>
+		<ul>
+			<li class="active"><a th:href="@{/admin/home_page}"><i class="fa fa-fw fa-home"></i> Home </a></li>
+			<li><a th:href="@{/admin/home_page/AdminProfile}"><i class="fa fa-fw fa-user"></i>Admin Profile </a></li>
+			<li><a th:href="@{/admin/home_page/UserManagement}"><i class="fa fa-fw fa-envelope"></i> User Management</a></li>
+			<li><a th:href="@{/admin/home_page/ProgramManagement}"><i class="fa fa-graduation-cap"></i> Program Management </a></li>
+			<li><a th:href="@{/admin/}"><i class="fa fa-sign-out"></i> Log out </a></li>
+		</ul>
+	</div>
+
+	<!--Main content-->
+	<div class="content">
+<!--		<div th:replace="~{/common/common-admin::top-nav-admin}"></div>-->
+		<div class="top-nav">
+			<!-- left: Search bar -->
+			<div class="nav-list-left">
+				<form class="search-bar" th:action="@{/admin/home_page/UserManagement/search}" th:method="post">
+					<button class="btn-search" type="submit"><i class="fa fa-search"></i></button>
+					<input type="text" name="UID" placeholder="Type to search...">
+				</form>
+			</div>
+			<!-- Right:Profile & Calender -->
+			<div class="nav-list-right">
+				<ul>,
+					<li><a th:href="@{/admin/home_page}"><i class="fa fa-fw fa-home"></i></a></li>
+					<li><a th:href="@{/admin/home_page/profile}"><i class="fa fa-user-o"></i></a></li>
+					<li><a th:href="@{/admin/}"><i class="fa fa-sign-out"></i></a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="main-content">
+			<div class="text">
+				<h1>User Management</h1>
+				<p>Manage all applicants here.</p>
+				<hr>
+			</div>
+			<!-- Container for -->
+			<div class="sub-container">
+
+				<div class="class-list">
+					<h4>Applicants List at this term of XYZ University</h4>
+					<hr>
+					<div class="programme-table">
+						<table>
+							<thead>
+							<tr>
+								<th> ID</th>
+								<th> Name</th>
+								<th> gender</th>
+								<th> Birthday</th>
+								<th> email</th>
+								<th> #phone</th>
+							</tr>
+							</thead>
+							<tbody>
+							<th:block th:each="userInfo : ${userInfo}">
+								<tr>
+									<td th:text="${userInfo.userId}"></td>
+									<td th:text="${userInfo.username}"></td>
+									<td th:text="${userInfo.gender}"></td>
+									<td th:text="${userInfo.dateOfBirth}"></td>
+									<td th:text="${userInfo.email}"></td>
+									<td th:text="${userInfo.phoneNumber}"></td>
+								</tr>
+							</th:block>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+
+
+</html>

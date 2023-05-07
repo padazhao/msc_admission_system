@@ -1,9 +1,12 @@
 package com.group13.msc_admission_system.controller;
 
 
+import com.group13.msc_admission_system.common.Message;
+import com.group13.msc_admission_system.common.ResourceType;
 import com.group13.msc_admission_system.dto.ApplicationFormRequestDTO;
 import com.group13.msc_admission_system.dto.LoginCredentials;
 import com.group13.msc_admission_system.dto.UserRequestDTO;
+import com.group13.msc_admission_system.exception.MyResourceNotFoundException;
 import com.group13.msc_admission_system.model.Applicant;
 import com.group13.msc_admission_system.model.Program;
 import com.group13.msc_admission_system.service.serviceinterface.ApplicantService;
@@ -46,7 +49,7 @@ public class ApplicantController {
     @PostMapping("/register")
     public ModelAndView register(@Validated UserRequestDTO userRequestDTO){
         applicantService.register(userRequestDTO);
-        ModelAndView modelAndView = new ModelAndView("index");
+        ModelAndView modelAndView = new ModelAndView("Login_form");
 
         return modelAndView;
     }

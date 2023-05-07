@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Administrator Home Page</title>
+    <!-- Page icon -->
+    <link rel="shortcut icon" th:href="@{/image/graduated.ico}"/>
+    <!-- Resource for icons -->
+    <link th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css}"
+          rel="stylesheet">
+    <!-- Common Style for the home page-->
+    <link th:href="@{/CSS/common.css}" rel="stylesheet"/>
+    <!-- CSS style for Home page -->
+    <link th:href="@{/CSS/applicant.css}" rel="stylesheet"/>
+</head>
+<body>
+
+<!--User Main page-->
+<div class="container">
+    <!--Side Navigation bar-->
+    <div class="side-nav">
+        <h3>Home Page</h3>
+        <hr>
+        <ul>
+            <li class="active"><a th:href="@{/admin/home_page}"><i class="fa fa-fw fa-home"></i> Home </a></li>
+            <li><a th:href="@{/admin/home_page/AdminProfile}"><i class="fa fa-fw fa-user"></i>Admin Profile </a></li>
+            <li><a th:href="@{/admin/home_page/UserManagement}"><i class="fa fa-fw fa-envelope"></i> User Management</a></li>
+            <li><a th:href="@{/admin/home_page/ProgramManagement}"><i class="fa fa-graduation-cap"></i> Program Management </a></li>
+            <li><a th:href="@{/admin/}"><i class="fa fa-sign-out"></i> Log out </a></li>
+        </ul>
+    </div>
+
+    <!--Main content of the home page-->
+    <div class="content">
+        <!-- Top navigation bar -->
+        <div th:replace="~{/common/common-admin::top-nav-admin}"></div>
+
+        <div class="main-content">
+            <!-- Page title -->
+            <div class="text">
+                <h1>Welcome to the home page&nbsp;!&nbsp; <span th:text="${user?.username}"/></h1>
+                <p>Here is a complete guidance for you to better understand how the system works</p>
+                <hr>
+            </div>
+
+            <div class="sub-container">
+                <div class="sub-sub-container" style="margin-left: 135px;">
+                    <div class="content-box">
+                        <h3 class="title"> Profile </h3>
+                        <p class="hidden-text"> The profile page displays all personal information about an individual.
+                            It is a comprehensive
+                            and informative space that serves as a sort of digital resume. Here applicants can view
+                            their
+                            username, system-generated unique ID, age, gender and date of birth</p>
+                    </div>
+                    <div class="photo">
+                        <img src="/image/photo2.jpg" width="200" height="200">
+                    </div>
+                </div>
+
+                <div class="sub-sub-container">
+                    <div class="photo">
+                        <img src="/image/photo1.jpg" width="200" height="200">
+                    </div>
+                    <div class="content-box">
+                        <h3 class="title"> User Management </h3>
+                        <p class="hidden-text"> Our school also offer various other means of communication, such as
+                            online portals or mobile applications. These tools can be particularly useful for parents
+                            and students who may need
+                            to access information or communicate with the school outside of regular office hours.</p>
+                    </div>
+                </div>
+
+                <div class="sub-sub-container">
+                    <div class="content-box">
+                        <h3 class="title"> Program Management </h3>
+                        <p class="hidden-text"> School submission page is to facilitate the submission of enrollment or
+                            registration documents,
+                            which supply application forms and programme list. This can streamline the admissions
+                            process
+                            and ensure that all necessary information is collected in a timely and organized manner.</p>
+                    </div>
+                    <div class="photo">
+                        <img src="/image/photo4.jpg" width="200" height="200">
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+</div>
+</body>
+</html>

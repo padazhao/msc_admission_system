@@ -1,10 +1,17 @@
 package com.group13.msc_admission_system.controller;
 
 import com.group13.msc_admission_system.dto.ApplicationFormRequestDTO;
+import com.group13.msc_admission_system.model.Applicant;
+import com.group13.msc_admission_system.model.Program;
+import com.group13.msc_admission_system.service.serviceinterface.ApplicantService;
 import com.group13.msc_admission_system.service.serviceinterface.ApplicationFormService;
+import com.group13.msc_admission_system.service.serviceinterface.ProgramService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/applicationform")
@@ -12,16 +19,25 @@ public class ApplicationFormController {
 
     private final ApplicationFormService applicationFormService;
 
-    //CONSTRUCTOR=======================================================================================================
+    //CONSTRUCTOR ======================================================================================================
     @Autowired
-    public ApplicationFormController(ApplicationFormService applicationFormService) { super();  this.applicationFormService = applicationFormService;}
+    public ApplicationFormController(ApplicationFormService applicationFormService) {
+        super();
+        this.applicationFormService = applicationFormService;
+    }
 
     //CREATE AN APPLICATION FORM
-    @PostMapping("/submit")
-    public ModelAndView submitApplicationForm(ApplicationFormRequestDTO applicationFormRequestDTO){
+/*    @PostMapping("/submit")
+    public ModelAndView submitApplicationForm(ApplicationFormRequestDTO applicationFormRequestDTO, HttpSession session){
         applicationFormService.createApplication(applicationFormRequestDTO);
-        return new ModelAndView("Application_form");
-    }
+        Applicant applicant = applicantService.getApplicantInfoByEmail((String) session.getAttribute("email"));
+        ModelAndView modelAndView = new ModelAndView("Application_form");
+        modelAndView.addObject("user", applicant);
+
+        List<Program> program = programService.getAllProgram();
+        modelAndView.addObject("program",program);
+        return modelAndView;
+    }*/
 
     //UPDATE ===========================================================================================================
     @PutMapping("/program/{id}")
