@@ -81,12 +81,11 @@
     inp.setAttribute('max', maxDate);
 
 
-
     // Validate the phone number length
     const phoneNumber = document.getElementById("phone");
     phoneNumber.addEventListener("input", () => {
         let x = document.getElementById("phone").value;
-        if (isNaN(x) || x.length < 8 || x.length > 11) {
+        if (isNaN(x) || x.length < 8 || x.length > 10) {
             phoneNumber.setCustomValidity("The length of the phone number should be 8 to 11 digits");
             phoneNumber.reportValidity();
         } else {

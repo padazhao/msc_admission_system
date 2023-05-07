@@ -50,7 +50,7 @@ public class ApplicationFormServiceImplement implements ApplicationFormService {
 
     //CREATE APPLICATION FORM ==========================================================================================
     @Override
-    public void createApplication(ApplicationFormRequestDTO applicationFormRequestDTO) {
+    public ApplicationForm createApplication(ApplicationFormRequestDTO applicationFormRequestDTO) {
         Long applicantId = applicationFormRequestDTO.getApplicantId();
         Applicant applicant = applicantRepository.findById(applicantId).orElseThrow(
                 () -> new MyResourceNotFoundException(Message.resourceNotFound(ResourceType.APPLICANT, applicantId)));  //THROW EXCEPTION IF APPLICANT ID IS NOT FOUND
@@ -60,7 +60,13 @@ public class ApplicationFormServiceImplement implements ApplicationFormService {
         ApplicationForm applicationForm = new ApplicationForm(applicant,program);
         
         applicationFormRepository.save(applicationForm);
+        applicant.setApplicantForm(applicationForm);
+        return applicationForm;
 
+    }
+
+    public ApplicationForm getApplicantInfo(Long applicationFormId){
+        return applicationFormRepository.findByApplicationFormId(applicationFormId);
     }
 
     //UPDATE============================================================================================================

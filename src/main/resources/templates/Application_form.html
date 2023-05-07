@@ -12,6 +12,362 @@
     <link th:href="@{/CSS/common.css}" rel="stylesheet"/>
     <!-- CSS style for application form -->
     <link th:href="@{/CSS/application_form.css}" rel="stylesheet"/>
+<!--    <style>
+        /*
+* Global styles :
+* 1. Center effect (wrapper)
+* 2. Whole page font style
+* 3. Eliminate the decoration of a and li
+*/
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body,html {
+            width: 100%;
+            height: 100%;
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        .wrapper {
+            width: 1400px;
+            margin: 0 auto;  /* centered */
+        }
+
+        a{
+            text-decoration: none;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        /* Container for whole page */
+        .container {
+            /* Display side-nav and content horizontally */
+            display: flex;
+            height: 100%;
+        }
+
+        /* Side Navigation bar */
+        .container .side-nav{
+            padding: 20px;
+            border-right: 10px solid #000;
+            border-bottom: 10px solid #000;
+            width: 12%;
+            height: 100%;
+            text-align: center;
+            color: #fff; /* text color */
+            background-color: #333;
+        }
+
+        .side-nav h3{
+            margin:10px 0 20px;
+            letter-spacing: 1px;
+        }
+
+        .side-nav li{
+            border-radius: 30px;
+            margin: 20px 0;
+            opacity: 0.8;
+        }
+        .side-nav li>a{
+            display: inline-block;
+            padding: 20px 5px;
+            width: 100%;
+            color: white;
+        }
+
+        .active{
+            box-shadow: 0 0 10px white;
+        }
+
+
+
+        .side-nav li:hover{
+            width: 100%;
+            height: 60px;
+            color: white;
+            background: none;
+            box-shadow: 0 0 10px white;
+            opacity: 1;
+        }
+
+        /* right side of Home page*/
+        .content {
+            flex: 1;
+            width: 88%;
+            height: 100%;
+        }
+
+        /* Navigation bar */
+        .top-nav{
+            display: flex;
+            border-top: 2px solid #e0dfdf;
+            border-bottom: 4px solid #e0dfdf;
+            width: 100%;
+            height: 70px;
+        }
+
+        /* div of whole search bar*/
+        .nav-list-left .search-bar{
+            float: left;
+            margin-left: 15px;
+            width: 100%;
+            height: 64px;
+        }
+        /* search icon */
+        .btn-search{
+            border-style: none;
+            margin: 10px 0;
+            width: 40px;
+            height: 40px;
+            font-size: 18px;
+            background-color: white;
+        }
+        /* input text filed*/
+        .nav-list-left .search-bar>input{
+            border-style: none;
+            outline: none;
+            width: 130px;
+            height: 40px;
+            font-size: 15px;
+            -webkit-transition: width 0.4s ease-in-out;
+            transition: width 0.4s ease-in-out;
+            opacity: 0.7;
+        }
+        /* transform on input text filed*/
+        input[type=text]:focus{
+            width: 200px;
+            background: transparent;
+            border-bottom: 1px solid grey;
+        }
+
+        .nav-list-right{
+            float: right;
+            margin-left: auto;
+        }
+
+        .nav-list-right li{
+            float: left;
+            border-radius: 50%;
+            margin: 14px 10px;
+            width: 36px;
+            height: 36px;
+            text-align: center;
+            line-height: 36px;
+            background-color: #eeeded;
+            cursor: pointer;
+        }
+
+        .nav-list-right li a{
+            display: inline-block;
+            font-size: 17px;
+            color: black;
+        }
+
+        .nav-list-right a:hover{
+            font-size: 20px;
+            color: #717171;
+        }
+
+        /* Main body of Home page */
+        .main-content{
+            display: block;
+            background-color: #e7e6e6;
+            padding: 35px;
+            height: calc(100% - 70px);
+        }
+
+        .text{
+            display: block;
+            width: 100%;
+        }
+        .text p{
+            font-style: italic;
+            font-size: 8px;
+            letter-spacing: 0em;
+            margin: 15px 0;
+            color: #888a8c;
+        }
+        label {
+            float: left;
+            margin: 5px 0 2px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        input {
+            display: inline-block;
+            border: 1px solid #cccccc;
+            margin: 10px 0;
+            padding: 10px;
+            width: 100%;
+        }
+
+        input[type=submit]{
+            display: inline-block;
+            border: 1px solid #cccccc;
+            margin: 20px 0;
+            padding: 12px 20px;
+            color: white;
+            background-color: royalblue;
+        }
+
+        input[type=submit]:hover{
+            background-color: cornflowerblue;
+        }
+
+        input::placeholder {
+            opacity: 0.7;
+        }
+
+        .sub-container{
+            display: flex;
+            height: 70%;
+        }
+
+
+        .class-list{
+            margin: 40px 0;
+            border: 1px solid black;
+            border-radius: 2px;
+            background-color: white;
+            box-shadow: 4px 4px 2px 2px grey;
+            overflow: scroll;
+            width: 70%;
+            height: 100%;
+        }
+
+        .class-list::-webkit-scrollbar {
+            width: 8px;
+            margin: 2px;
+        }
+
+        .class-list::-webkit-scrollbar-track {
+            background-color: #fcfcfc;
+            border-radius: 5px;
+        }
+
+        .class-list::-webkit-scrollbar-thumb {
+            background-color: #959494;
+            border-radius: 5px;
+        }
+
+        .class-list h4{
+            font-weight: 600;
+            margin: 15px;
+        }
+
+        table {
+            margin: 20px auto;
+            border-collapse: collapse;
+            width: 95%;
+        }
+
+        .programme-table th{
+            background-color: #333;
+            color: white;
+        }
+
+        .programme-table td, .programme-table th {
+            padding: 10px;
+            font-size: 12px; /* For Mon~Sun*/
+            border: 1px solid #545454;
+            text-align: center;
+            vertical-align: center;
+        }
+
+        /*每一栏的宽度*/
+        .programme-table th:nth-child(1){
+            width: 5%;
+        }
+        .programme-table th:nth-child(2){
+            width: 15%;
+        }
+        .programme-table th:nth-child(3){
+            width: 20%;
+        }
+        .programme-table th:nth-child(4){
+            width: 8%;
+        }
+
+        .programme-table td:nth-child(3){
+            text-align: justify;
+            hyphens: auto;
+        }
+
+        .sub-sub-container{
+            display: block;
+            margin: 40px 0 40px 30px;
+            width: 35%;
+        }
+
+        .submission-form{
+            border: 1px solid black;
+            border-radius: 20px;
+            box-shadow: 5px 5px 4px 2px grey;
+            margin: 0 auto;
+            width: 90%;
+            height: fit-content;
+            background-color: white;
+        }
+
+        .submission-form form{
+            padding: 0 30px 0;
+        }
+
+        .submission-form h2{
+            font-size: 20px;
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        .submission-form form .programme-id{
+            display: flex;
+        }
+
+        .submission-form>form>.programme-id>input {
+            border: 1px solid #cccccc;
+            margin: 0 7px 0;
+            padding: 10px;
+            width: 50px;
+            height: 10px;
+            font-size: 10px;
+        }
+
+        .submission-form>form>input[type=submit]{
+            display: inline-block;
+            border: 1px solid #cccccc;
+            margin: 10px 0;
+            padding: 12px 20px;
+            color: white;
+            background-color: royalblue;
+        }
+
+        .submission-form>form>input[type=submit]:hover{
+            background-color: cornflowerblue;
+        }
+
+
+        .progress{
+            border: 1px solid black;
+            border-radius: 5px;
+            box-shadow: 5px 5px 4px 2px grey;
+            margin: 40px auto 0;
+            width: 90%;
+            height: fit-content;
+            background-color: white;
+        }
+
+        .progress h3{
+            font-size: 18px;
+            margin: 20px;
+            vertical-align: center;
+        }
+    </style>-->
 </head>
 <body>
 
@@ -76,21 +432,36 @@
                     <div class="submission-form">
                         <h2>Application Form</h2>
                         <form th:action="@{/applicant/home_page/application_form}" th:method="post">
-                            <hr>
                             <br>
-                            <input type="hidden" name="applicantId" th:value="${user.userId}" required>
+                                <input type="hidden" name="applicantId" th:value="${user.userId}" required>
 
-                            <label for="programme 1">Programme 1 : </label>
-                            <input type="number" id="programme 1" name="programIds" required>
+                                <label for="programme 1">Program1 : </label>
+                                <input type="number" id="programme 1" name="programIds"  required>
 
-                            <label for="programme 2">Programme 2 : </label>
-                            <input type="numbber" id="programme 2" name="programIds">
-
+                                <label for="programme 2">Program2 : </label>
+                                <input type="numbber" id="programme 2" name="programIds">
                             <input type="submit" value="submit"/><br><br>
                         </form>
                     </div>
+                    <!--<div class="submission-form" style="margin-top: 20px">
+                        <h2>Update Form</h2>
+                        <form th:action="@{/applicant/home_page/application_form}" th:method="post">
+                            <br>
+                            <div class="programme-id">
+                                <input type="hidden" name="applicantId" th:value="${user.userId}" required>
+
+                                <label for="programme 1">Program1 : </label>
+                                <input type="number" id="programme 1" name="programIds" required>
+
+                                <label for="programme 2">Program2 : </label>
+                                <input type="numbber" id="programme 2" name="programIds">
+                            </div>
+                            <input type="submit" value="submit"/><br><br>
+                        </form>
+                    </div>-->
+
                     <div class="progress">
-                        <h3>Your application status:</h3>
+                        <h3>Your application status: <span th:text="${current_form.status}"/> </h3>
                     </div>
                 </div>
 

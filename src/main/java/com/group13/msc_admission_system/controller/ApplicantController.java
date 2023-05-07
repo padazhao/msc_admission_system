@@ -9,6 +9,7 @@ import com.group13.msc_admission_system.dto.ProgramRequestDTO;
 import com.group13.msc_admission_system.dto.UserRequestDTO;
 import com.group13.msc_admission_system.exception.MyResourceNotFoundException;
 import com.group13.msc_admission_system.model.Applicant;
+import com.group13.msc_admission_system.model.ApplicationForm;
 import com.group13.msc_admission_system.model.Program;
 import com.group13.msc_admission_system.service.serviceinterface.ApplicantService;
 import com.group13.msc_admission_system.service.serviceinterface.ApplicationFormService;
@@ -50,7 +51,7 @@ public class ApplicantController {
     @PostMapping("/register")
     public ModelAndView register(@Validated UserRequestDTO userRequestDTO){
         applicantService.register(userRequestDTO);
-        ModelAndView modelAndView = new ModelAndView("Login_form");
+        ModelAndView modelAndView = new ModelAndView("index");
 
         return modelAndView;
     }
@@ -116,9 +117,12 @@ public class ApplicantController {
     @GetMapping("/home_page/application_form")
     public ModelAndView showApplicationForm(HttpSession session){
         Applicant applicant = applicantService.getApplicantInfo((Long) session.getAttribute("id"));
+        ApplicationForm applicationForm = applicationFormService.getApplicantInfo((Long) session.getAttribute("form_id"));
 
         ModelAndView modelAndView = new ModelAndView("Application_form");
         modelAndView.addObject("user", applicant);
+
+        modelAndView.addObject("current_form", applicationForm);
 
         /* Show the program list to applicant */
         List<Program> program = programService.getAllProgram();
@@ -130,14 +134,19 @@ public class ApplicantController {
     //CREATE AN APPLICATION FORM
     @PostMapping("/home_page/application_form")
     public ModelAndView submitApplicationForm(ApplicationFormRequestDTO applicationFormRequestDTO, HttpSession session){
-        applicationFormService.createApplication(applicationFormRequestDTO);
+        ModelAndView modelAndView = new ModelAndView("Application_form");
+
+        // Add form object
+        ApplicationForm applicationForm = applicationFormService.createApplication(applicationFormRequestDTO);
+        modelAndView.addObject("current_form", applicationForm);
+        session.setAttribute("form_id",applicationForm.getApplicationFormId());
 
         Applicant applicant = applicantService.getApplicantInfo((Long) session.getAttribute("id"));
-        ModelAndView modelAndView = new ModelAndView("Application_form");
         modelAndView.addObject("user", applicant);
 
         List<Program> program = programService.getAllProgram();
         modelAndView.addObject("program",program);
+
         return modelAndView;
     }
 
@@ -163,7 +172,7 @@ public class ApplicantController {
         return modelAndView;
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/home_page/settings/{id}")
     public ModelAndView programUpdate(@PathVariable("id") Long id, @RequestBody ProgramRequestDTO programRequestDTO){
         programService.programUpdate(id,programRequestDTO);
         return new ModelAndView();

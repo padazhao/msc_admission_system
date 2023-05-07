@@ -19,7 +19,7 @@ public class ApplicationForm {
     @OneToOne
     @PrimaryKeyJoinColumn
     private Applicant applicant;
-    @OneToMany
+    @ManyToMany
     private Set<Program> program;
     @Column(name = "status")
     private Status status;
