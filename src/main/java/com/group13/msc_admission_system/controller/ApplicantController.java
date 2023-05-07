@@ -5,6 +5,7 @@ import com.group13.msc_admission_system.common.Message;
 import com.group13.msc_admission_system.common.ResourceType;
 import com.group13.msc_admission_system.dto.ApplicationFormRequestDTO;
 import com.group13.msc_admission_system.dto.LoginCredentials;
+import com.group13.msc_admission_system.dto.ProgramRequestDTO;
 import com.group13.msc_admission_system.dto.UserRequestDTO;
 import com.group13.msc_admission_system.exception.MyResourceNotFoundException;
 import com.group13.msc_admission_system.model.Applicant;
@@ -73,7 +74,7 @@ public class ApplicantController {
         modelAndView.addObject("user", applicant);
 
         /* store the email of corresponding applicant */
-        session.setAttribute("email", applicant.getEmail());
+        session.setAttribute("id", applicant.getUserId());
         return modelAndView;
     }
 
@@ -82,7 +83,7 @@ public class ApplicantController {
     //HOME PAGE ========================================================================================================
     @GetMapping("/home_page")
     public ModelAndView showHomePage(HttpSession session){
-        Applicant applicant = applicantService.getApplicantInfoByEmail((String) session.getAttribute("email"));
+        Applicant applicant = applicantService.getApplicantInfo((Long) session.getAttribute("id"));
 
         ModelAndView modelAndView = new ModelAndView("Applicants");
         modelAndView.addObject("user", applicant);
@@ -93,7 +94,7 @@ public class ApplicantController {
     //PROFILE PAGE =====================================================================================================
     @GetMapping("/home_page/profile")
     public ModelAndView showProfile(HttpSession session){
-        Applicant applicant = applicantService.getApplicantInfoByEmail((String) session.getAttribute("email"));
+        Applicant applicant = applicantService.getApplicantInfo((Long) session.getAttribute("id"));
 
         ModelAndView modelAndView = new ModelAndView("Profile");
         modelAndView.addObject("user", applicant);
@@ -103,7 +104,7 @@ public class ApplicantController {
     //CONTACT PAGE =====================================================================================================
     @GetMapping("/home_page/contact")
     public ModelAndView showContact(HttpSession session){
-        Applicant applicant = applicantService.getApplicantInfoByEmail((String) session.getAttribute("email"));
+        Applicant applicant = applicantService.getApplicantInfo((Long) session.getAttribute("id"));
 
         ModelAndView modelAndView = new ModelAndView("Contact");
         modelAndView.addObject("user", applicant);
@@ -114,7 +115,7 @@ public class ApplicantController {
     //SUBMISSION PAGE ==================================================================================================
     @GetMapping("/home_page/application_form")
     public ModelAndView showApplicationForm(HttpSession session){
-        Applicant applicant = applicantService.getApplicantInfoByEmail((String) session.getAttribute("email"));
+        Applicant applicant = applicantService.getApplicantInfo((Long) session.getAttribute("id"));
 
         ModelAndView modelAndView = new ModelAndView("Application_form");
         modelAndView.addObject("user", applicant);
@@ -131,7 +132,7 @@ public class ApplicantController {
     public ModelAndView submitApplicationForm(ApplicationFormRequestDTO applicationFormRequestDTO, HttpSession session){
         applicationFormService.createApplication(applicationFormRequestDTO);
 
-        Applicant applicant = applicantService.getApplicantInfoByEmail((String) session.getAttribute("email"));
+        Applicant applicant = applicantService.getApplicantInfo((Long) session.getAttribute("id"));
         ModelAndView modelAndView = new ModelAndView("Application_form");
         modelAndView.addObject("user", applicant);
 
@@ -160,6 +161,12 @@ public class ApplicantController {
         modelAndView.addObject("user", updatedApplicant);
 
         return modelAndView;
+    }
+
+    @PutMapping("/{id}")
+    public ModelAndView programUpdate(@PathVariable("id") Long id, @RequestBody ProgramRequestDTO programRequestDTO){
+        programService.programUpdate(id,programRequestDTO);
+        return new ModelAndView();
     }
 
     //LOG OUT ==========================================================================================================
