@@ -56,7 +56,7 @@ public class UserRequestDTO {
     }
 
     public void setGender(String gender) {
-        this.gender = gender;
+        UserRequestDTO.gender = gender;
     }
 
     public int getPhoneNumber() {
@@ -80,7 +80,7 @@ public class UserRequestDTO {
     }
 
     public void setDateOfBirth(String dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
+        UserRequestDTO.dateOfBirth = dateOfBirth;
     }
 
 }

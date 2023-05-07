@@ -53,7 +53,7 @@ public class ApplicationFormServiceImplement implements ApplicationFormService {
     public ApplicationForm createApplication(ApplicationFormRequestDTO applicationFormRequestDTO) {
         Long applicantId = applicationFormRequestDTO.getApplicantId();
         Applicant applicant = applicantRepository.findById(applicantId).orElseThrow(
-                () -> new MyResourceNotFoundException(Message.resourceNotFound(ResourceType.APPLICANT, applicantId)));  //THROW EXCEPTION IF APPLICANT ID IS NOT FOUND
+                () -> new MyResourceNotFoundException(MyMessage.resourceNotFound(ResourceType.APPLICANT, applicantId)));  //THROW EXCEPTION IF APPLICANT ID IS NOT FOUND
 
         Set<Program> program = validateProgramInput(applicationFormRequestDTO);
 
@@ -62,7 +62,6 @@ public class ApplicationFormServiceImplement implements ApplicationFormService {
         applicationFormRepository.save(applicationForm);
         applicant.setApplicantForm(applicationForm);
         return applicationForm;
-
     }
 
     public ApplicationForm getApplicantInfo(Long applicationFormId){
@@ -73,9 +72,8 @@ public class ApplicationFormServiceImplement implements ApplicationFormService {
     @Transactional
     @Override
     public void programUpdate(Long id, ApplicationFormRequestDTO applicationFormRequestDTO) {
-
         ApplicationForm update = applicationFormRepository.findById(id).orElseThrow(
-                () -> new MyResourceNotFoundException(Message.resourceNotFound(ResourceType.APPLICATION_FORM, id)));    //THROW EXCEPTION IF APPLICANT FORM ID IS NOT FOUND
+                () -> new MyResourceNotFoundException(MyMessage.resourceNotFound(ResourceType.APPLICATION_FORM, id)));    //THROW EXCEPTION IF APPLICANT FORM ID IS NOT FOUND
         
         //Update program ID 
         if (applicationFormRequestDTO.getProgramIds().length != 0) {
@@ -84,7 +82,7 @@ public class ApplicationFormServiceImplement implements ApplicationFormService {
             update.setProgram(program);
         }
         applicationFormRepository.save(update);
-        System.out.println( Message.updated); // TODO: Use logs
+        System.out.println( MyMessage.updated); // TODO: Use logs
     }
 
     @Transactional
@@ -92,29 +90,31 @@ public class ApplicationFormServiceImplement implements ApplicationFormService {
     public void statusUpdate(Long id, ApplicationFormRequestDTO applicationFormRequestDTO){
 
         if(!adminRepository.existsById(applicationFormRequestDTO.getAdminId())){
-            throw new MyResourceNotFoundException(Message.resourceNotFound(ResourceType.ADMIN, applicationFormRequestDTO.getAdminId())); //THROW EXCEPTION IF APPLICANT FORM ID IS NOT FOUND
+            throw new MyResourceNotFoundException(MyMessage.resourceNotFound(ResourceType.ADMIN, applicationFormRequestDTO.getAdminId())); //THROW EXCEPTION IF APPLICANT FORM ID IS NOT FOUND
         }
 
         ApplicationForm update = applicationFormRepository.findById(id).orElseThrow(
-                () -> new MyResourceNotFoundException( Message.resourceNotFound(ResourceType.APPLICATION_FORM, id))   );
+                () -> new MyResourceNotFoundException( MyMessage.resourceNotFound(ResourceType.APPLICATION_FORM, id))   );
 
         //Update status
         if (MyUtils.isNotEmptyAndNotNull(applicationFormRequestDTO.getStatus())) {
             Status status = new StatusConverter().convert(applicationFormRequestDTO.getStatus());
             update.setStatus(status);
         }
-
         applicationFormRepository.save(update);
-        Long applicantId = applicationFormRequestDTO.getApplicantId();
+    }
+
+    public void statusUpdateSendEmail(Long applicantId, String status) {
         Applicant applicant = applicantRepository.findById(applicantId).orElseThrow(
-                () -> new MyResourceNotFoundException(Message.resourceNotFound(ResourceType.APPLICANT, applicantId)));  //THROW
+                () -> new MyResourceNotFoundException(MyMessage.resourceNotFound(ResourceType.APPLICANT, applicantId)));  //THROW
+
         String from = "yangnochicken@163.com";
         String to = applicant.getEmail();
 
         String subject = "Application State Changed";
-        String content = "Dear Applicant, your state is changed to"+applicationFormRequestDTO.getStatus();
+        String content = "Dear Applicant, your state is changed to "+ status;
         mailService.sendSimpleMail(from, to, subject, content);
-        System.out.println( Message.updated);
+        System.out.println( MyMessage.updated +":"+ status);
     }
 
     /*
@@ -131,14 +131,14 @@ public class ApplicationFormServiceImplement implements ApplicationFormService {
 
         int maxNumberOfSelectedProgramme =  ApplicationFormRequestDTO.getMaxNumberOfSelectedProgramme();
         if(applicationFormRequestDTO.getProgramIds().length>maxNumberOfSelectedProgramme){
-            throw new MyOutOfBoundException(Message.invalidInput + ": Only" + maxNumberOfSelectedProgramme + " can be chosen");
+            throw new MyOutOfBoundException(MyMessage.invalidInput + ": Only" + maxNumberOfSelectedProgramme + " can be chosen");
         }
 
         Set<Program> program = new HashSet<>();
         for (Long programId: applicationFormRequestDTO.getProgramIds()) {
             program.add(
                     programRepository.findById(programId).orElseThrow(
-                            ()-> new MyResourceNotFoundException(Message.resourceNotFound(ResourceType.PROGRAM, programId)))
+                            ()-> new MyResourceNotFoundException(MyMessage.resourceNotFound(ResourceType.PROGRAM, programId)))
             );
         }
         return program;

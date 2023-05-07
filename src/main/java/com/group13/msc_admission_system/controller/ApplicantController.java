@@ -1,23 +1,20 @@
 package com.group13.msc_admission_system.controller;
 
 
-import com.group13.msc_admission_system.common.Message;
-import com.group13.msc_admission_system.common.ResourceType;
 import com.group13.msc_admission_system.dto.ApplicationFormRequestDTO;
 import com.group13.msc_admission_system.dto.LoginCredentials;
 import com.group13.msc_admission_system.dto.ProgramRequestDTO;
 import com.group13.msc_admission_system.dto.UserRequestDTO;
-import com.group13.msc_admission_system.exception.MyResourceNotFoundException;
 import com.group13.msc_admission_system.model.Applicant;
 import com.group13.msc_admission_system.model.ApplicationForm;
 import com.group13.msc_admission_system.model.Program;
+import com.group13.msc_admission_system.service.serviceimplement.MyActiveMQService;
 import com.group13.msc_admission_system.service.serviceinterface.ApplicantService;
 import com.group13.msc_admission_system.service.serviceinterface.ApplicationFormService;
 import com.group13.msc_admission_system.service.serviceinterface.ProgramService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -32,12 +29,15 @@ public class ApplicantController {
     private final ProgramService programService;
     private final ApplicationFormService applicationFormService;
 
+    private final MyActiveMQService myActiveMQService;
+
     //CONSTRUCTOR ======================================================================================================
     @Autowired
-    public ApplicantController(ApplicantService applicantService, ProgramService programService, ApplicationFormService applicationFormService) {
+    public ApplicantController(ApplicantService applicantService, ProgramService programService, ApplicationFormService applicationFormService, MyActiveMQService myActiveMQService) {
         this.applicantService = applicantService;
         this.programService = programService;
         this.applicationFormService = applicationFormService;
+        this.myActiveMQService = myActiveMQService;
     }
 
     //REGISTER==========================================================================================================
@@ -50,10 +50,11 @@ public class ApplicantController {
     }
     @PostMapping("/register")
     public ModelAndView register(@Validated UserRequestDTO userRequestDTO){
-        applicantService.register(userRequestDTO);
-        ModelAndView modelAndView = new ModelAndView("index");
-
-        return modelAndView;
+        Applicant applicant = applicantService.register(userRequestDTO);
+        String applicantId = String.valueOf(applicant.getUserId());
+        //REGISTER USER AS SUBSCRIBER WHEN REGISTERED
+        myActiveMQService.consumeNotification(applicantId);
+        return  new ModelAndView("index");
     }
 
     //LOGIN=============================================================================================================
@@ -65,7 +66,7 @@ public class ApplicantController {
         return modelAndView;
     }
     @PostMapping("/login")
-    public ModelAndView login(@Validated LoginCredentials loginCredentials, Model model, HttpSession session) {
+    public ModelAndView login(@Validated LoginCredentials loginCredentials, HttpSession session) {
         /* Verify the existing applicant */
         applicantService.login(loginCredentials);
 
@@ -73,6 +74,9 @@ public class ApplicantController {
         Applicant applicant = applicantService.getApplicantInfoByEmail(loginCredentials.getEmail());
         ModelAndView modelAndView = new ModelAndView("Applicants");
         modelAndView.addObject("user", applicant);
+        String applicantID = String.valueOf(applicant.getUserId());
+
+        myActiveMQService.consumeNotification(applicantID);
 
         /* store the email of corresponding applicant */
         session.setAttribute("id", applicant.getUserId());
@@ -187,24 +191,6 @@ public class ApplicantController {
             session.invalidate();
         }
 
-        ModelAndView modelAndView = new ModelAndView("index");
-        return modelAndView;
+        return new ModelAndView("index");
     }
-
-    //UPDATE============================================================================================================
-/*    @GetMapping("/info/{id}")
-    public ModelAndView getApplicantInfo(@PathVariable("id") Long applicantId){
-        Applicant applicant = applicantService.getApplicantInfo(applicantId);
-        ModelAndView modelAndView = new ModelAndView("Applicants");
-        modelAndView.addObject("Applicant",applicant);
-        return  modelAndView;
-    }
-
-    @GetMapping("/info/")
-    public ModelAndView getAllApplicantInfo(){
-        List<Applicant> applicant = applicantService.getAllApplicantInfo();
-        ModelAndView modelAndView = new ModelAndView("applicants");
-        modelAndView.addObject("Applicant",applicant);
-        return  modelAndView;
-    }*/
 }

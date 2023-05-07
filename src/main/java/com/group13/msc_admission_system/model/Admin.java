@@ -6,6 +6,21 @@ import jakarta.persistence.*;
 @Entity
 @Table(name="admin")
 public class Admin extends User {
+    public Admin(UserRequestDTO userRequestDTO){super(userRequestDTO);}
+    public Admin() {}
+
+}
+
+
+
+
+
+
+
+
+
+
+
 //    @Id
 //    @GeneratedValue(strategy = GenerationType.IDENTITY)
 //    private long adminId;
@@ -15,14 +30,13 @@ public class Admin extends User {
 //    private String adminPassword;
 
 
-    //CONSTRUCTOR ==============================================================
+//CONSTRUCTOR ==============================================================
 //    public Admin(String adminUsername, String adminPassword){
 //        this.adminUsername = adminUsername;
 //        this.adminPassword = adminPassword;
 //    }
 
-    public Admin(UserRequestDTO userRequestDTO){super(userRequestDTO);}
-    public Admin() {}
+
 //
 //    //GETTERS AND SETTERS ==============================================================
 //    public long getAdminId() {
@@ -44,4 +58,3 @@ public class Admin extends User {
 //    public void setAdminPassword(String AdminPassword) {
 //        this.adminPassword = AdminPassword;
 //    }
-}

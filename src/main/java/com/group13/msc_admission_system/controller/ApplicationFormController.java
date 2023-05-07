@@ -1,56 +1,52 @@
 package com.group13.msc_admission_system.controller;
 
 import com.group13.msc_admission_system.dto.ApplicationFormRequestDTO;
-import com.group13.msc_admission_system.model.Applicant;
-import com.group13.msc_admission_system.model.Program;
-import com.group13.msc_admission_system.service.serviceinterface.ApplicantService;
+import com.group13.msc_admission_system.service.serviceimplement.MyActiveMQService;
 import com.group13.msc_admission_system.service.serviceinterface.ApplicationFormService;
-import com.group13.msc_admission_system.service.serviceinterface.ProgramService;
-import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/applicationform")
 public class ApplicationFormController {
 
     private final ApplicationFormService applicationFormService;
+    private final MyActiveMQService myActiveMQService;
 
-    //CONSTRUCTOR ======================================================================================================
+    //CONSTRUCTOR=======================================================================================================
     @Autowired
-    public ApplicationFormController(ApplicationFormService applicationFormService) {
+    public ApplicationFormController(ApplicationFormService applicationFormService, MyActiveMQService myActiveMQService) {
         super();
         this.applicationFormService = applicationFormService;
+        this.myActiveMQService = myActiveMQService;
     }
 
     //CREATE AN APPLICATION FORM
-/*    @PostMapping("/submit")
-    public ModelAndView submitApplicationForm(ApplicationFormRequestDTO applicationFormRequestDTO, HttpSession session){
+    @PostMapping("/submit")
+    public ModelAndView submitApplicationForm(ApplicationFormRequestDTO applicationFormRequestDTO){
         applicationFormService.createApplication(applicationFormRequestDTO);
-        Applicant applicant = applicantService.getApplicantInfoByEmail((String) session.getAttribute("email"));
-        ModelAndView modelAndView = new ModelAndView("Application_form");
-        modelAndView.addObject("user", applicant);
-
-        List<Program> program = programService.getAllProgram();
-        modelAndView.addObject("program",program);
-        return modelAndView;
-    }*/
+        return new ModelAndView("Application_form");
+    }
 
     //UPDATE ===========================================================================================================
     @PutMapping("/program/{id}")
     public ModelAndView programFormUpdate(@PathVariable("id") Long id,
                                           @RequestBody ApplicationFormRequestDTO applicationFormRequestDTO){
         applicationFormService.programUpdate(id,applicationFormRequestDTO);
-        return new ModelAndView("applicant_form");
+        return new ModelAndView();
     }
 
     @PutMapping("/status/{id}")
     public ModelAndView statusUpdate(@PathVariable("id") Long id,
                                @RequestBody ApplicationFormRequestDTO applicationFormRequestDTO){
         applicationFormService.statusUpdate(id,applicationFormRequestDTO);
+        applicationFormService.statusUpdateSendEmail(applicationFormRequestDTO.getApplicantId(), applicationFormRequestDTO.getStatus());
+
+        String applicantId = String.valueOf(applicationFormRequestDTO.getApplicantId());
+
+        myActiveMQService.publishNotification(applicantId,applicationFormRequestDTO.getStatus());
+
         return new ModelAndView();
     }
 }

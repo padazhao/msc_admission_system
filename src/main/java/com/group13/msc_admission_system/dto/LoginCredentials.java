@@ -14,10 +14,10 @@ public class LoginCredentials {
 
     @NotEmpty(message = "Email cannot be empty")
     @Email(message = "Email must conform to email format")
-    private String email;
+    private final String email;
     @NotEmpty(message = "password cannot be empty")
     @Size(min = 3, message = "Password must contain at least 3 characters")
-    private String password;
+    private final String password;
 
     public String getEmail() {
         return email;

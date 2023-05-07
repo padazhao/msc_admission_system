@@ -1,10 +1,12 @@
 package com.group13.msc_admission_system.common;
 
 /**
- * This Message class is created to handle all messages to be sent as a response to Request.
+ * This MyMessage class is created to handle all messages to be sent as a response to Request.
  * Instead of hardcoding the responses in the form of strings in each method, we instead use this class to standardize all returned strings
  */
-public class Message {
+public class MyMessage {
+
+    public static final String created= "CREATED";
     public static final String updated= "UPDATED";
     public static final String deleted= "DELETED";
     public static final String added= "ADDED";

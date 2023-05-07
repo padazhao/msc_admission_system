@@ -15,7 +15,6 @@ public class ApplicationForm {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="applicationForm_id",nullable = false)
     private long applicationFormId;
-
     @OneToOne
     @PrimaryKeyJoinColumn
     private Applicant applicant;
@@ -25,6 +24,8 @@ public class ApplicationForm {
     private Status status;
     @Column(name = "appliedOn")
     private LocalDate appliedOn;
+
+
 
 
     //CONSTRUCTOR==================================================

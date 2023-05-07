@@ -1,6 +1,6 @@
 package com.group13.msc_admission_system.service.serviceimplement;
 
-import com.group13.msc_admission_system.common.Message;
+import com.group13.msc_admission_system.common.MyMessage;
 import com.group13.msc_admission_system.common.MyUtils;
 import com.group13.msc_admission_system.common.ResourceType;
 import com.group13.msc_admission_system.dto.ProgramRequestDTO;
@@ -32,12 +32,13 @@ public class ProgramServiceImplement implements ProgramService {
     public void createProgram(ProgramRequestDTO programRequestDTO) {
         Program program = new Program(programRequestDTO);
         programRepository.save(program);
+        System.out.println(ResourceType.PROGRAM + MyMessage.created);
     }
 
     @Override
     public Program getProgram(Long programId) {
         return programRepository.findById(programId).orElseThrow(
-                () -> new MyResourceNotFoundException(Message.resourceNotFound(ResourceType.PROGRAM, programId)));
+                () -> new MyResourceNotFoundException(MyMessage.resourceNotFound(ResourceType.PROGRAM, programId)));
     }
 
     @Override
@@ -50,11 +51,11 @@ public class ProgramServiceImplement implements ProgramService {
     public void programUpdate(Long id, ProgramRequestDTO programRequestDTO) {
 
         if(!adminRepository.existsById(programRequestDTO.getAdminId())){
-            throw new MyResourceNotFoundException(Message.resourceNotFound(ResourceType.ADMIN,programRequestDTO.getAdminId()));
+            throw new MyResourceNotFoundException(MyMessage.resourceNotFound(ResourceType.ADMIN,programRequestDTO.getAdminId()));
         }
 
         Program update = programRepository.findById(id).orElseThrow(
-                ()-> new MyResourceNotFoundException(Message.resourceNotFound(ResourceType.PROGRAM,id)));
+                ()-> new MyResourceNotFoundException(MyMessage.resourceNotFound(ResourceType.PROGRAM,id)));
 
         if(MyUtils.isNotEmptyAndNotNull(programRequestDTO.getProgramName())){
             update.setProgramName(programRequestDTO.getProgramName());
@@ -70,15 +71,19 @@ public class ProgramServiceImplement implements ProgramService {
 
         programRepository.save(update);
 
-        System.out.println( Message.updated);
+        System.out.println(MyMessage.updated);
 
     }
 
     //DELETE============================================================================================================
-    public void deleteProgram(Long programId) {
+    public void deleteProgram(Long programId,Long adminId) {
+
+        if(!adminRepository.existsById(adminId)){
+            throw new MyResourceNotFoundException(MyMessage.resourceNotFound(ResourceType.ADMIN,adminId));
+        }
         programRepository.findById(programId).orElseThrow(
-                () -> new MyResourceNotFoundException(Message.resourceNotFound(ResourceType.PROGRAM, programId)));
+                () -> new MyResourceNotFoundException(MyMessage.resourceNotFound(ResourceType.PROGRAM, programId)));
         programRepository.deleteById(programId);
-        System.out.println( Message.updated);
+        System.out.println(MyMessage.deleted);
     }
 }

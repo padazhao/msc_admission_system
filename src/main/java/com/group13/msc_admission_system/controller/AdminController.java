@@ -1,7 +1,6 @@
 package com.group13.msc_admission_system.controller;
 
 import com.group13.msc_admission_system.dto.LoginCredentials;
-import com.group13.msc_admission_system.dto.ProgramRequestDTO;
 import com.group13.msc_admission_system.dto.UserRequestDTO;
 import com.group13.msc_admission_system.model.Admin;
 import com.group13.msc_admission_system.model.Applicant;
@@ -9,22 +8,14 @@ import com.group13.msc_admission_system.model.Program;
 import com.group13.msc_admission_system.service.serviceinterface.AdminService;
 import com.group13.msc_admission_system.service.serviceinterface.ApplicantService;
 import com.group13.msc_admission_system.service.serviceinterface.ProgramService;
-
-import com.group13.msc_admission_system.service.serviceinterface.ProgramService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
-import org.hibernate.Hibernate;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.io.Serializable;
 import java.util.List;
 
 
@@ -50,10 +41,9 @@ public class AdminController {
         return modelAndView;
     }
     @PostMapping("/register")
-    public ModelAndView register(@Validated @RequestParam UserRequestDTO userRequestDTO) {
+    public ModelAndView register(@Validated @RequestBody UserRequestDTO userRequestDTO) {
         adminService.register(userRequestDTO);
-        ModelAndView modelAndView = new ModelAndView("Login_form");
-        return modelAndView;
+        return new ModelAndView();
     }
 
     //LOGIN=============================================================================================================
@@ -136,26 +126,26 @@ public class AdminController {
         return modelAndView;
     }
 
-    @PostMapping("/admin/home_page/ProgramManagement/create")
-    public void ProgramManagement_create(HttpSession session,HttpServletRequest request){
-        //加载 Hibernate 核心配置文件
-        Configuration configuration = new Configuration().configure();
-        //创建一个 SessionFactory 用来获取 Session 连接对象
-        SessionFactory sessionFactory = configuration.buildSessionFactory();
-        //获取session 连接对象
-        Session sess = sessionFactory.openSession();
-        //开始事务
-        Transaction transaction = sess.beginTransaction();
-        Program program = new Program();
-        program.setProgramDuration(Long.valueOf(request.getParameter("Duration")));
-        program.setDescription(request.getParameter("Description"));
-        program.setProgramName(request.getParameter("Name"));
-        Serializable save = (Serializable) sess.save(program);
-        transaction.commit();
-        //释放资源
-        sess.close();
-        sessionFactory.close();
-    }
+//    @PostMapping("/admin/home_page/ProgramManagement/create")
+//    public void ProgramManagement_create(HttpSession session,HttpServletRequest request){
+//
+//        Configuration configuration = new Configuration().configure();
+//
+//        SessionFactory sessionFactory = configuration.buildSessionFactory();
+//
+//        Session sess = sessionFactory.openSession();
+//
+//        Transaction transaction = sess.beginTransaction();
+//        Program program = new Program();
+//        program.setProgramDuration(Long.valueOf(request.getParameter("Duration")));
+//        program.setDescription(request.getParameter("Description"));
+//        program.setProgramName(request.getParameter("Name"));
+//        Serializable save = (Serializable) sess.save(program);
+//        transaction.commit();
+//
+//        sess.close();
+//        sessionFactory.close();
+//    }
 
     //User Management =====================================================================================================
     @GetMapping("/home_page/UserManagement")

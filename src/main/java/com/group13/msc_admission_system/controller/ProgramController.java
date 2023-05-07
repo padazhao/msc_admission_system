@@ -3,16 +3,13 @@ package com.group13.msc_admission_system.controller;
 import com.group13.msc_admission_system.dto.ProgramRequestDTO;
 import com.group13.msc_admission_system.model.Program;
 import com.group13.msc_admission_system.service.serviceinterface.ProgramService;
-import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.List;
-
 @RestController
-/*@RequestMapping("/program")*/
+@RequestMapping("/program")
 public class ProgramController {
 
     private final ProgramService programService;
@@ -25,7 +22,7 @@ public class ProgramController {
     @PostMapping("/create")
     public ModelAndView createProgram(@Validated @RequestBody ProgramRequestDTO programRequestDTO){
         programService.createProgram(programRequestDTO);
-        return new ModelAndView();
+        return new ModelAndView("index");
     }
 
     //GET ==============================================================================================================
@@ -54,9 +51,9 @@ public class ProgramController {
     }
 
     //DELETE============================================================================================================
-    @DeleteMapping("/{id}")
-    public ModelAndView deleteProgram(@PathVariable("id") Long programId){
-        programService.deleteProgram(programId);
+    @DeleteMapping("/{programId}/{adminId}")
+    public ModelAndView deleteProgram(@PathVariable("programId") Long programId,@PathVariable("adminId") Long adminId){
+        programService.deleteProgram(programId,adminId);
         return new ModelAndView();
     }
 }

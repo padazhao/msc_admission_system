@@ -4,8 +4,8 @@ import java.time.LocalDateTime;
 import java.util.Map;
 
 /**
- * This is class is a custom error message class.
- * It is used to customize the error message sent as a response by the global exception handler.
+ * This is class is a custom error receiveMessage class.
+ * It is used to customize the error receiveMessage sent as a response by the global exception handler.
  */
 public class MyExceptionErrorMessage {
     String message;

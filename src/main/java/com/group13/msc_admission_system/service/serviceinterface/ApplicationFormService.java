@@ -1,6 +1,5 @@
 package com.group13.msc_admission_system.service.serviceinterface;
 
-import com.group13.msc_admission_system.common.Status;
 import com.group13.msc_admission_system.dto.ApplicationFormRequestDTO;
 import com.group13.msc_admission_system.model.Applicant;
 import com.group13.msc_admission_system.model.ApplicationForm;
@@ -14,5 +13,7 @@ public interface ApplicationFormService {
     void programUpdate(Long id, ApplicationFormRequestDTO applicationFormRequestDTO);
     @Transactional
     void statusUpdate(Long id, ApplicationFormRequestDTO applicationFormRequestDTO);
+
+    void statusUpdateSendEmail(Long applicantId, String status);
     ApplicationForm getApplicantInfo(Long applicantId);
 }

@@ -17,7 +17,7 @@ public interface ProgramService {
 
     void programUpdate(Long id, ProgramRequestDTO programRequestDTO);
 
-    void deleteProgram(Long programId);
+    void deleteProgram(Long programId,Long adminId);
 
 
 }

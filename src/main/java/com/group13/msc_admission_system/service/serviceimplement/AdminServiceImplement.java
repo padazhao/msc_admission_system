@@ -1,22 +1,18 @@
 package com.group13.msc_admission_system.service.serviceimplement;
 
-import com.group13.msc_admission_system.common.*;
+import com.group13.msc_admission_system.common.MyMessage;
+import com.group13.msc_admission_system.common.ResourceType;
 import com.group13.msc_admission_system.dto.LoginCredentials;
 import com.group13.msc_admission_system.dto.UserRequestDTO;
-import com.group13.msc_admission_system.exception.MyInvalidInputException;
 import com.group13.msc_admission_system.exception.MyResourceAlreadyExistException;
 import com.group13.msc_admission_system.exception.MyResourceNotFoundException;
 import com.group13.msc_admission_system.model.Admin;
-import com.group13.msc_admission_system.model.Applicant;
 import com.group13.msc_admission_system.repository.AdminRepository;
 import com.group13.msc_admission_system.service.serviceinterface.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class AdminServiceImplement implements AdminService {
@@ -31,7 +27,7 @@ public class AdminServiceImplement implements AdminService {
     @Override
     public void register(UserRequestDTO userRequestDTO) {
         if(adminRepository.findByEmail(userRequestDTO.getEmail())!=null)
-            throw new MyResourceAlreadyExistException(Message.resourceAlreadyExist(ResourceType.EMAIL));
+            throw new MyResourceAlreadyExistException(MyMessage.resourceAlreadyExist(ResourceType.EMAIL));
 
         Admin admin = new Admin(userRequestDTO);
 
@@ -43,7 +39,7 @@ public class AdminServiceImplement implements AdminService {
         Admin admin = adminRepository.findByEmailAndPassword(loginCredentials.getEmail(), loginCredentials.getPassword());
 
         if (admin==null)                                        //THROW EXCEPTION IF ADMIN NOT FOUND
-            throw new MyResourceNotFoundException(Message.resourceNotFound(ResourceType.ADMIN));
+            throw new MyResourceNotFoundException(MyMessage.resourceNotFound(ResourceType.ADMIN));
     }
     //===========================================getAdminInfoByEmail================================================================
     @Override
@@ -54,11 +50,13 @@ public class AdminServiceImplement implements AdminService {
     @Override
     public Admin getAdminInfo(Long adminId) {
         return adminRepository.findById(adminId).orElseThrow(
-                () -> new MyResourceNotFoundException(Message.resourceNotFound(ResourceType.ADMIN, adminId)));
+                () -> new MyResourceNotFoundException(MyMessage.resourceNotFound(ResourceType.ADMIN, adminId)));
     }
     //===========================================getAllAdminInfo================================================================
     @Override
     public List<Admin> getAllAdminInfo() {
         return adminRepository.findAll();
     }
+
+
 }

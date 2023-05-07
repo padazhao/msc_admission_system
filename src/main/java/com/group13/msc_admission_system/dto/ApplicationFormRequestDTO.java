@@ -1,8 +1,5 @@
 package com.group13.msc_admission_system.dto;
 
-import com.group13.msc_admission_system.common.Message;
-import com.group13.msc_admission_system.exception.MyOutOfBoundException;
-
 /**
  * This is a Data Transfer Object Class.
  * It is designed to 'register' all the inputs from the client and store it in a single object "Transfer Object"

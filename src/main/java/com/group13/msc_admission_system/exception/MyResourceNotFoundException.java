@@ -7,7 +7,7 @@ import java.io.Serial;
 
 /**
  * This is a custom created class to return an exception when a resource is not found.
- * It accepts a message as parameter to explain the error.
+ * It accepts a receiveMessage as parameter to explain the error.
  */
 @ResponseStatus(value = HttpStatus.NOT_FOUND)
 public class MyResourceNotFoundException extends RuntimeException{
